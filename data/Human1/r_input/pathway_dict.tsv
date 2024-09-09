@@ -1,0 +1,143 @@
+Group	Pathway
+group1	Acyl-CoA hydrolysis
+group2	Acylglycerides metabolism
+group3	Alanine, aspartate and glutamate metabolism
+group4	Alkaloids biosynthesis
+group5	Amino sugar and nucleotide sugar metabolism
+group6	Aminoacyl-tRNA biosynthesis
+group7	Androgen metabolism
+group8	Arachidonic acid metabolism
+group9	Arginine and proline metabolism
+group10	Artificial reactions
+group11	Ascorbate and aldarate metabolism
+group12	Beta oxidation of branched-chain fatty acids (mitochondrial)
+group13	Beta oxidation of di-unsaturated fatty acids (n-6) (mitochondrial)
+group14	Beta oxidation of di-unsaturated fatty acids (n-6) (peroxisomal)
+group15	Beta oxidation of even-chain fatty acids (mitochondrial)
+group16	Beta oxidation of even-chain fatty acids (peroxisomal)
+group17	Beta oxidation of odd-chain fatty acids (mitochondrial)
+group18	Beta oxidation of odd-chain fatty acids (peroxisomal)
+group19	Beta oxidation of phytanic acid (peroxisomal)
+group20	Beta oxidation of poly-unsaturated fatty acids (mitochondrial)
+group21	Beta oxidation of unsaturated fatty acids (n-7) (mitochondrial)
+group22	Beta oxidation of unsaturated fatty acids (n-7) (peroxisomal)
+group23	Beta oxidation of unsaturated fatty acids (n-9) (mitochondrial)
+group24	Beta oxidation of unsaturated fatty acids (n-9) (peroxisomal)
+group25	Beta-alanine metabolism
+group26	Bile acid biosynthesis
+group27	Bile acid recycling
+group28	Biopterin metabolism
+group29	Biotin metabolism
+group30	Blood group biosynthesis
+group31	Butanoate metabolism
+group32	C5-branched dibasic acid metabolism
+group33	Carnitine shuttle (cytosolic)
+group34	Carnitine shuttle (endoplasmic reticular)
+group35	Carnitine shuttle (mitochondrial)
+group36	Carnitine shuttle (peroxisomal)
+group37	Cholesterol biosynthesis 1 (Bloch pathway)
+group38	Cholesterol biosynthesis 2
+group39	Cholesterol biosynthesis 3 (Kandustch-Russell pathway)
+group40	Cholesterol metabolism
+group41	Chondroitin / heparan sulfate biosynthesis
+group42	Chondroitin sulfate degradation
+group43	CoA catabolism
+group44	CoA synthesis
+group45	Cysteine and methionine metabolism
+group46	Dietary fiber binding
+group47	Drug metabolism
+group48	Eicosanoid metabolism
+group49	Estrogen metabolism
+group50	Ether lipid metabolism
+group51	Exchange/demand reactions
+group52	Fatty acid activation (cytosolic)
+group53	Fatty acid activation (endoplasmic reticular)
+group54	Fatty acid biosynthesis
+group55	Fatty acid biosynthesis (even-chain)
+group56	Fatty acid biosynthesis (odd-chain)
+group57	Fatty acid biosynthesis (unsaturated)
+group58	Fatty acid desaturation (even-chain)
+group59	Fatty acid desaturation (odd-chain)
+group60	Fatty acid elongation (even-chain)
+group61	Fatty acid elongation (odd-chain)
+group62	Fatty acid oxidation
+group63	Folate metabolism
+group64	Formation and hydrolysis of cholesterol esters
+group65	Fructose and mannose metabolism
+group66	Galactose metabolism
+group67	Glucocorticoid biosynthesis
+group68	Glutathione metabolism
+group69	Glycerolipid metabolism
+group70	Glycerophospholipid metabolism
+group71	Glycine, serine and threonine metabolism
+group72	Glycolysis / Gluconeogenesis
+group73	Glycosphingolipid biosynthesis-ganglio series
+group74	Glycosphingolipid biosynthesis-globo series
+group75	Glycosphingolipid biosynthesis-lacto and neolacto series
+group76	Glycosphingolipid metabolism
+group77	Glycosylphosphatidylinositol (GPI)-anchor biosynthesis
+group78	Heme degradation
+group79	Heme synthesis
+group80	Heparan sulfate degradation
+group81	Hippurate metabolism
+group82	Histidine metabolism
+group83	Inositol phosphate metabolism
+group84	Isolated
+group85	Keratan sulfate biosynthesis
+group86	Keratan sulfate degradation
+group87	Leukotriene metabolism
+group88	Linoleate metabolism
+group89	Lipoic acid metabolism
+group90	Lysine metabolism
+group91	Metabolism of other amino acids
+group92	Miscellaneous
+group93	N-glycan metabolism
+group94	Nicotinate and nicotinamide metabolism
+group95	Nucleotide metabolism
+group96	O-glycan metabolism
+group97	Omega-3 fatty acid metabolism
+group98	Omega-6 fatty acid metabolism
+group99	Oxidative phosphorylation
+group100	Pantothenate and CoA biosynthesis
+group101	Pentose and glucuronate interconversions
+group102	Pentose phosphate pathway
+group103	Peptide metabolism
+group104	Phenylalanine metabolism
+group105	Phenylalanine, tyrosine and tryptophan biosynthesis
+group106	Phosphatidylinositol phosphate metabolism
+group107	Pool reactions
+group108	Porphyrin metabolism
+group109	Propanoate metabolism
+group110	Prostaglandin biosynthesis
+group111	Protein assembly
+group112	Protein degradation
+group113	Protein modification
+group114	Purine metabolism
+group115	Pyrimidine metabolism
+group116	Pyruvate metabolism
+group117	ROS detoxification
+group118	Retinol metabolism
+group119	Riboflavin metabolism
+group120	Serotonin and melatonin biosynthesis
+group121	Sphingolipid metabolism
+group122	Starch and sucrose metabolism
+group123	Steroid metabolism
+group124	Sulfur metabolism
+group125	Terpenoid backbone biosynthesis
+group126	Thiamine metabolism
+group127	Transport reactions
+group128	Triacylglycerol synthesis
+group129	Tricarboxylic acid cycle and glyoxylate/dicarboxylate metabolism
+group130	Tryptophan metabolism
+group131	Tyrosine metabolism
+group132	Ubiquinone synthesis
+group133	Urea cycle
+group134	Valine, leucine, and isoleucine metabolism
+group135	Vitamin A metabolism
+group136	Vitamin B12 metabolism
+group137	Vitamin B2 metabolism
+group138	Vitamin B6 metabolism
+group139	Vitamin C metabolism
+group140	Vitamin D metabolism
+group141	Vitamin E metabolism
+group142	Xenobiotics metabolism

@@ -1,0 +1,143 @@
+Pathway	ManualCategoryLvl1	ManualCategoryLvl2	KEGGCategory	ReactomeID	BioCycID	HumanCycCategory	KEGGID
+Alanine, aspartate and glutamate metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00250
+Amino sugar and nucleotide sugar metabolism	Amino acid metabolism		Amino acid metabolism				hsa00520
+Arginine and proline metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00330
+Cysteine and methionine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00270
+Glycine, serine and threonine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00260
+Histidine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00340
+Lysine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	
+Peptide metabolism	Protein metabolism						
+Protein assembly	Protein metabolism						
+Protein degradation	Protein metabolism						
+Sphingolipid metabolism	Lipid metabolism		Lipid metabolism			Fatty Acid and Lipid Biosynthesis	hsa00600
+Metabolism of other amino acids	Amino acid derivatives					Other Amino Acid Biosynthesis	
+Phenylalanine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00360
+Phenylalanine, tyrosine and tryptophan biosynthesis	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00400
+Tyrosine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	hsa00350
+Valine, leucine, and isoleucine metabolism	Amino acid metabolism		Amino acid metabolism			Proteinogenic Amino Acid Biosynthesis	
+C5-branched dibasic acid metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00660
+Aminoacyl-tRNA biosynthesis	Protein metabolism					Aminoacyl-tRNA Charging	hsa00970
+Glutathione metabolism	Amino acid derivatives		Metabolism of other amino acids				hsa00480
+Serotonin and melatonin biosynthesis	Amino acid derivatives	Hormone metabolism					
+Galactose metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00052
+Glycolysis / Gluconeogenesis	Carbohydrate metabolism		Carbohydrate metabolism				hsa00010
+Inositol phosphate metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00562
+Pentose and glucuronate interconversions	Carbohydrate metabolism		Carbohydrate metabolism				hsa00040
+Pentose phosphate pathway	Carbohydrate metabolism		Carbohydrate metabolism				hsa00030
+Propanoate metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00640
+Pyruvate metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00620
+Starch and sucrose metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00500
+Tricarboxylic acid cycle and glyoxylate/dicarboxylate metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00630
+Ascorbate and aldarate metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00053
+Fructose and mannose metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00051
+Butanoate metabolism	Carbohydrate metabolism		Carbohydrate metabolism				hsa00650
+Cholesterol biosynthesis 1 (Bloch pathway)	Cholesterol biosynthesis and metabolism		Cholesterol metabolism				
+Cholesterol biosynthesis 2	Cholesterol biosynthesis and metabolism		Cholesterol metabolism				
+Cholesterol biosynthesis 3 (Kandustch-Russell pathway)	Cholesterol biosynthesis and metabolism		Cholesterol metabolism				
+Cholesterol metabolism	Cholesterol biosynthesis and metabolism		Cholesterol metabolism				hsa04979
+Formation and hydrolysis of cholesterol esters	Cholesterol biosynthesis and metabolism		Cholesterol metabolism				
+Drug metabolism	Drug metabolism	Drug metabolism					
+Eicosanoid metabolism	Eicosanoids	Eicosanoids					
+Leukotriene metabolism	Eicosanoids	Eicosanoids					
+Oxidative phosphorylation	Energy metabolism		Energy metabolism				hsa00190
+Sulfur metabolism	Energy metabolism		Energy metabolism				hsa00920
+Blood group biosynthesis	Glycan biosynthesis and metabolism						
+Chondroitin / heparan sulfate biosynthesis	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Chondroitin sulfate degradation	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Glycosphingolipid biosynthesis-ganglio series	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Glycosphingolipid biosynthesis-globo series	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Glycosphingolipid biosynthesis-lacto and neolacto series	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Glycosphingolipid metabolism	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Keratan sulfate biosynthesis	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Keratan sulfate degradation	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+N-glycan metabolism	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+O-glycan metabolism	Glycan biosynthesis and metabolism		Glycan biosynthesis and metabolism				
+Acyl-CoA hydrolysis	Lipid metabolism		Lipid metabolism		PWY-5148		
+Acylglycerides metabolism	Lipid metabolism		Lipid metabolism				
+Androgen metabolism	Lipid metabolism	Hormone metabolism	Lipid metabolism				
+Arachidonic acid metabolism	Lipid metabolism	Phospholipid metabolism	Lipid metabolism				hsa00590
+Beta oxidation of branched-chain fatty acids (mitochondrial)	Lipid metabolism	Saturated fatty acid metabolism	Lipid metabolism				
+Beta oxidation of di-unsaturated fatty acids (n-6) (mitochondrial)	Lipid metabolism	Unsaturated fatty acid metabolism	Lipid metabolism				
+Beta oxidation of di-unsaturated fatty acids (n-6) (peroxisomal)	Lipid metabolism	Unsaturated fatty acid metabolism	Lipid metabolism				
+Beta oxidation of even-chain fatty acids (mitochondrial)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of even-chain fatty acids (peroxisomal)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of odd-chain fatty acids (mitochondrial)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of poly-unsaturated fatty acids (mitochondrial)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of unsaturated fatty acids (n-7) (mitochondrial)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of unsaturated fatty acids (n-9) (mitochondrial)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of unsaturated fatty acids (n-9) (peroxisomal)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of unsaturated fatty acids (n-7) (peroxisomal)	Lipid metabolism		Lipid metabolism				
+Beta oxidation of phytanic acid (peroxisomal)	Lipid metabolism		Lipid metabolism				
+Bile acid biosynthesis	Lipid metabolism		Lipid metabolism				
+Bile acid recycling	Lipid metabolism		Lipid metabolism				
+Carnitine shuttle (cytosolic)	Lipid metabolism		Lipid metabolism				
+Carnitine shuttle (endoplasmic reticular)	Lipid metabolism		Lipid metabolism				
+Carnitine shuttle (mitochondrial)	Lipid metabolism		Lipid metabolism				
+Carnitine shuttle (peroxisomal)	Lipid metabolism		Lipid metabolism				
+Estrogen metabolism	Lipid metabolism	Hormone metabolism	Lipid metabolism				
+Ether lipid metabolism	Lipid metabolism		Lipid metabolism				hsa00565
+Fatty acid activation (cytosolic)	Lipid metabolism		Lipid metabolism				
+Fatty acid activation (endoplasmic reticular)	Lipid metabolism		Lipid metabolism				
+Fatty acid biosynthesis	Lipid metabolism		Lipid metabolism				hsa00061
+Fatty acid biosynthesis (even-chain)	Lipid metabolism		Lipid metabolism				
+Fatty acid biosynthesis (odd-chain)	Lipid metabolism		Lipid metabolism				
+Fatty acid biosynthesis (unsaturated)	Lipid metabolism		Lipid metabolism				
+Fatty acid desaturation (even-chain)	Lipid metabolism		Lipid metabolism				
+Fatty acid desaturation (odd-chain)	Lipid metabolism		Lipid metabolism				
+Fatty acid elongation (even-chain)	Lipid metabolism		Lipid metabolism				
+Fatty acid elongation (odd-chain)	Lipid metabolism		Lipid metabolism				
+Fatty acid oxidation	Lipid metabolism		Lipid metabolism				
+Glucocorticoid biosynthesis	Lipid metabolism	Hormone metabolism	Lipid metabolism				
+Glycerolipid metabolism	Lipid metabolism		Lipid metabolism				hsa00561
+Glycerophospholipid metabolism	Lipid metabolism		Lipid metabolism				hsa00564
+Glycosylphosphatidylinositol (GPI)-anchor biosynthesis	Lipid metabolism		Lipid metabolism				hsa00563
+Heparan sulfate degradation	Lipid metabolism		Lipid metabolism				
+Linoleate metabolism	Lipid metabolism		Lipid metabolism				
+Omega-3 fatty acid metabolism	Lipid metabolism		Lipid metabolism				
+Omega-6 fatty acid metabolism	Lipid metabolism		Lipid metabolism				
+Prostaglandin biosynthesis	Lipid metabolism		Lipid metabolism				
+Steroid metabolism	Lipid metabolism		Lipid metabolism				
+Biopterin metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Biotin metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00780
+Folate metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Porphyrin metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00860
+Retinol metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00830
+Thiamine metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00730
+Ubiquinone synthesis	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Vitamin B6 metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00750
+Vitamin D metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Vitamin E metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Vitamin B12 metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Vitamin A metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				
+Nicotinate and nicotinamide metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00760
+Miscellaneous	Miscellaneous		Miscellaneous				
+ROS detoxification	Miscellaneous		Miscellaneous				
+Nucleotide metabolism	Nucleotide metabolism		Nucleotide metabolism				hsa01232
+Purine metabolism	Nucleotide metabolism		Nucleotide metabolism				hsa00230
+Pyrimidine metabolism	Nucleotide metabolism		Nucleotide metabolism				hsa00240
+Xenobiotics metabolism	Xenobiotics metabolism		Xenobiotics metabolism				
+Heme degradation	Energy metabolism						
+Triacylglycerol synthesis	Lipid metabolism						
+Terpenoid backbone biosynthesis	Metabolism of terpenoids and polyketides		Metabolism of terpenoids and polyketides				hsa00900
+Beta oxidation of odd-chain fatty acids (peroxisomal)	Lipid metabolism		Lipid metabolism				
+Pantothenate and CoA biosynthesis	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00770
+Heme synthesis	Energy metabolism						
+Phosphatidylinositol phosphate metabolism	Lipid metabolism						
+Tryptophan metabolism	Amino acid metabolism		Amino acid metabolism				hsa00380
+Alkaloids biosynthesis	Amino acid derivatives						
+Hippurate metabolism	Amino acid derivatives						
+Protein modification	Protein metabolism						
+Lipoic acid metabolism	Metabolism of cofactors and vitamins		Metabolism of cofactors and vitamins				hsa00785
+CoA catabolism	Metabolism of cofactors and vitamins						
+CoA synthesis	Metabolism of cofactors and vitamins						
+Vitamin B2 metabolism	Metabolism of cofactors and vitamins						
+Beta-alanine metabolism	Amino acid derivatives						
+Urea cycle	Amino acid derivatives			R-HSA-70635			
+Vitamin C metabolism	Metabolism of cofactors and vitamins						
+Riboflavin metabolism	Metabolism of cofactors and vitamins						hsa00740
+Pool reactions	Miscellaneous						
+Artificial reactions	Miscellaneous						
+Isolated	Miscellaneous						
+Dietary fiber binding	Miscellaneous						
+Exchange/demand reactions	Miscellaneous						
+Transport reactions	Miscellaneous						

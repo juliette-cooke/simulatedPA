@@ -1,0 +1,143 @@
+Pathway	Type
+Acyl-CoA hydrolysis	unable_to_run_ORA
+Acylglycerides metabolism	able_to_run
+Alanine, aspartate and glutamate metabolism	able_to_run
+Alkaloids biosynthesis	blocked
+Amino sugar and nucleotide sugar metabolism	infeasible
+Aminoacyl-tRNA biosynthesis	infeasible
+Androgen metabolism	able_to_run
+Arachidonic acid metabolism	able_to_run
+Arginine and proline metabolism	able_to_run
+Artificial reactions	removed_but_ran
+Ascorbate and aldarate metabolism	able_to_run
+Beta oxidation of branched-chain fatty acids (mitochondrial)	unable_to_run_ORA
+Beta oxidation of di-unsaturated fatty acids (n-6) (mitochondrial)	unable_to_run_ORA
+Beta oxidation of di-unsaturated fatty acids (n-6) (peroxisomal)	unable_to_run_ORA
+Beta oxidation of even-chain fatty acids (mitochondrial)	able_to_run
+Beta oxidation of even-chain fatty acids (peroxisomal)	unable_to_run_ORA
+Beta oxidation of odd-chain fatty acids (mitochondrial)	unable_to_run_ORA
+Beta oxidation of odd-chain fatty acids (peroxisomal)	unable_to_run_ORA
+Beta oxidation of phytanic acid (peroxisomal)	unable_to_run_ORA
+Beta oxidation of poly-unsaturated fatty acids (mitochondrial)	unable_to_run_ORA
+Beta oxidation of unsaturated fatty acids (n-7) (mitochondrial)	unable_to_run_ORA
+Beta oxidation of unsaturated fatty acids (n-7) (peroxisomal)	unable_to_run_ORA
+Beta oxidation of unsaturated fatty acids (n-9) (mitochondrial)	unable_to_run_ORA
+Beta oxidation of unsaturated fatty acids (n-9) (peroxisomal)	unable_to_run_ORA
+Beta-alanine metabolism	able_to_run
+Bile acid biosynthesis	able_to_run
+Bile acid recycling	able_to_run
+Biopterin metabolism	unable_to_run_ORA
+Biotin metabolism	unable_to_run_ORA
+Blood group biosynthesis	unable_to_run_ORA
+Butanoate metabolism	able_to_run
+C5-branched dibasic acid metabolism	able_to_run
+Carnitine shuttle (cytosolic)	unable_to_run_ORA
+Carnitine shuttle (endoplasmic reticular)	unable_to_run_ORA
+Carnitine shuttle (mitochondrial)	infeasible
+Carnitine shuttle (peroxisomal)	unable_to_run_ORA
+Cholesterol biosynthesis 1 (Bloch pathway)	unable_to_run_ORA
+Cholesterol biosynthesis 2	unable_to_run_ORA
+Cholesterol biosynthesis 3 (Kandustch-Russell pathway)	unable_to_run_ORA
+Cholesterol metabolism	unable_to_run_ORA
+Chondroitin / heparan sulfate biosynthesis	unable_to_run_ORA
+Chondroitin sulfate degradation	able_to_run
+CoA catabolism	able_to_run
+CoA synthesis	unable_to_run_ORA
+Cysteine and methionine metabolism	able_to_run
+Dietary fiber binding	removed_but_ran
+Drug metabolism	able_to_run
+Eicosanoid metabolism	able_to_run
+Estrogen metabolism	unable_to_run_ORA
+Ether lipid metabolism	unable_to_run_ORA
+Exchange/demand reactions	infeasible
+Fatty acid activation (cytosolic)	unable_to_run_ORA
+Fatty acid activation (endoplasmic reticular)	unable_to_run_ORA
+Fatty acid biosynthesis	able_to_run
+Fatty acid biosynthesis (even-chain)	unable_to_run_ORA
+Fatty acid biosynthesis (odd-chain)	unable_to_run_ORA
+Fatty acid biosynthesis (unsaturated)	unable_to_run_ORA
+Fatty acid desaturation (even-chain)	unable_to_run_ORA
+Fatty acid desaturation (odd-chain)	unable_to_run_ORA
+Fatty acid elongation (even-chain)	unable_to_run_ORA
+Fatty acid elongation (odd-chain)	unable_to_run_ORA
+Fatty acid oxidation	able_to_run
+Folate metabolism	able_to_run
+Formation and hydrolysis of cholesterol esters	unable_to_run_ORA
+Fructose and mannose metabolism	able_to_run
+Galactose metabolism	infeasible
+Glucocorticoid biosynthesis	unable_to_run_ORA
+Glutathione metabolism	able_to_run
+Glycerolipid metabolism	able_to_run
+Glycerophospholipid metabolism	infeasible
+Glycine, serine and threonine metabolism	able_to_run
+Glycolysis / Gluconeogenesis	infeasible
+Glycosphingolipid biosynthesis-ganglio series	able_to_run
+Glycosphingolipid biosynthesis-globo series	unable_to_run_ORA
+Glycosphingolipid biosynthesis-lacto and neolacto series	unable_to_run_ORA
+Glycosphingolipid metabolism	able_to_run
+Glycosylphosphatidylinositol (GPI)-anchor biosynthesis	unable_to_run_ORA
+Heme degradation	unable_to_run_ORA
+Heme synthesis	unable_to_run_ORA
+Heparan sulfate degradation	able_to_run
+Hippurate metabolism	unable_to_run_ORA
+Histidine metabolism	able_to_run
+Inositol phosphate metabolism	able_to_run
+Isolated	removed_but_ran
+Keratan sulfate biosynthesis	unable_to_run_ORA
+Keratan sulfate degradation	able_to_run
+Leukotriene metabolism	able_to_run
+Linoleate metabolism	able_to_run
+Lipoic acid metabolism	unable_to_run_ORA
+Lysine metabolism	able_to_run
+Metabolism of other amino acids	unable_to_run_ORA
+Miscellaneous	infeasible
+N-glycan metabolism	able_to_run
+Nicotinate and nicotinamide metabolism	infeasible
+Nucleotide metabolism	infeasible
+O-glycan metabolism	able_to_run
+Omega-3 fatty acid metabolism	unable_to_run_ORA
+Omega-6 fatty acid metabolism	unable_to_run_ORA
+Oxidative phosphorylation	able_to_run
+Pantothenate and CoA biosynthesis	unable_to_run_ORA
+Pentose and glucuronate interconversions	able_to_run
+Pentose phosphate pathway	able_to_run
+Peptide metabolism	able_to_run
+Phenylalanine metabolism	unable_to_run_ORA
+Phenylalanine, tyrosine and tryptophan biosynthesis	able_to_run
+Phosphatidylinositol phosphate metabolism	unable_to_run_ORA
+Pool reactions	removed_but_ran
+Porphyrin metabolism	unable_to_run_ORA
+Propanoate metabolism	able_to_run
+Prostaglandin biosynthesis	able_to_run
+Protein assembly	unable_to_run_ORA
+Protein degradation	unable_to_run_ORA
+Protein modification	unable_to_run_ORA
+Purine metabolism	infeasible
+Pyrimidine metabolism	infeasible
+Pyruvate metabolism	able_to_run
+ROS detoxification	removed_but_ran
+Retinol metabolism	infeasible
+Riboflavin metabolism	able_to_run
+Serotonin and melatonin biosynthesis	unable_to_run_ORA
+Sphingolipid metabolism	able_to_run
+Starch and sucrose metabolism	able_to_run
+Steroid metabolism	able_to_run
+Sulfur metabolism	unable_to_run_ORA
+Terpenoid backbone biosynthesis	unable_to_run_ORA
+Thiamine metabolism	infeasible
+Transport reactions	infeasible
+Triacylglycerol synthesis	blocked
+Tricarboxylic acid cycle and glyoxylate/dicarboxylate metabolism	able_to_run
+Tryptophan metabolism	able_to_run
+Tyrosine metabolism	able_to_run
+Ubiquinone synthesis	unable_to_run_ORA
+Urea cycle	unable_to_run_ORA
+Valine, leucine, and isoleucine metabolism	unable_to_run_ORA
+Vitamin A metabolism	unable_to_run_ORA
+Vitamin B12 metabolism	infeasible
+Vitamin B2 metabolism	unable_to_run_ORA
+Vitamin B6 metabolism	able_to_run
+Vitamin C metabolism	unable_to_run_ORA
+Vitamin D metabolism	infeasible
+Vitamin E metabolism	infeasible
+Xenobiotics metabolism	unable_to_run_ORA

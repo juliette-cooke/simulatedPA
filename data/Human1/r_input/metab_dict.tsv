@@ -1,0 +1,1501 @@
+ID	Name	metabID
+MAR07108	benzo[a]pyrene	MAM01374
+MAR07110	naphthalene	MAM02556
+MAR07112	aflatoxin B1	MAM01296
+MAR07114	trichloroethene	MAM03044
+MAR07116	bromobenzene	MAM01403
+MAR07118	7,12-dimethylbenz[a]anthracene	MAM01174
+MAR07120	4-(n-nitrosomethylamino)-1-(3-pyridyl)-1-butanone	MAM00932
+MAR07122	1-nitronaphthalene	MAM00545
+MAR07124	1,1-dichloroethylene	MAM00228
+MAR07126	1,2-dibromoethane	MAM00242
+MAR09023	TAG-extraction	MAM02957
+MAR09024	chylomicron	MAM01570
+MAR09032	SMCFA-blood-pool	MAM02909
+MAR09808	propanoate	MAM02772
+MAR09809	butyrate	MAM01410
+MAR09810	valeric acid	MAM03134
+MAR09811	hexanoic acid	MAM02120
+MAR09812	heptylic acid	MAM02108
+MAR09813	octanoic acid	MAM02642
+MAR09814	nonanoic acid	MAM02614
+MAR09815	decanoic acid	MAM01648
+MAR09816	undecylic acid	MAM03117
+MAR09033	NEFA blood pool in	MAM02560
+MAR09034	glucose	MAM01965
+MAR09035	linoleate	MAM02387
+MAR09036	linolenate	MAM02389
+MAR09037	phytanic acid	MAM02746
+MAR09038	histidine	MAM02125
+MAR09039	isoleucine	MAM02184
+MAR09040	leucine	MAM02360
+MAR09041	lysine	MAM02426
+MAR09042	methionine	MAM02471
+MAR09043	phenylalanine	MAM02724
+MAR09044	threonine	MAM02993
+MAR09045	tryptophan	MAM03089
+MAR09046	valine	MAM03135
+MAR09047	H2O	MAM02040
+MAR09048	O2	MAM02630
+MAR09049	VLDL	MAM03147
+MAR09050	HDL	MAM02048
+MAR09051	LDL	MAM02353
+MAR09052	chylomicron remnant	MAM01569
+MAR09053	VLDL remnant	MAM03146
+MAR09054	HDL remnant	MAM02047
+MAR09055	LDL remnant	MAM02352
+MAR09056	NEFA blood pool out	MAM02561
+MAR09058	CO2	MAM01596
+MAR09061	alanine	MAM01307
+MAR09062	asparagine	MAM01369
+MAR09063	glutamine	MAM01975
+MAR09064	tyrosine	MAM03101
+MAR09065	cysteine	MAM01628
+MAR09066	arginine	MAM01365
+MAR09067	glycine	MAM01986
+MAR09068	proline	MAM02770
+MAR09069	serine	MAM02896
+MAR09070	aspartate	MAM01370
+MAR09071	glutamate	MAM01974
+MAR09072	Pi	MAM02751
+MAR09073	NH3	MAM02578
+MAR09074	sulfate	MAM02946
+MAR09075	urate	MAM03120
+MAR09076	Fe2+	MAM01821
+MAR09078	HCO3-	MAM02046
+MAR09079	H+	MAM02039
+MAR09083	choline	MAM01513
+MAR09084	ethanolamine	MAM01797
+MAR09085	glycerol	MAM01983
+MAR09086	acetate	MAM01252
+MAR09087	ornithine	MAM02658
+MAR09088	sulfite	MAM02949
+MAR09089	phospholipids extracellular pool	MAM02740
+MAR09090	methylimidazoleacetic acid	MAM02477
+MAR09091	4-aminobutyrate	MAM00970
+MAR09092	dopamine	MAM01736
+MAR09093	noradrenaline	MAM02617
+MAR09094	5-hydroxy-L-tryptophan	MAM01107
+MAR09095	adrenaline	MAM01290
+MAR09096	Fe3+	MAM01822
+MAR09097	D-aspartate	MAM01641
+MAR09098	D-alanine	MAM01638
+MAR09099	ethanol	MAM01796
+MAR09100	5-formyl-THF	MAM01100
+MAR09101	PNP	MAM02754
+MAR09102	lactose	MAM02332
+MAR09103	H2S	MAM02042
+MAR09104	1-methylnicotinamide	MAM00536
+MAR09105	thiamin-P	MAM02983
+MAR09106	thiamin-PPP	MAM02985
+MAR09107	heme	MAM02049
+MAR09108	dihydroneopterin	MAM01704
+MAR09109	biotin	MAM01401
+MAR09110	biocytin	MAM01400
+MAR09111	heparan sulfate proteoglycan	MAM02054
+MAR09113	keratan sulfate I	MAM02278
+MAR09114	keratan sulfate I, degradation product 1	MAM02237
+MAR09115	keratan sulfate II (core 2-linked)	MAM02288
+MAR09116	keratan sulfate II (core 4-linked)	MAM02303
+MAR09117	chondroitin sulfate A (GalNAc4S-GlcA) proteoglycan	MAM01517
+MAR09118	chondroitin sulfate B - dermatan sulfate (IdoA2S-GalNAc4S) proteoglycan	MAM01525
+MAR09119	chondroitin sulfate C (GalNAc6S-GlcA) proteoglycan	MAM01533
+MAR09120	chondroitin sulfate D (GlcNAc6S-GlcA2S) proteoglycan	MAM01543
+MAR09121	chondroitin sulfate E (GalNAc4,6diS-GlcA) proteoglycan	MAM01554
+MAR09122	hyaluronate	MAM02141
+MAR09123	hyaluronan biosynthesis, precursor 1	MAM02139
+MAR09124	de-Fuc form of PA6	MAM01652
+MAR09125	PA6	MAM02672
+MAR09126	n2m2nmasn	MAM02510
+MAR09127	sialyl-Tn antigen	MAM02907
+MAR09128	disialyl-T antigen	MAM01712
+MAR09129	estradiol-17beta 3-glucuronide	MAM01786
+MAR09130	LPL	MAM02414
+MAR09131	sarcosine	MAM02880
+MAR09132	acetoacetate	MAM01253
+MAR09133	pyruvate	MAM02819
+MAR09134	(R)-3-hydroxybutanoate	MAM00157
+MAR09135	L-lactate	MAM02403
+MAR09136	D-lactate	MAM01716
+MAR09137	mannose	MAM02453
+MAR09138	xylitol	MAM03155
+MAR09139	fructose	MAM01840
+MAR09140	galactose	MAM01910
+MAR09141	ADP-ribose	MAM01288
+MAR09142	nicotinate	MAM02586
+MAR09143	riboflavin	MAM02842
+MAR09144	pyridoxine	MAM02817
+MAR09145	pantothenate	MAM02680
+MAR09146	folate	MAM01830
+MAR09147	retinol	MAM02834
+MAR09148	iodide	MAM02174
+MAR09149	nitrite	MAM02588
+MAR09150	chloride	MAM01442
+MAR09151	alpha-tocopherol	MAM01327
+MAR09152	alpha-tocotrienol	MAM01330
+MAR09153	gamma-tocopherol	MAM01935
+MAR09154	gamma-tocotrienol	MAM01938
+MAR09155	ITP	MAM02193
+MAR09156	dITP	MAM01714
+MAR09158	ascorbate	MAM01368
+MAR09159	thiamin	MAM02982
+MAR09160	hydrogen-cyanide	MAM02145
+MAR09161	homoserine	MAM02136
+MAR09163	leukotriene F4	MAM02370
+MAR09165	oxalate	MAM02661
+MAR09166	chitin-component	MAM01438
+MAR09167	lipoic acid	MAM02394
+MAR09168	glucosamine	MAM01962
+MAR09169	selenate	MAM02885
+MAR09171	2-acetyl-1-alkyl-sn-glycero-3-phosphocholine	MAM00626
+MAR09172	1-organyl-2-lyso-sn-glycero-3-phosphocholine	MAM00549
+MAR09201	citrulline	MAM01588
+MAR09203	D-xylose	MAM01758
+MAR09204	glycophosphatidylinositol-(GPI)-anchored-protein-precursor	MAM02001
+MAR09205	10-formyl-THF	MAM00266
+MAR09206	10-formyl-THF-glu(5)	MAM00267
+MAR09207	10-formyl-THF-glu(6)	MAM00268
+MAR09208	10-formyl-THF-glu(7)	MAM00269
+MAR09209	fatty acid pool	MAM10005
+MAR09210	13-cis-retinoyl-glucuronide	MAM00353
+MAR09211	24R,25-dihyoxyvitamin D2	MAM00613
+MAR09212	(24R)-24,25-dihydroxycalciol	MAM00035
+MAR09213	4-nitrocatechol	MAM01019
+MAR09214	25-hydroxyvitamin D2	MAM00620
+MAR09215	calcidiol	MAM01415
+MAR09216	2-hydroxybutyrate	MAM00648
+MAR09217	2-methylcitrate	MAM00665
+MAR09218	3,4-dihydroxyphenylethyleneglycol	MAM00730
+MAR09219	L-dopa	MAM02354
+MAR09220	cGMP	MAM01433
+MAR09221	L-3-amino-isobutanoate	MAM02325
+MAR09222	D-3-amino-isobutanoate	MAM01633
+MAR09223	4-hydroxy-debrisoquine	MAM00998
+MAR09224	4-hydroxyphenylacetate	MAM01003
+MAR09225	isocaproic-aldehyde	MAM02182
+MAR09226	4-hydroxy-tolbutamide	MAM01007
+MAR09227	4-nitrophenyl-sulfate	MAM01021
+MAR09228	4-pyridoxate	MAM01033
+MAR09229	5-alpha-dihydrotestosterone	MAM01069
+MAR09230	5alpha-dihydrotestosterone-glucuronide	MAM01070
+MAR09231	5alpha-dihydrotestosterone-sulfate	MAM01071
+MAR09232	pentaglutamyl-folate(DHF)	MAM02691
+MAR09233	5-hydroxy-omeprazole	MAM01109
+MAR09234	5-methyl-THF	MAM01115
+MAR09235	pentaglutamyl-folate(THF)	MAM02692
+MAR09236	hexaglutamyl-folate(DHF)	MAM02118
+MAR09237	6beta-hydroxytestosterone	MAM01158
+MAR09238	hexaglutamyl-folate(THF)	MAM02119
+MAR09239	heptaglutamyl-folate(DHF)	MAM02104
+MAR09240	heptaglutamyl-folate(THF)	MAM02105
+MAR09241	L-arabitol	MAM02338
+MAR09242	acetaldehyde	MAM01249
+MAR09243	acetone	MAM01256
+MAR09244	type III A glycolipid	MAM03096
+MAR09245	type IIIAb	MAM03098
+MAR09246	N-acetylglucosamine	MAM02527
+MAR09247	acetylcholine	MAM01260
+MAR09248	sialyl(1,3)-sialyl(2,6)-galactosylgloboside	MAM02902
+MAR09249	sialyl(2,3)-sialyl(2,6)-galactosylgloboside	MAM02903
+MAR09250	3,8-LD1	MAM00744
+MAR09251	disialylgalactosylgloboside	MAM01711
+MAR09252	VI3NeuAc-nLc6Cer	MAM03138
+MAR09253	adenine	MAM01279
+MAR09254	adenosine	MAM01280
+MAR09255	ADP	MAM01285
+MAR09256	ADP-ribose-2-phosphate	MAM01289
+MAR09257	etiocholan-3alpha-ol-17-one 3-glucuronide	MAM01799
+MAR09258	1-alkyl-2-lysoglycerol-3-phosphocholine	MAM00516
+MAR09259	AKG	MAM01306
+MAR09260	beta-alanine	MAM01383
+MAR09261	aldosterone	MAM01309
+MAR09262	AMP	MAM01334
+MAR09263	androsterone	MAM01338
+MAR09264	androsterone-glucuronide	MAM01339
+MAR09265	antipyrine	MAM01344
+MAR09266	alpha-pinene-oxide	MAM01326
+MAR09267	(+)-alpha-pinene	MAM00002
+MAR09268	20alpha-hydroxy-4-pregnen-3-one	MAM00580
+MAR09269	aquacob(III)alamin	MAM01361
+MAR09270	L-arabinose	MAM02337
+MAR09271	bilirubin-bisglucuronoside	MAM01397
+MAR09272	bilirubin-monoglucuronoside	MAM01398
+MAR09273	bilirubin	MAM01396
+MAR09275	cAMP	MAM01419
+MAR09276	beta-carotene	MAM01385
+MAR09277	(-)-trans-carveol	MAM00001
+MAR09279	cys-gly	MAM01626
+MAR09280	cholate	MAM01445
+MAR09281	glycocholate	MAM01988
+MAR09282	taurocholate	MAM02963
+MAR09283	glycochenodeoxycholate	MAM01987
+MAR09284	taurochenodeoxycholate	MAM02962
+MAR09285	cholesterol	MAM01450
+MAR09286	citrate	MAM01587
+MAR09287	CMP	MAM01590
+MAR09288	CO	MAM01595
+MAR09289	coumarin	MAM01617
+MAR09290	creatine	MAM01619
+MAR09291	cytosine	MAM01632
+MAR09292	L-carnitine	MAM02348
+MAR09293	cortisol	MAM01615
+MAR09294	corticosterone	MAM01614
+MAR09295	cytidine	MAM01630
+MAR09296	deoxycytidine	MAM01668
+MAR09297	deoxyadenosine	MAM01666
+MAR09299	debrisoquin	MAM01647
+MAR09300	deoxyguanosine	MAM01669
+MAR09301	dehydroascorbic acid	MAM01655
+MAR09302	dehydroepiandrosterone sulfate	MAM01659
+MAR09303	dihydrofolate	MAM01700
+MAR09304	digalactosylceramidesulfate	MAM01695
+MAR09305	deoxyinosine	MAM01671
+MAR09306	edaravone	MAM01768
+MAR09307	2,6-dimethylheptanoyl-carnitine	MAM00577
+MAR09308	dopamine-3-O-sulfate	MAM01737
+MAR09309	deoxyribose	MAM01672
+MAR09310	deoxyuridine	MAM01673
+MAR09311	aflatoxin B1-exo-8,9-epoxide	MAM01298
+MAR09312	ebastine	MAM01765
+MAR09313	hydroxylated-ebastine	MAM02150
+MAR09314	estradiol-17beta	MAM01787
+MAR09315	16-glucuronide-estriol	MAM00402
+MAR09316	estrone-glucuronide	MAM01795
+MAR09317	estrone 3-sulfate	MAM01789
+MAR09318	formate	MAM01833
+MAR09319	III3Fuc-nLc6Cer	MAM02164
+MAR09320	glycolipid	MAM01999
+MAR09321	fucacgalfucgalacglcgalgluside heparan sulfate	MAM01850
+MAR09322	IV3NeuAc,III3Fuc-nLc4Cer	MAM02199
+MAR09323	IV3Neu5Ac,III4Fuc-Lc4Cer	MAM02198
+MAR09324	fucfuc132galacglcgal14acglcgalgluside heparan sulfate	MAM01851
+MAR09325	fucfucfucgalacglc13galacglcgal14acglcgalgluside heparan sulfate	MAM01852
+MAR09326	fucfucfucgalacglcgal14acglcgalgluside heparan sulfate	MAM01853
+MAR09327	lacto-N-fucopentaosyl-III-ceramide	MAM02331
+MAR09328	fucgalfucgalacglcgalgluside heparan sulfate	MAM01859
+MAR09329	fucosyl-galactosylgloboside	MAM01861
+MAR09330	6-deoxy-L-galactose	MAM01159
+MAR09331	gal-glcnac-gal-globoside	MAM01919
+MAR09332	galfuc12gal14acglcgalgluside heparan sulfate	MAM01914
+MAR09333	galfucgalacglcgal14acglcgalgluside heparan sulfate	MAM01915
+MAR09334	galgalfucfucgalacglcgalacglcgal14acglcgalgluside heparan sulfate	MAM01916
+MAR09335	galgalgalthcrm heparan sulfate	MAM01917
+MAR09336	globoside	MAM01959
+MAR09337	GD1beta	MAM01944
+MAR09338	(5-L-glutamyl)-L-amino acid	MAM00097
+MAR09339	GD1c	MAM01945
+MAR09340	GDP	MAM01948
+MAR09341	betaine	MAM01393
+MAR09342	glycerate	MAM01982
+MAR09343	GMP	MAM02016
+MAR09344	GP1c	MAM02018
+MAR09345	GP1calpha	MAM02019
+MAR09346	GQ1b	MAM02023
+MAR09347	GQ1balpha	MAM02024
+MAR09348	guanosine	MAM02038
+MAR09349	GT1a	MAM02028
+MAR09350	GSSG	MAM02027
+MAR09351	GSH	MAM02026
+MAR09352	GTP	MAM02034
+MAR09353	guanine	MAM02037
+MAR09354	H2O2	MAM02041
+MAR09355	4-hydroxy-17beta-estradiol	MAM00986
+MAR09356	umbelliferone	MAM03113
+MAR09357	6-hydroxypaclitaxel	MAM01163
+MAR09358	hypoxanthine	MAM02159
+MAR09359	IDP	MAM02161
+MAR09360	IMP	MAM02167
+MAR09361	inositol	MAM02171
+MAR09362	inosine	MAM02170
+MAR09363	cystine	MAM01629
+MAR09364	leukotriene A4	MAM02362
+MAR09365	leukotriene B4	MAM02364
+MAR09366	leukotriene C4	MAM02366
+MAR09367	LTD4	MAM02418
+MAR09368	leukotriene E4	MAM02369
+MAR09369	limonene	MAM02386
+MAR09370	maltose	MAM02450
+MAR09371	maltotriose	MAM02452
+MAR09372	methanol	MAM02470
+MAR09373	L-metanephrine	MAM02407
+MAR09374	3-mercaptolactate-cysteine-disulfide	MAM00816
+MAR09375	methylglyoxal	MAM02475
+MAR09376	NAD+	MAM02552
+MAR09377	NADP+	MAM02554
+MAR09378	nicotinamide	MAM02583
+MAR09379	nifedipine	MAM02587
+MAR09380	hydroxy-nifedipine	MAM02153
+MAR09381	NO	MAM02609
+MAR09382	norepinephrine sulfate	MAM02620
+MAR09383	O2-	MAM02631
+MAR09384	9-O-acetylated-GD3	MAM01244
+MAR09385	9-O-acetylated-GT3	MAM01245
+MAR09386	hydroxide	MAM02147
+MAR09387	omeprazole	MAM02653
+MAR09388	(1R,2S)-naphthalene 1,2-oxide	MAM00032
+MAR09389	[protein]-L-lysine	MAM00204
+MAR09390	perillyl alcohol	MAM02712
+MAR09391	phenylacetylglutamine	MAM02722
+MAR09393	progesterone	MAM02769
+MAR09395	prostaglandin D2	MAM02783
+MAR09396	prostaglandin E1	MAM02785
+MAR09397	prostaglandin E2	MAM02786
+MAR09398	prostaglandin F2alpha	MAM02789
+MAR09399	pyridoxamine	MAM02815
+MAR09400	pyridoxal	MAM02813
+MAR09401	ribitol	MAM02841
+MAR09404	retinoate	MAM02833
+MAR09405	retinoyl-glucuronide	MAM02836
+MAR09406	ribose	MAM02843
+MAR09408	(S)-3-sulfolactate	MAM00179
+MAR09409	sphingosylphosphorylcholine	MAM02931
+MAR09410	sphinganine-1-phosphate	MAM02928
+MAR09411	sphingosine-1-phosphate	MAM02930
+MAR09412	serotonin	MAM02897
+MAR09413	starch structure 1	MAM02936
+MAR09414	starch structure 2	MAM02937
+MAR09415	succinate	MAM02943
+MAR09416	sucrose	MAM02945
+MAR09417	D-tagatose	MAM01745
+MAR09418	taurine	MAM02961
+MAR09419	paclitaxel	MAM02673
+MAR09420	thiocyanate	MAM02986
+MAR09421	THF	MAM02980
+MAR09422	thymine	MAM02997
+MAR09423	thymidine	MAM02996
+MAR09424	thyroxine	MAM02998
+MAR09425	tolbutamide	MAM03001
+MAR09426	trehalose	MAM03039
+MAR09427	triiodothyronine	MAM03052
+MAR09428	3,5,3-triiodothyronine-4-sulfate	MAM00734
+MAR09429	testosterone	MAM02969
+MAR09430	testosterone glucuronide	MAM02967
+MAR09431	testosterone sulfate	MAM02968
+MAR09432	thiosulfate	MAM02991
+MAR09433	thromboxane A2	MAM02994
+MAR09434	tyramine-O-sulfate	MAM03100
+MAR09435	UDP	MAM03106
+MAR09436	UMP	MAM03114
+MAR09437	uracil	MAM03118
+MAR09438	urea	MAM03121
+MAR09439	uridine	MAM03123
+MAR09440	UTP	MAM03130
+MAR09441	vitamin D2	MAM03141
+MAR09442	vitamin D3	MAM03142
+MAR09443	12-hydroxydodecanoic acid	MAM00325
+MAR09444	14-hydroxytetradecanoic acid	MAM00371
+MAR09445	16-hydroxyhexadecanoic acid	MAM00403
+MAR09446	19-hydroxytestosterone	MAM00432
+MAR09447	galactosylglycerol	MAM01913
+MAR09448	maltodecaose	MAM02445
+MAR09449	phenylacetylglycine	MAM02723
+MAR09450	XTP	MAM03154
+MAR09451	itaconate	MAM02191
+MAR09452	estriol	MAM01788
+MAR09453	etiocholanolone	MAM01800
+MAR09454	D-ornithine	MAM01740
+MAR09455	D-arginine	MAM01640
+MAR09456	ADP-glucose	MAM01286
+MAR09457	ADP-mannose	MAM01287
+MAR09458	D-ribulose	MAM01743
+MAR09460	creatinine	MAM01621
+MAR09461	glucose-1,6-bisphosphate	MAM01966
+MAR09462	hyodeoxycholate	MAM02155
+MAR09463	glycodeoxycholate	MAM01989
+MAR09681	L-iduronic acid	MAM02384
+MAR09682	4-nitrophenyl-phosphate	MAM01020
+MAR09683	5-L-gamma-glutamyl	MAM01111
+MAR09684	agmatine	MAM01303
+MAR09685	D-glucitol	MAM01682
+MAR09686	G00022	MAM01870
+MAR09687	G00032	MAM01872
+MAR09688	G00086	MAM01887
+MAR09689	N-acetyl-D-mannosamine	MAM02524
+MAR09690	orotate	MAM02659
+MAR09691	pyridoxal-phosphate	MAM02814
+MAR09692	spermine dialdehyde	MAM02924
+MAR09693	xanthurenate	MAM03151
+MAR09694	homovanillate	MAM02137
+MAR09695	G00040	MAM01874
+MAR09696	G00079	MAM01881
+MAR09697	G00082	MAM01883
+MAR09698	G00083	MAM01884
+MAR09699	V3(NeuAc)2-Gb5Cer	MAM03131
+MAR09700	n5m2masn	MAM02516
+MAR09701	coproporphyrin I	MAM01603
+MAR09702	coproporphyrin III	MAM01604
+MAR09703	gpi_sig	MAM02022
+MAR09704	dgpi_prot heparan sulfate	MAM01687
+MAR09705	dem2emgacpail_prot heparan sulfate	MAM01665
+MAR09706	glcnac-alpha-1,4-core 2	MAM01955
+MAR09707	3-deoxy-D-glycero-D-galacto-2-nonulosonic acid	MAM00771
+MAR09708	eumelanin	MAM02458
+MAR09709	core 5	MAM01610
+MAR09710	core 7	MAM01612
+MAR09711	core 8	MAM01613
+MAR09712	mem2emgacpail_prot heparan sulfate	MAM02462
+MAR09713	4-hydroxyretinoic acid	MAM01006
+MAR09714	m3gacpail_prot heparan sulfate	MAM02434
+MAR09715	spermine	MAM02926
+MAR09721	dolichol	MAM01730
+MAR09729	glycogen	MAM03161
+MAR09730	albumin	MAM01308
+MAR00565	Fatty Acid 9-Cis-Retinol	MAM03315
+MAR00566	adrenic acid	MAM01291
+MAR00567	eicosanoate	MAM01771
+MAR00568	arachidonate	MAM01362
+MAR00569	ATP	MAM01371
+MAR00571	DPA	MAM01741
+MAR00572	ceramide-1P pool	MAM01431
+MAR00573	DHA	MAM01689
+MAR00574	1,2-diacylglycerol-LD-TAG pool	MAM00240
+MAR00575	(4Z,7Z,10Z,13Z,16Z)-DPA	MAM00094
+MAR00576	dihomo-gamma-linolenate	MAM01696
+MAR00577	omega-3-arachidonic acid	MAM02648
+MAR00583	elaidate	MAM01778
+MAR00585	Ley Glycolipid	MAM03577
+MAR00595	Leb Glycolipid	MAM03578
+MAR00603	(S)-Glycerate	MAM03620
+MAR00606	glycogenin G4G7	MAM01992
+MAR00608	Glycogen, Structure 4 (Glycogenin-1,6-{2[1,4-Glc], [1,4-Glc]})	MAM03622
+MAR00609	Glycogen, Structure 5 (Glycogenin-2[1,4-Glc])	MAM03623
+MAR00611	palmitate	MAM02674
+MAR00617	palmitolate	MAM02675
+MAR00618	cerotic acid	MAM01432
+MAR00619	histamine	MAM02124
+MAR00620	margaric acid	MAM02456
+MAR00621	lignocerate	MAM02385
+MAR00624	(6Z,9Z)-octadecadienoic acid	MAM00104
+MAR00626	gamma-linolenate	MAM01932
+MAR00628	2-lysolecithin pool	MAM00656
+MAR00631	1-acylglycerol-3P pool	MAM10006
+MAR00637	nervonic acid	MAM02564
+MAR00639	stearate	MAM02938
+MAR00650	oleate	MAM02646
+MAR00655	PC-LD pool	MAM02684
+MAR00656	PE-LD pool	MAM02685
+MAR00658	PG-CL pool	MAM02715
+MAR00659	Phytanate	MAM03884
+MAR00661	PS-LD pool	MAM02808
+MAR00662	pentadecylic acid	MAM02690
+MAR00666	retinyl-ester	MAM02838
+MAR00695	stearidonic acid	MAM02939
+MAR00696	TAG-VLDL pool	MAM02959
+MAR00697	(6Z,9Z,12Z,15Z,18Z,21Z)-THA	MAM00114
+MAR00698	(9Z,12Z,15Z,18Z,21Z)-TPA	MAM00135
+MAR00699	(6Z,9Z,12Z,15Z,18Z)-TPA	MAM00111
+MAR00700	(9Z,12Z,15Z,18Z)-TTA	MAM00132
+MAR00701	EPA	MAM01784
+MAR00702	myristic acid	MAM02494
+MAR00704	cis-vaccenic acid	MAM01585
+MAR00714	cholesterol-ester pool	MAM01451
+MAR00720	cholest-5-ene-3beta,7alpha,24(S)-triol	MAM01446
+MAR00721	cholest-5-ene-3beta,7alpha,25-triol	MAM01447
+MAR00722	cholest-5-ene-3beta,7alpha,27-triol	MAM01448
+MAR01869	4-aminobutanal	MAM00969
+MAR01871	6-[(1S,2R)-1,2-dihydroxy-3-triphosphooxypropyl]-7,8-dihydropterin	MAM01155
+MAR01873	CTP	MAM01623
+MAR01912	dGMP	MAM01686
+MAR01918	dGTP	MAM01688
+MAR01921	glycerone	MAM01984
+MAR01922	DHAP	MAM01690
+MAR01923	dTMP	MAM01752
+MAR01938	dTTP	MAM01753
+MAR01939	FAD	MAM01802
+MAR01946	formaldehyde	MAM01831
+MAR01947	glucose-1-phosphate	MAM01967
+MAR01954	isomaltose	MAM02185
+MAR01955	3-keto-beta-D-galactose	MAM00810
+MAR01956	lactose-6-phosphate	MAM02333
+MAR01957	3-ketolactose	MAM00812
+MAR01961	gamma-glutamyl-beta-cyanoalanine	MAM01926
+MAR01964	uroporphyrinogen I	MAM03127
+MAR01965	coproporphyrinogen I	MAM01605
+MAR01966	gamma-glutamyl-3-aminopropiononitrile	MAM01925
+MAR01972	GM2	MAM02011
+MAR01975	GM1	MAM02008
+MAR01984	PRPP	MAM02806
+MAR01986	UDP-glucose	MAM03108
+MAR04092	prostaglandin H2	MAM02794
+MAR04094	prostaglandin I2	MAM02795
+MAR04096	CDP	MAM01424
+MAR04098	dTDP	MAM01747
+MAR04100	L-3-cyanoalanine	MAM02326
+MAR04102	antichymotrypsin	MAM01343
+MAR04104	antitrypsin	MAM01345
+MAR04110	apoA1	MAM01350
+MAR04117	fibrinogen	MAM01827
+MAR04119	haptoglobin	MAM02044
+MAR04129	plasminogen	MAM02753
+MAR04138	prothrombin	MAM02802
+MAR04140	[apotransferin]	MAM00186
+MAR04142	chitobiose	MAM01439
+MAR04144	Chenodeoxycholate	MAM03318
+MAR04146	taurolithocholate	MAM02965
+MAR04148	glycolithocholate	MAM02000
+MAR04150	tauroursodeoxycholate	MAM02966
+MAR04151	glycoursodeoxycholate	MAM02004
+MAR04153	sulfochenodeoxycholate	MAM02950
+MAR04164	lithocholate	MAM02402
+MAR04173	ursodeoxycholate	MAM03129
+MAR04178	sulfoglycolithocholate	MAM02951
+MAR04181	sulfotaurolithocholate	MAM02952
+MAR04195	reverse triiodthyronine	MAM02839
+MAR04203	prostaglandin A1	MAM02776
+MAR04213	prostaglandin A2	MAM02777
+MAR04215	prostaglandin B1	MAM02778
+MAR04217	prostaglandin B2	MAM02779
+MAR04221	prostaglandin C1	MAM02780
+MAR04223	prostaglandin C2	MAM02781
+MAR04230	prostaglandin E3	MAM02787
+MAR04234	prostaglandin F1alpha	MAM02788
+MAR04238	prostaglandin G2	MAM02792
+MAR04240	malonyl-CoA	MAM02444
+MAR04247	eicosanoyl-CoA	MAM01773
+MAR04256	CoA	MAM01597
+MAR04258	3-oxodocosanoyl-CoA	MAM00866
+MAR04272	spermine monoaldehyde	MAM02925
+MAR04273	spermidine monoaldehyde 2	MAM02922
+MAR04286	spermidine dialdehyde	MAM02920
+MAR04289	hypothiocyanite	MAM02158
+MAR04292	spermidine monoaldehyde 1	MAM02921
+MAR04293	maltopentaose	MAM02449
+MAR04294	beta-casomorphin	MAM01387
+MAR04298	beta-casomorphin (1-6)	MAM01386
+MAR04305	neocasomorphin	MAM02563
+MAR04307	neocasomorphin (1-5)	MAM02562
+MAR04309	apelin-13	MAM01348
+MAR04311	apelin-(1-12)	MAM01347
+MAR04322	maltoheptaose	MAM02446
+MAR04325	maltononaose	MAM02448
+MAR04327	Cyanosulfurous Acid Anion	MAM03330
+MAR04334	Cyanate	MAM03525
+MAR04337	2,3-cyclic-UMP	MAM00570
+MAR04339	3-UMP	MAM00921
+MAR04341	kinetensin	MAM02318
+MAR04349	kinetensin 1-7	MAM02315
+MAR04353	kinetensin 1-8	MAM02316
+MAR04357	neuromedin N	MAM02570
+MAR04359	neuromedin N(1-4)	MAM02569
+MAR04361	kinetensin 1-3	MAM02314
+MAR04362	kinetensin 4-8	MAM02317
+MAR04364	N-acetyl-seryl-aspartyl-lysyl-proline	MAM02551
+MAR04366	N-acetyl-seryl-aspartate	MAM02550
+MAR04369	lysyl-proline	MAM02429
+MAR04374	hypochlorite	MAM02156
+MAR04376	nitryl-chloride	MAM02591
+MAR04378	gamma-CEHC-glucuronide	MAM01924
+MAR04380	gamma-carboxyethyl-hydroxychroman	MAM01923
+MAR04382	UDP-galactose	MAM03107
+MAR04384	ceramide pool	MAM01430
+MAR04389	D-galactosyl-N-acylsphingosine	MAM01679
+MAR04392	alloxan	MAM01315
+MAR04405	alpha-CEHC-glucuronide	MAM01321
+MAR04407	3-carboxy-alpha-chromanol	MAM00766
+MAR04409	hepoxilin A3	MAM02096
+MAR04815	3-Hydroxy Butyryl Carnitine	MAM03201
+MAR04820	3-Hydroxydodecanoylcarnitine	MAM03202
+MAR04821	3-Hydroxydecanoylcarnitine	MAM03204
+MAR04822	3-Hydroxyhexadecenoylcarnitine	MAM03217
+MAR04823	3-Hydroxyhexadecanoylcarnitine	MAM03219
+MAR04824	3-Hydroxy-Isovaleryl Carnitine	MAM03243
+MAR04825	3-Hydroxyoctadecadienoylcarnitine	MAM03250
+MAR04826	3-Hydroxyoctadecanoyl Carnitine	MAM03251
+MAR04828	3-Hydroxy-Tetradecanoyl Carnitine	MAM03262
+MAR04829	3-Hydroxy Tetradecenoyl-7-Carnitine	MAM03264
+MAR04830	3-Hydroxy Trans7,10-Hexadecadienoyl Carnitine	MAM03266
+MAR04853	3-Hydroxy Trans5,8Tetradecadienoyl Carnitine	MAM03268
+MAR04859	Decanoyl Carnitine	MAM03488
+MAR04866	Sebacoyl Carnitine	MAM03489
+MAR04869	Dodecanedioyl Carnitine	MAM03490
+MAR04884	Hexadecanedioic Acid Mono-L-Carnitine Ester	MAM03493
+MAR04886	Malonyl Carnitine	MAM03494
+MAR04889	O-butanoylcarnitine	MAM02635
+MAR04891	Succinyl Carnitine	MAM03495
+MAR04895	Tiglyl Carnitine	MAM03496
+MAR04897	Glutaryl Carnitine	MAM03497
+MAR04899	Hexanoyl Carnitine	MAM03498
+MAR04901	Adipoyl Carnitine	MAM03499
+MAR04918	L-octanoylcarnitine	MAM02409
+MAR04920	Suberyl Carnitine	MAM03502
+MAR04923	Lauroyl Carnitine	MAM03540
+MAR04927	cis-erucic acid	MAM01583
+MAR04929	behenic acid	MAM01373
+MAR04936	Docosanedioicacid	MAM03560
+MAR04943	Isovaleryl Carnitine	MAM03706
+MAR04950	Tetradecadienoyl Carnitine	MAM03975
+MAR08386	trans-4-hydroxy-L-proline	MAM03037
+MAR08422	D-alanyl-D-alanine	MAM03164
+MAR08423	Beta-Glucans	MAM03483
+MAR08644	carnosine	MAM01423
+MAR08646	3alpha,12alpha-dihydroxy-5beta-cholanate	MAM00745
+MAR08647	Beta Glucan-Glycocholate Complex	MAM03595
+MAR08649	Beta Glucan-Taurocholic Acid Complex	MAM03604
+MAR08650	Beta Glucan-Taurodeoxycholic Acid Complex	MAM03605
+MAR08701	Glycyl-Glycine	MAM03621
+MAR08705	Glycylsarcosine	MAM03631
+MAR08707	Gums	MAM03638
+MAR08708	Guar Gum-Deoxyxholic Acid Complex	MAM03639
+MAR08832	Guar Gum-Glycocholate Complex	MAM03640
+MAR08916	Guar Gum-Taurocholic Acid Complex	MAM03641
+MAR08948	Leucyl-Glycine	MAM03714
+MAR08949	Leucylleucine	MAM03715
+MAR08950	Pectin	MAM03851
+MAR08951	Pectin-Deoxycholic Acid Complex	MAM03852
+MAR08952	Pectin-Glycocholate Complex	MAM03853
+MAR08953	Pectin-Taurocholic Acid Complex	MAM03854
+MAR08954	Psyllium	MAM03907
+MAR08955	Psillium-Glycocholic Acid Complex	MAM03908
+MAR08956	Psyllium-Taurocholic Acid Complex	MAM03909
+MAR08957	Psyllium-Taurodeoxycholic Acid Complex	MAM03910
+MAR08958	S-Sulfo-L-Cysteine	MAM03933
+MAR08959	taurodeoxycholate	MAM02964
+MAR08960	cysteamine	MAM01627
+MAR08961	dephospho-CoA	MAM01674
+MAR08962	FMN	MAM01828
+MAR08963	hypotaurine	MAM02157
+MAR08964	phosphopantetheine	MAM02741
+MAR08965	pantetheine	MAM02679
+MAR08966	ubiquinone	MAM03103
+MAR08967	ubiquinol	MAM03102
+MAR09010	4-hydroxyphenylpyruvate	MAM01005
+MAR09011	3-methyl-2-oxobutyrate	MAM00824
+MAR09012	2-oxo-3-methylvalerate	MAM00669
+MAR09013	4-methyl-2-oxopentanoate	MAM01013
+MAR09021	5-methylthioadenosine	MAM01116
+MAR09025	5-oxoproline	MAM01127
+MAR09026	SAH	MAM02871
+MAR09027	AICAR	MAM01304
+MAR09028	anthranilate	MAM01342
+MAR09029	N-carbamoyl-L-aspartate	MAM02559
+MAR09842	2-phospho-D-glycerate	MAM00674
+MAR09843	5-hydroxyindoleacetate	MAM01103
+MAR09844	3-ureidopropionate	MAM00923
+MAR09845	phosphocholine	MAM02738
+MAR09846	L-cystathionine	MAM02349
+MAR09847	dCMP	MAM01644
+MAR09848	dimethylglycine	MAM01708
+MAR09849	ethanolamine-phosphate	MAM01798
+MAR09850	sn-glycerol-3-PC	MAM02912
+MAR09851	glyceraldehyde	MAM01981
+MAR09852	guanidinoacetate	MAM02036
+MAR09853	homocysteine	MAM02133
+MAR09854	isocitrate	MAM02183
+MAR09855	4-hydroxy-2-quinolinecarboxylic acid	MAM00990
+MAR09856	L-2-aminoadipate	MAM02322
+MAR09857	kynurenine	MAM02319
+MAR09858	PEP	MAM02696
+MAR09859	quinolinate	MAM02822
+MAR09860	xanthosine-5-phosphate	MAM03150
+MAR09861	xanthosine	MAM03149
+MAR09862	3-phospho-D-glycerate	MAM00913
+MAR09863	3-hydroxyanthranilate	MAM00775
+MAR09864	UDP-glucuronate	MAM03109
+MAR09865	3-hydroxy-L-kynurenine	MAM00788
+MAR09866	nicotinate ribonucleotide	MAM02585
+MAR09867	orotidine-5-phosphate	MAM02660
+MAR09868	sn-glycerol-3-phosphate	MAM02914
+MAR09919	argininosuccinate	MAM01366
+MAR09920	O-acetylcarnitine	MAM02634
+MAR09921	O-propanoylcarnitine	MAM02657
+MAR09922	(6Z,9Z)-octadecadienoylcarnitine	MAM00105
+MAR09923	octadecenoylcarnitine(5)	MAM02639
+MAR09924	stearoylcarnitine	MAM02940
+MAR09925	L-palmitoylcarnitine	MAM02411
+MAR09926	palmitoleoyl-carnitine	MAM02676
+MAR09956	3-Methyl-Thio-Propionate	MAM03248
+MAR10145	8,9-EET	MAM01209
+MAR10179	12(S)-HPETE	MAM00309
+MAR10180	15(S)-HPETE	MAM00380
+MAR10181	15-Keto-Prostaglandin F2A	MAM01892
+MAR10182	21-hydroxypregnenolone	MAM00605
+MAR10183	2-oxoadipate	MAM00670
+MAR10184	4-hydroxyphenyllactate	MAM01004
+MAR10185	3-hydroxyisobutyrate	MAM00784
+MAR10186	hydracrylate	MAM02142
+MAR10187	3-(3-Hydroxy-Phenyl)Propionate Hydroxy Derivative Glucuronide	MAM03234
+MAR10188	3-Methylhistidine	MAM03247
+MAR10189	3-ureidoisobutyrate	MAM00922
+MAR10190	4-acetamidobutanoate	MAM00952
+MAR10191	gamma-butyrobetaine	MAM01922
+MAR10192	dihydrothymine	MAM01705
+MAR10193	5,6-Dihydrouracil	MAM01052
+MAR10194	5(S)-HPETE	MAM01042
+MAR10195	provitamin D3	MAM02805
+MAR10196	Acetyl-Glycine	MAM03397
+MAR10197	Acetyl-L-Lysine	MAM03401
+MAR10198	N-acetylornithine	MAM02546
+MAR10199	Acetyl-Threonine	MAM03406
+MAR10200	Adipic Acid	MAM03408
+MAR10201	2-Hydroxyadipic Acid	MAM03410
+MAR10202	SAM	MAM02877
+MAR10203	19-Hydroxyandrost-4-Ene-3,17-Dione	MAM03433
+MAR10205	biliverdin	MAM01399
+MAR10206	(S)-2-aminobutanoate	MAM00169
+MAR10207	N-acetylmethionine	MAM02540
+MAR10208	13(S)-HPODE	MAM00337
+MAR10209	5(S)-HETE	MAM01040
+MAR10210	prostaglandin J2	MAM02796
+MAR10211	lipoxin A4	MAM02395
+MAR10212	lipoxin B4	MAM02396
+MAR10213	anandamide	MAM01335
+MAR10214	5,6-EET	MAM01054
+MAR10215	11,12-EET	MAM00279
+MAR10216	14,15-EET	MAM00366
+MAR10217	9(10)-EpOME	MAM01216
+MAR10218	12(13)-EpOME	MAM00305
+MAR10219	6-oxo-prostaglandin F1alpha	MAM01168
+MAR10222	N-acetyl-L-alanine	MAM02530
+MAR10223	N-acetyl-L-asparagine	MAM02531
+MAR10224	beta-hydroxy-beta-methylbutyrate	MAM01392
+MAR10225	3-O-methyldopa	MAM00830
+MAR10226	6-trans-LTB4	MAM01172
+MAR10227	15(S)-HETrE	MAM00378
+MAR10228	Cis,Cis-11,14-Eicosadienoic Acid	MAM03569
+MAR10229	15-deoxy-PGD2	MAM00384
+MAR10230	androsterone sulfate	MAM01337
+MAR10231	5,12,20-TriHETE	MAM01047
+MAR10232	15(S)-HEPE	MAM00376
+MAR10233	leukotriene B5	MAM02365
+MAR10234	14,15-DiHETE	MAM00365
+MAR10235	cortisone	MAM01616
+MAR10240	Dodecanedioic Acid	MAM03562
+MAR10241	(9E)-octadecenoylcarnitine	MAM00126
+MAR10242	N-formimino-L-glutamate	MAM02574
+MAR10243	methylmalonate	MAM02479
+MAR10246	Hexadecanediocacid	MAM03654
+MAR10247	homogentisate	MAM02135
+MAR10248	homocarnosine	MAM02132
+MAR10249	Homocitrulline	MAM03681
+MAR10250	hexanoyl-CoA	MAM02122
+MAR10251	20-COOH-LTB4	MAM00585
+MAR10252	20-OH-LTB4	MAM00599
+MAR10254	linoleic-carnitine	MAM02388
+MAR10255	L-pipecolate	MAM02413
+MAR10256	lathosterol	MAM02343
+MAR10262	(R)-mevalonate	MAM00167
+MAR10263	inositol-1-phosphate	MAM02173
+MAR10264	N-acetyl-L-aspartate	MAM02532
+MAR10265	N-(omega)-hydroxyarginine	MAM02497
+MAR10301	L-hydroxylysine	MAM02381
+MAR10320	saccharopine	MAM02868
+MAR10321	Sebacicacid	MAM03923
+MAR10339	Suberic Acid	MAM03954
+MAR10340	Cia-5,8, Tetradecadienoic Acid	MAM03976
+MAR10342	threonate	MAM02992
+MAR10343	N6,N6,N6-trimethyl-L-lysine	MAM02517
+MAR10345	tetradecenoylcarnitine(5)	MAM02974
+MAR10346	thromboxane B2	MAM02995
+MAR10347	urocanate	MAM03124
+MAR10348	10-HETE	MAM00270
+MAR10349	1-Vaccenoyl-Cholesterol, Cholesterol-Ester (18:1, Delta 11)	MAM04075
+MAR10350	1-Linoleoyl-Cholesterol, Cholesterol-Ester (18:2, Delta 9, 12)	MAM04076
+MAR10351	1-Gamma-Linolenoyl-Cholesterol, Cholesterol-Ester (18:3, Delta 6, 9, 12)	MAM04077
+MAR10352	Cholesteryl Arachidonate, Cholesterol-Ester (20:4, Delta 5,8,11,14)	MAM04078
+MAR10353	1-Timnodnoyl-Cholesterol, Cholesterol-Ester (20:5, Delta 5,8,11,14,17)	MAM04079
+MAR10354	Cholesteryl Docosahexanoate, Cholesterol-Ester (22:6, Delta 4,7,10,13,16,19)	MAM04080
+MAR10415	Acetyl Isoleucine (Chemspider Id: 9964364)	MAM03399
+MAR10419	N-Acetylleucine	MAM03400
+MAR10422	Acetylhomoserine	MAM03398
+MAR10424	Phenylacetylglycine_phacgly	MAM03862
+MAR10426	3-(3-Hydroxy-Phenyl)Propionate	MAM03232
+MAR10427	3-methoxytyramine	MAM00821
+MAR10428	5-aminolevulinate	MAM01074
+MAR10429	D-Arabitol	MAM03396
+MAR10430	N-acetyl-L-glutamate	MAM02536
+MAR10431	allantoin	MAM01313
+MAR10432	cis-gondoic acid	MAM01584
+MAR10434	lauric acid	MAM02344
+MAR10435	Glycerol 2-Phosphate	MAM03619
+MAR10436	glycolate	MAM01998
+MAR10437	L-cysteate	MAM02350
+MAR10438	OAA	MAM02633
+MAR10439	phenylacetate	MAM02720
+MAR10440	Phenyllactate	MAM03882
+MAR10441	3-phosphoserine	MAM00916
+MAR10442	(9E)-tetradecenoic acid	MAM00128
+MAR10474	hippurate	MAM02123
+MAR10475	benzoate	MAM01380
+MAR10476	P-Cresol	MAM03836
+MAR10477	P-Cresol Sulfate	MAM03837
+MAR10490	normetanephrine	MAM02622
+MAR10491	16alpha-hydroxyestrone	MAM00400
+MAR10492	retinal	MAM02832
+MAR10493	maltotetraose	MAM02451
+MAR10494	L-Prolinylglycine	MAM03896
+MAR10495	dihydrobiopterin	MAM01698
+MAR10496	tetrahydrobiopterin	MAM02978
+MAR10497	Alanyl-Arginyl-Cysteine	MAM03411
+MAR10498	Alanyl-Arginyl-Glycine	MAM03412
+MAR10499	Alanyl-Asparaginyl-Leucine	MAM03413
+MAR10500	Alanyl-Glycyl-Lysine	MAM03414
+MAR10501	Alanyl-Histidyl-Alanine	MAM03415
+MAR10502	Alanyl-Lysine-Threonine	MAM03416
+MAR10503	Arginyl-Alanyl-Alanine	MAM03435
+MAR10504	Arginyl-Alanine-Phenylalanine	MAM03436
+MAR10505	Arginyl-Alanyl-Threonine	MAM03437
+MAR10506	Arginyl-Arginine	MAM03438
+MAR10507	Arginyl-Arginyl-Lysine	MAM03439
+MAR10508	Arginyl-Arginyl-Metheonine	MAM03440
+MAR10509	Arginyl-Cystinyl-Glycine	MAM03441
+MAR10510	Arginyl-Cystinyl-Serine	MAM03442
+MAR10511	Arginyl-Glutamyl-Glutamate	MAM03443
+MAR10512	Arginyl-Glutamyl-Proline	MAM03444
+MAR10513	Arginyl-Glycyl-Glycine	MAM03445
+MAR10514	Arginyl-Histidyl-Threonine	MAM03446
+MAR10515	Arginyl-Leucyl-Phenylalanine	MAM03447
+MAR10516	Arginyl-Lysyl-Aspartate	MAM03448
+MAR10517	Arginyl-Phenylalanine-Arginine	MAM03449
+MAR10518	Arginyl-Prolyl-Methionine	MAM03450
+MAR10519	Arginyl-Prolyl-Threonine	MAM03451
+MAR10520	Arginyl-Seryl-Serine	MAM03452
+MAR10521	Argtyrval	MAM03453
+MAR10522	Arginyl-Valyl-Cysteine	MAM03454
+MAR10523	Arginyl-Valyl-Tryptophan	MAM03455
+MAR10524	Asparaginyl-Asparaginyl-Arginine	MAM03456
+MAR10525	Asparaginyl-Cysteinyl-Cysteine	MAM03457
+MAR10526	Asparaginyl-Methionyl-Proline	MAM03458
+MAR10527	Asparaginyl-Phenylalanyl-Aspartate	MAM03459
+MAR10528	Asparaginyl-Phenylalanyl-Cysteine	MAM03460
+MAR10529	Asparaginyl-Tyrosyl-Glycine	MAM03461
+MAR10530	Asparaginyl-Tyrosyl-Phenylalanine	MAM03462
+MAR10531	Asparaginyl-Tyrosyl-Threonine	MAM03463
+MAR10532	Asparaginyl-Alanyl-Arginine	MAM03464
+MAR10533	Aspartyl-Asparaginyl-Glutamate	MAM03465
+MAR10534	Aspartyl-Glutamate	MAM03466
+MAR10535	Aspartyl-Glutamyl-Proline	MAM03467
+MAR10536	Aspartyl-Glutamyl-Tryptophan	MAM03468
+MAR10537	Aspartyl-Histidyl-Cysteine	MAM03469
+MAR10538	Aspartyl-Histidyl-Proline	MAM03470
+MAR10539	Aspartyl-Lysyl-Glutamate	MAM03471
+MAR10540	Aspartyl-Lysyl-Histidine	MAM03472
+MAR10541	Aspartyl-Methionyl-Aspartate	MAM03473
+MAR10542	Aspartyl-Prolyl-Lysine	MAM03474
+MAR10543	Aspartyl-Valyl-Asparagine	MAM03475
+MAR10544	Cystyl-Asparaginyl-Methionine	MAM03527
+MAR10545	Cystyl-Aspartyl-Phenylalanine	MAM03528
+MAR10546	Cystyl-Cysteine	MAM03529
+MAR10547	Cystyl-Glutaminyl-Methionine	MAM03530
+MAR10548	Cystyl-Glutamyl-Histidine	MAM03531
+MAR10549	Cystyl-Glutamyl-Tryptophan	MAM03532
+MAR10550	Cystyl-Leucyl-Threonine	MAM03533
+MAR10551	Cystyl-Seryl-Methionine	MAM03534
+MAR10552	Cystyl-Tyrosyl-Asparagine	MAM03535
+MAR10553	Glutaminyl-Asparaginyl-Glutamine	MAM03596
+MAR10554	Glutaminyl-Histidyl-Histidine	MAM03597
+MAR10555	Glutaminyl-Histidyl-Lysine	MAM03598
+MAR10556	Glutaminyl-Lysyl-Lysine	MAM03599
+MAR10557	Glutaminyl-Lysyl-Tryptophan	MAM03600
+MAR10558	Glutaminyl-Prolyl-Glutamate	MAM03601
+MAR10559	Glutaminyl-Tryptophanyl-Glutamate	MAM03602
+MAR10560	Glutaminyl-Tyrosyl-Leucine	MAM03603
+MAR10561	Glutaminyl-Arginyl-Leucine	MAM03606
+MAR10562	Glutaminyl-Asparaginyl-Leucine	MAM03607
+MAR10563	Glutamyl-Glutamate	MAM03608
+MAR10564	Glutamyl-Isoleucyl-Lysine	MAM03609
+MAR10565	Glutamyl-Leucine	MAM03610
+MAR10566	Glutamyl-Methionine	MAM03611
+MAR10567	Glutamyl-Methioninyl-Histidine	MAM03612
+MAR10568	Glutamyl-Threonine	MAM03616
+MAR10569	Glutamyl-Threonyl-Lysine	MAM03617
+MAR10570	Glutamyl-Tryptophanyl-Alanine	MAM03618
+MAR10571	Glycyl-Histidyl-Asparagine	MAM03624
+MAR10572	Glycyl-Histidyl-Lysine	MAM03625
+MAR10573	Glycyl-Lysyl-Cysteine	MAM03627
+MAR10574	Glycyl-Lysyl-Phenylalanine	MAM03628
+MAR10575	Glycyl-Tyrosyl-Lysine	MAM03632
+MAR10576	Glycyl-Valyl-Histidine	MAM03633
+MAR10577	Histidyl-Arginyl-Cysteine	MAM03662
+MAR10578	Histidyl-Arginyl-Serine	MAM03663
+MAR10579	Histidyl-Aspartate	MAM03664
+MAR10580	Histidyl-Cystyl-Cysteine	MAM03665
+MAR10581	Histidyl-Glutaminyl-Alanine	MAM03666
+MAR10582	Histidyl-Glutamate	MAM03667
+MAR10583	Histidyl-Glutamyl-Glutamine	MAM03668
+MAR10584	Histidyl-Lysyl-Lysine	MAM03669
+MAR10585	Histidyl-Histidyl-Lysine	MAM03670
+MAR10586	Histidyl-Lysyl-Alanine	MAM03671
+MAR10587	Histidyl-Lysyl-Glutamate	MAM03672
+MAR10588	Histidyl-Lysyl-Isoleucine	MAM03673
+MAR10589	Histidyl-Lysyl-Threonine	MAM03674
+MAR10590	Histidyl-Lysyl-Valine	MAM03675
+MAR10591	Histidyl-Methionine	MAM03676
+MAR10592	Histidyl-Methionyl-Glutamine	MAM03677
+MAR10593	Histidyl-Phenylalanyl-Arginine	MAM03678
+MAR10594	Histidyl-Prolyl-Lysine	MAM03679
+MAR10595	Histidyl-Tryptophanyl-Histidine	MAM03680
+MAR10596	Isoleucyl-Arginyl-Isoleucine	MAM03693
+MAR10597	Isoleucyl-Asparaginyl-Histidine	MAM03694
+MAR10598	Isolecyl-Aspartate	MAM03695
+MAR10599	Isolecyl-Glutaminyl-Glutamate	MAM03696
+MAR10600	Isolecyl-Glycyl-Arginine	MAM03697
+MAR10601	Isolecyl-Prolyl-Lysine	MAM03698
+MAR10602	Isolecyl-Seryl-Arginine	MAM03699
+MAR10603	Isolecyl-Tryptophanyl-Tyrosine	MAM03700
+MAR10604	Leucyl-Alanyl-Arginine	MAM03711
+MAR10605	Leucyl-Asparaginyl-Aspartate	MAM03712
+MAR10606	Leucyl-Aspartyl-Lysine	MAM03713
+MAR10607	Leucyl-Leucyl-Tryptophan	MAM03716
+MAR10608	Leucyl-Proline	MAM03717
+MAR10609	Leucyl-Prolyl-Arginine	MAM03718
+MAR10610	Leucyl-Seryl-Tryptophan	MAM03719
+MAR10611	Leucyl-Tryptophan	MAM03720
+MAR10612	Leucyl-Tryptophanyl-Arginine	MAM03721
+MAR10613	Leucyl-Tyrosyl-Tyrosine	MAM03722
+MAR10614	Leucyl-Valine	MAM03723
+MAR10615	Lysyl-Arginyl-Leucine	MAM03738
+MAR10616	Lysyl-Cysteinyl-Histidine	MAM03739
+MAR10617	Lysyl-Glutaminyl-Phenylalanine	MAM03740
+MAR10618	Lysyl-Glutamyl-Glutamate	MAM03741
+MAR10619	Lysyl-Lysyl-Lysine	MAM03742
+MAR10620	Lysyl-Phenylalanyl-Isoleucine	MAM03743
+MAR10621	Lysyl-Tryptophanyl-Arginine	MAM03744
+MAR10622	Lysyl-Tyrosyl-Isoleucine	MAM03745
+MAR10623	Lysyl-Valyl-Phenylalanine	MAM03746
+MAR10624	Lysyl-Valyl-Tryptophan	MAM03747
+MAR10625	Methionyl-Arginyl-Leucine	MAM03760
+MAR10626	Methionyl-Asparaginyl-Tyrosine	MAM03761
+MAR10627	Methionyl-Glutaminyl-Tyrosine	MAM03762
+MAR10628	Methionyl-Glycyl-Arginine	MAM03763
+MAR10629	Methionyl-Histidyl-Lysine	MAM03764
+MAR10630	Methionyl-Methionyl-Isoleucine	MAM03767
+MAR10631	Methionyl-Phenylalanyl-Arginine	MAM03768
+MAR10632	Methionyl-Tryptophanyl-Phenylalanine	MAM03769
+MAR10633	Phenylalanyl-Asparaginyl-Methionine	MAM03864
+MAR10634	Phenylalanyl-Aspartate	MAM03865
+MAR10635	Phenylalanyl-Glutaminyl-Phenylalanine	MAM03866
+MAR10636	Phenylalanyl-Leucine	MAM03867
+MAR10637	Phenylalanyl-Leucyl-Aspartate	MAM03868
+MAR10638	Phenylalanyl-Leucyl-Histidine	MAM03869
+MAR10639	Phenylalanyl-Lysyl-Alanine	MAM03870
+MAR10640	Phenylalanyl-Lysyl-Proline	MAM03871
+MAR10641	Phenylalanyl-Phenylalanine	MAM03872
+MAR10642	Phenylalanyl-Phenylalaninyl-Asparagine	MAM03873
+MAR10643	Phenylalanyl-Phenylalaninyl-Threonine	MAM03874
+MAR10644	Phenylalanyl-Prolyl-Arginine	MAM03875
+MAR10645	Phenylalanyl-Seryl-Tryptophan	MAM03876
+MAR10646	Phenylalanyl-Threonyl-Lysine	MAM03877
+MAR10647	Phenylalanyl-Tryptophanyl-Leucine	MAM03878
+MAR10648	Phenylalanyl-Tyrosine	MAM03879
+MAR10649	Phenylalanyl-Tyrosinyl-Glutamine	MAM03880
+MAR10650	Phenylalanyl-Tyrosinyl-Lysine	MAM03881
+MAR10651	Prolyl-Arginyl-Aspartate	MAM03888
+MAR10652	Prolyl-Arginyl-Cysteine	MAM03889
+MAR10653	Prolyl-Asparaginyl-Cysteine	MAM03890
+MAR10654	Prolyl-Cysteine	MAM03891
+MAR10655	Prolyl-Glutaminyl-Proline	MAM03894
+MAR10656	Prolyl-Glutamatsyl-Lysine	MAM03895
+MAR10657	Prolyl-Histidine	MAM03897
+MAR10658	Prolyl-Histidyl-Tyrosine	MAM03898
+MAR10659	Prolyl-Leucyl-Arginine	MAM03899
+MAR10660	Prolyl-Lysyl-Proline	MAM03900
+MAR10661	Prolyl-Phenylalanine	MAM03901
+MAR10662	Prolyl-Prolyl-Arginine	MAM03902
+MAR10663	Prolyl-Prolyl-Proline	MAM03903
+MAR10664	Prolyl-Tryptophanyl-Lysine	MAM03904
+MAR10665	Prolyl-Tryptophanyl-Threonine	MAM03905
+MAR10666	Prolyl-Valyl-Glutamine	MAM03906
+MAR10667	Seryl-Arginyl-Alanine	MAM03925
+MAR10668	Seryl-Arginyl-Tryptophan	MAM03926
+MAR10669	Seryl-Cysteinyl-Arginine	MAM03927
+MAR10670	Seryl-Glycyl-Glutamate	MAM03928
+MAR10671	Seryl-Lysyl-Histidine	MAM03929
+MAR10672	Seryl-Phenylalanyl-Lysine	MAM03930
+MAR10673	Seryl-Tryptophanyl-Histidine	MAM03931
+MAR10674	Threonyl-Arginyl-Tyrosine	MAM03983
+MAR10675	Threonyl-Asparaginyl-Tyrosine	MAM03984
+MAR10676	Threonyl-Glutaminyl-Glutamate	MAM03986
+MAR10677	Threonyl-Glutaminyl-Tyrosine	MAM03987
+MAR10678	Threonyl-Histidinyl-Histidine	MAM03988
+MAR10679	Threonyl-Isoleucyl-Arginine	MAM03989
+MAR10680	Threonyl-Methionyl-Arginine	MAM03990
+MAR10681	Threonyl-Phenylalanyl-Arginine	MAM03991
+MAR10682	Threonyl-Seryl-Arginine	MAM03992
+MAR10683	Threonyl-Threonyl-Arginine	MAM03993
+MAR10684	Threonyl-Tyrosyl-Methionine	MAM03994
+MAR10685	Tryptophanyl-Alanyl-Proline	MAM04008
+MAR10686	Tryptophanyl-Arginyl-Alanine	MAM04009
+MAR10687	Tryptophanyl-Aspartyl-Aspartate	MAM04010
+MAR10688	Tryptophanyl-Glutaminyl-Glutamine	MAM04011
+MAR10689	Tryptophanyl-Glutamyl-Glycine	MAM04012
+MAR10690	Tryptophanyl-Glutamyl-Leucine	MAM04013
+MAR10691	Tryptophanyl-Glutamyl-Proline	MAM04014
+MAR10692	Tryptophanyl-Glutamyl-Tyrosine	MAM04015
+MAR10693	Tryptophanyl-Glycyl-Leucine	MAM04017
+MAR10694	Tryptophanyl-Glycyl-Phenylalanine	MAM04018
+MAR10695	Tryptophanyl-Glycyl-Valine	MAM04019
+MAR10696	Tryptophanyl-Histidyl-Methionine	MAM04020
+MAR10697	Tryptophanyl-Isoleucyl-Lysine	MAM04021
+MAR10698	Tryptophanyl-Isoleucyl-Tryptophan	MAM04022
+MAR10699	Tryptophanyl-Leucyl-Valine	MAM04023
+MAR10700	Tryptophanyl-Lysine	MAM04024
+MAR10701	Tryptophanyl-Methionyl-Arginine	MAM04025
+MAR10702	Tryptophanyl-Methionyl-Valine	MAM04026
+MAR10703	Tryptophanyl-Phenylalanine	MAM04027
+MAR10704	Tryptophanyl-Prolyl-Glycine	MAM04028
+MAR10705	Tryptophanyl-Prolyl-Leucine	MAM04029
+MAR10706	Tryptophanyl-Prolyl-Valine	MAM04030
+MAR10707	Tryptophanyl-Seryl-Tyrosine	MAM04031
+MAR10708	Tryptophanyl-Threonyl-Glutamate	MAM04032
+MAR10709	Tryptophanyl-Threonyl-Isoleucine	MAM04033
+MAR10710	Tryptophanyl-Threonyl-Tyrosine	MAM04034
+MAR10711	Tryptophanyl-Tyrosyl-Glutamine	MAM04035
+MAR10712	Tryptophanyl-Tyrosyl-Tyrosine	MAM04036
+MAR10713	Tryptophanyl-Valyl-Aspartate	MAM04037
+MAR10714	Tyrosyl-Alanine	MAM04043
+MAR10715	Tyrosyl-Alaninyl-Phenylalanine	MAM04044
+MAR10716	Tyrosyl-Arginyl-Glutamate	MAM04045
+MAR10717	Tyrosyl-Arginyl-Serine	MAM04046
+MAR10718	Tyrosyl-Aspartyl-Arginine	MAM04047
+MAR10719	Tyrosyl-Cysteinyl-Glycine	MAM04048
+MAR10720	Tyrosyl-Cysteinyl-Threonine	MAM04049
+MAR10721	Tyrosyl-Glutamate	MAM04050
+MAR10722	Tyrosyl-Leucyl-Arginine	MAM04051
+MAR10723	Tyrosyl-Phenylalanyl-Tyrosine	MAM04052
+MAR10724	Tyrosyl-Threonine	MAM04053
+MAR10725	Tyrosyl-Tryptophanyl-Phenylalanine	MAM04054
+MAR10726	Tyrosyl-Tyrosine	MAM04055
+MAR10727	Tyrosyl-Valyl-Methionine	MAM04056
+MAR10728	Valyl-Arginyl-Glycine	MAM04062
+MAR10729	Valyl-Histidyl-Asparagine	MAM04063
+MAR10730	Valyl-Leucyl-Phenylalanine	MAM04064
+MAR10731	Valyl-Lysyl-Tyrosine	MAM04065
+MAR10732	Valyl-Phenylalanyl-Arginine	MAM04066
+MAR10733	Valyl-Prolyl-Tryptophan	MAM04067
+MAR10734	Valyl-Seryl-Arginine	MAM04068
+MAR10735	Valyl-Tryptophanyl-Phenylalanine	MAM04069
+MAR10736	Valyl-Tryptophanyl-Valine	MAM04070
+MAR10737	Valyl-Valine	MAM04071
+MAR10738	Tryptophanyl-Glycyl-Aspartate	MAM04016
+MAR11281	SM pool	MAM02908
+MAR11293	Hexanoate (N-C6:0)	MAM03684
+MAR11301	L-Homocystine	MAM03394
+MAR11336	core 4	MAM01609
+MAR11337	F1alpha	MAM01801
+MAR11339	glcnac-alpha-1,4-core 1	MAM01954
+MAR11344	de-Fuc form of PA6 (wo peptide linkage)	MAM01651
+MAR11347	N-acetylgalactosamine	MAM02525
+MAR11348	N-acetylneuraminate	MAM02543
+MAR11349	creatine-phosphate	MAM01620
+MAR11350	cis-aconitate	MAM01580
+MAR11351	azelaic acid	MAM01372
+MAR11353	O-methylhippurate	MAM02654
+MAR11373	glycogenin G4G4	MAM01991
+MAR11376	3alpha,7alpha-dihydroxy-5beta-cholestanate	MAM00758
+MAR11379	3alpha,7alpha,12alpha-trihydroxy-5beta-cholestanate	MAM00752
+MAR11382	5beta-cholestane-3alpha,7alpha,26-triol	MAM01093
+MAR11385	7alpha-hydroxycholest-4-en-3-one	MAM01182
+MAR11387	7alpha,12alpha-dihydroxycholest-4-en-3-one	MAM01178
+MAR11390	7-Ketolithocholate	MAM03313
+MAR11391	2-oxobutyrate	MAM00671
+MAR11393	D-gluconic acid	MAM01683
+MAR11400	fumarate	MAM01862
+MAR11401	Glycylleucine	MAM03626
+MAR11402	Glycyl-Phenylalanine	MAM03629
+MAR11403	Glycylproline	MAM03630
+MAR11404	malate	MAM02439
+MAR11405	PPi	MAM02759
+MAR11419	indoleacetate	MAM02169
+MAR11420	NH4+	MAM02579
+MAR11422	galactitol	MAM01909
+MAR11423	D-glucarate	MAM01681
+MAR11424	glucuronate	MAM01973
+MAR11425	maltohexaose	MAM02447
+MAR11426	putrescine	MAM02812
+MAR11427	spermidine	MAM02923
+MAR11428	xanthine	MAM03148
+MAR11431	4-hydroxybenzoate	MAM00995
+MAR11432	3,4-dihydroxyphenylacetate	MAM00729
+MAR11438	phenylpyruvate	MAM02725
+MAR11439	tyramine	MAM03099
+MAR11440	2-hydroxyphenylacetate	MAM00654
+MAR11441	lanosterol	MAM02336
+MAR11446	vanillylmandelate	MAM03136
+MAR11448	glyoxalate	MAM02007
+MAR11451	2-methylbutyrylglycine	MAM00664
+MAR11454	3-methylcrotonoylglycine	MAM00825
+MAR11457	isovalerylglycine	MAM02190
+MAR11461	N-Acetyl-Tyrosine	MAM03407
+MAR11466	Succinylacetone	MAM03957
+MAR11474	Vanil-Lactate	MAM04072
+MAR11475	N-Acetylvanilalanine	MAM03778
+MAR11478	2-Hydroxy-3-Methyl-Valerate	MAM03176
+MAR11481	2-Hydroxy-Isovalerate	MAM03186
+MAR11485	2-Methyl-3-Hydroxy-Butyrate	MAM03189
+MAR11491	2-Methyl-3-Hydroxy-Valerate	MAM03190
+MAR11494	3-Hydroxy-3-Methyl-Glutarate	MAM03212
+MAR11498	3-Methyl-Glutaconate	MAM03245
+MAR11501	3-Methyl-Glutarate	MAM03246
+MAR11505	Propionyl-Glycine	MAM03886
+MAR11508	Mevalonate-Lactone	MAM03777
+MAR11512	Tiglyl Glycine	MAM03997
+MAR11519	3-Hydroxy-Glutarate	MAM03257
+MAR11524	Glutaconate	MAM03615
+MAR11528	3-Hydroxyisovaleric Acid	MAM03227
+MAR11533	3-Hydroxy-Adipate	MAM03214
+MAR11538	3-Hydroxy-Sebacic Acid	MAM03258
+MAR11543	3-Hydoxy-Suberic Acid	MAM03260
+MAR11547	5-Hydroxyhexanoic Acid	MAM03287
+MAR11550	7-Hydroxy-Octanoate	MAM03314
+MAR11554	Ethylmalonic Acid	MAM03575
+MAR11557	Hexanoyl-Glycine	MAM03660
+MAR11561	Methyl-Succinate	MAM03765
+MAR11564	Suberyl-Glycine	MAM03955
+MAR11568	4-Hydroxy-Butyrate	MAM03277
+MAR11739	7Z,10Z-Hexadecadienoic Acid	MAM03981
+MAR11743	(Z,Z,Z)-7,10,13-Hexadecatrienoic Acid	MAM03657
+MAR11748	Trans-Delta-2-Heptadecanoic Acid	MAM03682
+MAR11751	Trans,Cis,Cis-2,11,14-Eicosatrienoic Acid	MAM03568
+MAR11755	5,8,11,14,17-Eicosapentenoic Acid	MAM03283
+MAR11818	isobutyrylglycine	MAM02181
+MAR11821	N-acetyl-L-cysteine	MAM02534
+MAR11823	4-coumarate	MAM00981
+MAR11827	succinate semialdehyde	MAM02942
+MAR11830	15(R)-HEPE	MAM00373
+MAR11833	ecgonine-methyl ester	MAM01767
+MAR11836	12-hydroxy-arachidonate	MAM00324
+MAR11839	18-hydroxy-arachidonate	MAM00428
+MAR11842	squalene	MAM02933
+MAR11847	5-guanidino-2-oxopentanoate	MAM01101
+MAR11848	4-androstene-3,17-dione	MAM00971
+MAR11850	dehydroepiandrosterone	MAM01660
+MAR11852	16alpha-hydroxydehydroepiandrosterone	MAM00399
+MAR11855	5alpha-androstane-3,17-dione	MAM01064
+MAR11856	5alpha-androstane-3alpha,17beta-diol	MAM01065
+MAR11858	estrone	MAM01790
+MAR11860	2-hydroxyestrone	MAM00650
+MAR11861	2-hydroxyestradiol-17beta	MAM00649
+MAR11862	2-methoxyestrone	MAM00660
+MAR11863	2-methoxyestradiol-17beta	MAM00659
+MAR11864	21-hydroxyallopregnanolone	MAM00604
+MAR11865	11-deoxycortisol	MAM00295
+MAR11866	11-deoxycorticosterone	MAM00294
+MAR11867	pregnenolone	MAM02763
+MAR11868	allopregnanolone	MAM01314
+MAR11869	17alpha-hydroxyprogesterone	MAM00409
+MAR11870	17alpha-hydroxypregnenolone	MAM00408
+MAR11871	5alpha-pregnane-3,20-dione	MAM01072
+MAR11874	cholesterol-ester-palm	MAM01504
+MAR11875	pregnenolone sulfate	MAM02762
+MAR11876	17alpha-hydroxypregnenolone sulfate	MAM00407
+MAR11879	24-hydroxycholesterol	MAM00610
+MAR11881	26-hydroxycholesterol	MAM00623
+MAR11884	25-hydroxycholesterol	MAM00619
+MAR11887	desmosterol	MAM01675
+MAR11889	cholesterol-sulfate	MAM01512
+MAR11891	3-iodo-L-tyrosine	MAM00807
+MAR11893	3,5-diiodo-L-tyrosine	MAM00739
+MAR11895	13-cis-retinoate	MAM00350
+MAR11897	9-cis-retinoate	MAM01231
+MAR11901	2,5-dihydroxybenzoate	MAM00576
+MAR11902	3,4-dihydroxymandelate	MAM00727
+MAR11904	formyl-N-acetyl-5-methoxykynurenamine	MAM01839
+MAR11906	peroxynitrite	MAM02714
+MAR11907	(18R)-HEPE	MAM00028
+MAR11908	5(S)-HEPE	MAM01039
+MAR11909	5,15-DiHETE	MAM01050
+MAR11910	15-deoxy-prostaglandin J2	MAM00385
+MAR11911	11-dehydro-thromboxane B2	MAM00293
+MAR11912	4-hydroxy-2-nonenal	MAM00988
+MAR11914	homocysteine-thiolactone	MAM02134
+MAR11916	gamma-glutamyl-cysteine	MAM01927
+MAR11917	N8-acetylspermidine	MAM02518
+MAR11918	5-methoxytryptophol	MAM01113
+MAR11920	melatonin	MAM02460
+MAR11922	6-hydroxymelatonin	MAM01161
+MAR11923	tryptamine	MAM03088
+MAR11925	picolinic acid	MAM02752
+MAR11926	N-methylsalsolinol	MAM02603
+MAR11927	salsolinol	MAM02875
+MAR11929	uroporphyrin I	MAM03125
+MAR11930	N-methylhistamine	MAM02601
+MAR11932	porphobilinogen	MAM02756
+MAR11933	1,3-diaminopropane	MAM00248
+MAR11934	methylamine	MAM02473
+MAR11936	propane-1,2-diol	MAM02771
+MAR11938	S-adenosylmethioninamine	MAM02870
+MAR11940	L-xylulose	MAM02425
+MAR11942	D-xylulose	MAM01759
+MAR11945	malonic-dialdehyde	MAM02441
+MAR11947	sphingosine	MAM02929
+MAR11949	hexadecenoylcarnitine(9)	MAM02117
+MAR11951	imidazole-4-acetate	MAM02166
+MAR11952	5-hydroxytryptophol	MAM01110
+MAR11953	5,10-methylene-THF	MAM01045
+MAR11954	protoporphyrin	MAM02803
+MAR11956	aminoacetone	MAM01332
+MAR11957	quinonoid dihydrobiopterin	MAM02823
+MAR11959	sphinganine	MAM02927
+MAR11961	selenomethionine	MAM02891
+MAR11962	N1-acetylspermidine	MAM02503
+MAR11965	calcitriol	MAM01417
+MAR11967	pristanic acid	MAM02766
+MAR11969	12,13-hydroxyoctadec-9(z)-enoate	MAM00314
+MAR11971	9,10-hydroxyoctadec-12(Z)-enoate	MAM01220
+MAR11974	fructose-1,6-bisphosphate	MAM01841
+MAR11975	cocaine	MAM01601
+MAR11978	5-amino-2-oxopentanoic acid	MAM01073
+MAR11987	apoB100	MAM01351
+MAR11990	apoC1	MAM01353
+MAR11993	apoC2	MAM01354
+MAR11996	apoC3	MAM01355
+MAR11999	apoE	MAM01359
+MAR12007	Dopamine 4-O-Sulphate	MAM03565
+MAR12009	Dopamine-4-O-Glucuronide	MAM03564
+MAR12011	Dopamine-3-O-Glucuronide	MAM03563
+MAR12026	4-S-Glutathionyl-5,6-Dihydroxyindoline	MAM03270
+MAR12028	5-S-Cysteinyldopamine	MAM03281
+MAR12030	5-S-glutathionyl-dopamine	MAM01138
+MAR12032	6,7-dihydroxy-1,2,3,4-tetrahydroisoquinoline	MAM01154
+MAR12034	1,2-dehydrosalsolinol	MAM00231
+MAR12042	GD3	MAM01947
+MAR12043	glucosylceramide pool	MAM01972
+MAR12044	GM3	MAM02015
+MAR12104	CMP-N-acetylneuraminate	MAM01592
+MAR12105	GD2	MAM01946
+MAR12106	GD1a	MAM01941
+MAR12114	3,4-Dihydroxyphenylethanol	MAM03197
+MAR12127	PI pool	MAM02750
+MAR12128	12(S)-HHT	MAM00308
+MAR12129	5-S-glutathionyl-L-dopa	MAM01139
+MAR12130	5-S-Cysteinylglycine Dopa	MAM03282
+MAR12131	5-S-cysteinyldopa	MAM01134
+MAR12132	Galactosyl Glucosyl Ceramide	MAM03586
+MAR12133	GA1	MAM01904
+MAR12136	Ganglioside Gm1	MAM03635
+MAR12137	GM1b	MAM02010
+MAR12138	GD1b	MAM01943
+MAR12139	GT1b	MAM02030
+MAR12141	NADH	MAM02553
+MAR12199	3-Dehydrochenodeoxychollyc acid; 7oxo-3alpha-hydroxy-5beta-cholan-24-oic acid	MAM03206
+MAR12200	3-Dehydrocholic acid; 3oxo-7alpha,12alpha-Dihydroxy-5beta-cholan-24-oic acid	MAM03207
+MAR12201	3-dehydro-Deoxycholate	MAM03208
+MAR12202	3-dehydro-Lithocholate	MAM03209
+MAR12205	Cholic acid-24glucuronide, CA-24G	MAM03503
+MAR12206	Cholic acid 3-sulfate	MAM03504
+MAR12207	Chenodeoxycholic acid-24glucuronide, CDCA-24G	MAM03508
+MAR12208	Chenodeoxycholic acid-3glucuronide, CDCA-3G	MAM03509
+MAR12210	Deoxycholic acid-24glucuronide, CDA-24G	MAM03536
+MAR12211	Deoxycholic acid-3glucuronide, CDA-3G	MAM03537
+MAR12212	Deoxycholic acid 3-sulfate	MAM03538
+MAR12213	Glycocholic acid 3-sulfate	MAM03587
+MAR12214	Glycochenodeoxycholic acid 3-sulfate	MAM03588
+MAR12215	Glycodeoxycholic acid 3-sulfate	MAM03589
+MAR12216	Glycoursodeoxycholic acid 3-sulfate	MAM03637
+MAR12217	Hyocholic acid-24glucuronide, HCA-24G	MAM03642
+MAR12218	Hyocholic acid-6glucuronide, HCA-6G	MAM03643
+MAR12219	Hyodeoxycholic acid-24glucuronide, HDCA-24G	MAM03644
+MAR12220	Hyodeoxycholic acid-6glucuronide, HDCA-6G	MAM03645
+MAR12221	Hyocholic acid; gamma-Muricholate	MAM03685
+MAR12224	Lithocholic acid-24glucuronide, CDCA-24G	MAM03707
+MAR12225	Lithocholic acid-3glucuronide, CDCA-3G	MAM03708
+MAR12226	Lithocholic acid 3-sulfate	MAM03709
+MAR12227	Taurocholic acid 3-sulfate	MAM03962
+MAR12228	Taurochenodeoxycholic acid 3-sulfate	MAM03963
+MAR12229	Taurodeoxycholic acid 3-sulfate	MAM03965
+MAR12230	Taurohyocholic acid; N-(3alpha,6alpha,7alpha-Trihydroxy-5beta-cholan-24-oyl)taurine	MAM03996
+MAR12231	Tauroursodeoxycholic acid 3-sulfate	MAM04042
+MAR12233	Ursodeoxycholic acid 3-sulfate	MAM04058
+MAR12575	12-HT or M-VI, 12-hydroxy tacrolimus	MAM01817
+MAR12576	13,31-O-Didesmethyl-tacrolimus	MAM01818
+MAR12577	13-O-desmethyl tacrolimus, 13-DMT or M-I	MAM01875
+MAR12578	1,4-Dihydroxy-midazolam	MAM01888
+MAR12579	13,15-O-didesmethyl tacrolimus	MAM01889
+MAR12580	15,31-O-Didesmethyl-tacrolimus	MAM01890
+MAR12581	15-DMT or M-III, 15-O-desmethyl tacrolimus	MAM01891
+MAR12582	1-hydroxy S-ibuprofen	MAM01894
+MAR12583	1-hydroxy S-ibuprofen-glucuronide	MAM01901
+MAR12584	1'-OH-midazolam-glucuronide	MAM01902
+MAR12585	1'-OH-midazolam	MAM01903
+MAR12586	2-hydroxy-atorvastatin-acid / ortho-hydroxy-atorvastatin acid	MAM03177
+MAR12587	2-hydroxy-atorvastatin-acyl-glucuronide	MAM03178
+MAR12588	2-hydroxy-atorvastatin-lactone / ortho-hydroxy-atorvastatin lactone	MAM03179
+MAR12589	2-hydroxy-atorvastatin-lactone-glucuronide	MAM03180
+MAR12590	2-hydroxy-R-ibuprofen	MAM03183
+MAR12591	2-hydroxy-S-ibuprofen	MAM03184
+MAR12592	2-hydroxy S-ibuprofen-glucuronide	MAM03185
+MAR12593	31-DMT or M-II, 31-O-desmethyl tacrolimus	MAM03196
+MAR12594	3'-alpha,5'beta-dihydroxy-pravastatin / 3'-alpha5'beta6'beta-trihydroxy pravastatin	MAM03198
+MAR12595	3',5'-dihydrodiol-simvastatin-lactone form	MAM03199
+MAR12596	3-hydroxy R-ibuprofen	MAM03223
+MAR12597	3-hydroxy S-ibuprofen	MAM03224
+MAR12598	3-hydroxy S-ibuprofen-glucuronide	MAM03225
+MAR12599	3''-hydroxy-lovastatin acid form	MAM03229
+MAR12600	3'-S-hydroxy-pravastatin	MAM03235
+MAR12601	3'-S-hydroxy-pravastatin-tetranor	MAM03237
+MAR12602	3'-hydroxy-simvastatin-acid form	MAM03240
+MAR12603	3-alpha-iso-pravastatin	MAM03241
+MAR12604	3-hydroxy-acetaminophen	MAM03256
+MAR12605	4-beta-OH-gliclazide	MAM03269
+MAR12606	4-hydroxy-atorvastatin-acid / para-hydroxy-atorvastatin acid	MAM03271
+MAR12607	4-hydroxy-atorvastatin-lactone / para-hydroxy-atorvastatin lactone	MAM03272
+MAR12608	4-OH-midazolam-glucuronide	MAM03275
+MAR12609	4-OH-midazolam	MAM03278
+MAR12610	3-keto-5,6,-dihydroxy-pravastatin	MAM03279
+MAR12611	5,6-epoxy-3-alpha-iso-pravastatin	MAM03280
+MAR12612	5-hydroxy-fluvastatin	MAM03285
+MAR12613	5-hydroxy-fluvastatin-glucuronide	MAM03286
+MAR12614	6-alpha-OH-gliclazide	MAM03289
+MAR12615	6-beta-OH-gliclazide	MAM03290
+MAR12616	6-beta-OH-gliclazide-glucuronide	MAM03291
+MAR12617	6'-beta-carboxy-simvastatin-acid form	MAM03293
+MAR12618	6-epipravastatin	MAM03294
+MAR12619	6'-beta-hydroxy-lovastatin lactone form	MAM03296
+MAR12620	6'-beta-hydroxy-methyl-simvastatin-acid form	MAM03299
+MAR12621	6'-beta-hydroxy simvastatin acid	MAM03301
+MAR12622	6'-exomethylene-lovastatin-acid form	MAM03302
+MAR12623	6'-exomethylene-lovastatin lactone form	MAM03303
+MAR12624	6-hydroxy-fluvastatin	MAM03305
+MAR12625	6-hydroxy-fluvastatin-glucuronide	MAM03306
+MAR12626	7-alpha-OH-gliclazide	MAM03307
+MAR12627	7-beta-OH-gliclazide	MAM03308
+MAR12628	7-beta-OH-gliclazide-glucuronide	MAM03309
+MAR12629	7-hydroxy-3-alpha-iso-pravastatin	MAM03312
+MAR12630	acetaminophen/paracetamol	MAM03402
+MAR12631	Acetaminophen glucuronide	MAM03403
+MAR12632	acetaminophen-glutathione-conjugate	MAM03404
+MAR12633	allopurinol	MAM03418
+MAR12634	AM19 (cyclosporine)	MAM03420
+MAR12635	AM1A4N (cyclosporine)	MAM03421
+MAR12636	AM1Ac (cyclosporine)	MAM03422
+MAR12637	AM1A (cyclosporine)	MAM03423
+MAR12638	AM1AL (cyclosporine)	MAM03424
+MAR12639	AM1c4N9 (cyclosporine)	MAM03425
+MAR12640	AM1c9 (cyclosporine)	MAM03426
+MAR12641	AM1c (cyclosporine)	MAM03427
+MAR12642	AM1c-glucuronide (cyclosporine)	MAM03428
+MAR12643	AM1 (cyclosporine)	MAM03429
+MAR12644	AM4N9 (cyclosporine)	MAM03430
+MAR12645	AM4N (cyclosporine)	MAM03431
+MAR12646	AM9 (cyclosporine)	MAM03432
+MAR12647	atorvastatin-acid	MAM03476
+MAR12648	atorvastatin-lactone	MAM03479
+MAR12649	R-carboxy ibuprofen	MAM03505
+MAR12650	S-carboxy ibuprofen	MAM03506
+MAR12651	S-carboxy ibuprofen glucuronide	MAM03507
+MAR12652	carboxy-gliclazide	MAM03513
+MAR12653	cerivastatin	MAM03514
+MAR12654	cerivastatin-M1	MAM03515
+MAR12655	cerivastatin-M23	MAM03517
+MAR12656	cerivastatin-M24	MAM03518
+MAR12657	cyclosporine	MAM03520
+MAR12658	cyclosporine-sulphate	MAM03521
+MAR12659	cysteine-conjugate-acetaminophen	MAM03526
+MAR12660	deoxy-fluvastatin-dinor	MAM03546
+MAR12661	N-desisopropyl-fluvastatin	MAM03547
+MAR12662	dehydro-gliclazide	MAM03549
+MAR12663	desacyl dehydro-pravastatin	MAM03566
+MAR12664	31-O-Desmethyl,19-Hydroxy,37, 39-Epoxy-tacrolimus	MAM03572
+MAR12665	fluvastatin	MAM03579
+MAR12666	des-isopropyl-dihydro-fluvastatin-tetranor	MAM03582
+MAR12667	des-isopropyl-dihydro-fluvastatin-tetranor-glucuronide	MAM03583
+MAR12668	glucuronide-conjugate of 3-methoxy-acetaminophen	MAM03594
+MAR12669	Gliclazide	MAM03634
+MAR12670	glucuronide-thiomethyl-acetaminophen conjugate	MAM03636
+MAR12671	ibuprofen-R	MAM03686
+MAR12672	ibuprofen-S	MAM03687
+MAR12673	ibuprofen acyl glucuronide	MAM03690
+MAR12674	3'-hydroxy-iso-delta-4',5'-hydroxy acid form of lovastatin	MAM03705
+MAR12675	Losartan-E3174/ losartan-M6	MAM03728
+MAR12676	Losartan	MAM03729
+MAR12677	Losartan-N1-glucuronide	MAM03730
+MAR12678	Losartan-M1	MAM03731
+MAR12679	Losartan-M2	MAM03732
+MAR12680	Losartan-M4 (glucuronide derivative)	MAM03733
+MAR12681	Losartan-M5	MAM03734
+MAR12682	Losartan-N2-glucuronide / Losartan-M7	MAM03735
+MAR12683	lovastatin lactone form	MAM03736
+MAR12684	Midazolam	MAM03756
+MAR12685	Midazolam-glucuronide	MAM03757
+MAR12686	acetaminophen-mercapturate-conjugate/N-acetyl-cysteine-acetaminophen	MAM03759
+MAR12687	Methyl-hydroxy-gliclazide	MAM03770
+MAR12688	N-desmethyl-rosuvastatin	MAM03780
+MAR12689	acid metabolite of nifedipine	MAM03781
+MAR12690	lactone form of nifedipine	MAM03782
+MAR12691	Nitropyridine metabolite of nifedipine	MAM03783
+MAR12692	hydroxy metabolite of nifedipine	MAM03784
+MAR12693	oxypurinol	MAM03801
+MAR12694	oxypurinol-1-riboside	MAM03799
+MAR12695	oxypurinol-7-riboside	MAM03800
+MAR12696	des-isoproylpropionic-acid-fluvastatin	MAM03892
+MAR12697	pitavastatin	MAM03911
+MAR12698	pitavastatin-lactone	MAM03913
+MAR12699	pitavastatin-M3	MAM03915
+MAR12700	pravastatin	MAM03916
+MAR12701	pravastatin glucuronide	MAM03917
+MAR12702	rosuvastatin	MAM03918
+MAR12703	rosuvastatin-5S-lactone	MAM03920
+MAR12704	sulphate-conjugate-3-methoxy-acetaminophen	MAM03921
+MAR12705	simvastatin lactone form	MAM03934
+MAR12706	simvastatin dihydroxy acid form	MAM03935
+MAR12707	sulphate-conjugate of thiomethyl-acetaminophen	MAM03952
+MAR12708	sulphate-conjugate-acetaminophen	MAM03958
+MAR12709	Tacrolimus	MAM03959
+MAR12710	taurine conjugate of S-ibuprofen	MAM03961
+MAR12711	threo-isomer of fluvastain	MAM03985
+MAR12712	trans-lactone-fluvastatin	MAM03998
+MAR12713	Torasemide	MAM04000
+MAR12714	Torasemide-M1	MAM04001
+MAR12715	Torasemide-M3	MAM04002
+MAR12716	Torasemide-M5	MAM04003
+MAR12717	triol metabolite of pravastatin	MAM04007
+MAR12718	thiomethyl-sulphoxide-acetaminophen-glucuronide	MAM04038
+MAR12719	thiomethyl-sulphoxide-acetaminophen-sulphate	MAM04039
+MAR12966	lovastatin-hydroxyacid form	MAM03737
+MAR12977	pitavastatin-M13	MAM03914
+MAR13030	1-alpha,25-dihydroxyvitamin D2	MAM00519
+MAR13031	2-arachidonoylglycerol	MAM00635
+MAR13032	TAG-chylomicron pool	MAM02956
+MAR13033	1,2-diacylglycerol-chylomicron pool	MAM00234
+MAR13034	fatty acid-chylomicron pool	MAM01807
+MAR13035	1-acylglycerol-chylomicron pool	MAM00503
+MAR13036	1,2-diacylglycerol-VLDL pool	MAM00241
+MAR13037	fatty acid-VLDL pool	MAM01820
+MAR13038	1-acylglycerol-VLDL pool	MAM00510
+MAR13039	fatty acid-uptake pool	MAM01819
+MAR13040	(10Z)-heptadecenoic acid	MAM00003
+MAR13041	(11Z,14Z)-eicosadienoic acid	MAM00008
+MAR13042	(11Z,14Z,17Z)-eicosatrienoic acid	MAM00010
+MAR13043	(13Z)-eicosenoic acid	MAM00017
+MAR13044	(13Z)-octadecenoic acid	MAM00019
+MAR13045	(13Z,16Z)-docosadienoic acid	MAM00021
+MAR13046	(7Z)-octadecenoic acid	MAM00115
+MAR13047	(7Z)-tetradecenoic acid	MAM00117
+MAR13048	10,13,16,19-docosatetraenoic acid	MAM00260
+MAR13049	10,13,16-docosatriynoic acid	MAM00265
+MAR13050	12,15,18,21-tetracosatetraenoic acid	MAM00315
+MAR13051	13,16,19-docosatrienoic acid	MAM00341
+MAR13052	7-palmitoleic acid	MAM01197
+MAR13053	8,11-eicosadienoic acid	MAM01207
+MAR13054	9-eicosenoic acid	MAM01235
+MAR13055	9-heptadecylenic acid	MAM01238
+MAR13056	cis-cetoleic acid	MAM01582
+MAR13057	henicosanoic acid	MAM02053
+MAR13058	mead acid	MAM02457
+MAR13059	nonadecylic acid	MAM02613
+MAR13060	physeteric acid	MAM02745
+MAR13061	tricosanoic acid	MAM03045
+MAR13062	tridecylic acid	MAM03051
+MAR13063	ximenic acid	MAM03153
+MAR13065	bile-PC pool	MAM01395
+MAR13066	carbonate	MAM01421
+MAR13067	retinyl palmitate	MAM02837
+MAR10024	biomass	MAM03971
+MAR10025	20-hydroxy-arachidonate	MAM00591
+MAR10026	chenodiol	MAM01435
+MAR10027	LacCer pool	MAM02328
+MAR10029	steroids	MAM10001
+MAR10030	xenobiotics	MAM10002
+MAR10031	arachidonate derivatives	MAM10003
+MAR10047	1,2-diacylglycerol-LD-PC pool	MAM00235
+MAR10060	N-formyl-L-glutamate	MAM10011
+MAR10077	dehydrocholic acid	MAM10023
+MAR10081	omega-muricholic acid	MAM10025
+MAR10083	taurohyocholic acid	MAM10026
+MAR10084	glycohyocholic acid	MAM10027
+MAR10085	glycohyodeoxycholic acid	MAM10028
+MAR10086	glycodehydrocholic acid	MAM10029
+MAR10087	hyocholic acid	MAM10030
+MAR10088	tauro-omega-muricholic acid	MAM10031
+MAR10091	taurodehydrocholic acid	MAM10034
+MAR10132	tauro-hyodeoxycholic acid	MAM10041

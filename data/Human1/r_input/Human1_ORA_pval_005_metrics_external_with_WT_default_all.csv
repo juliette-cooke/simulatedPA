@@ -1,0 +1,52 @@
+Unique_reaction_id,Subsystem name,TPR,FPR,FNR,TNR,TNR2,Precision,Recall,F1
+1,"Alanine, aspartate and glutamate metabolism",0,3,1,,114,0.0,0.0,0.0
+2,Arachidonic acid metabolism,1,2,0,,115,0.3333333333333333,1.0,0.5
+3,Arginine and proline metabolism,1,0,0,,117,1.0,1.0,1.0
+4,Ascorbate and aldarate metabolism,0,2,1,,115,0.0,0.0,0.0
+6,Bile acid biosynthesis,1,1,0,,116,0.5,1.0,0.6666666666666666
+9,C5-branched dibasic acid metabolism,1,0,0,,117,1.0,1.0,1.0
+14,Cysteine and methionine metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666
+15,Drug metabolism,1,0,0,,117,1.0,1.0,1.0
+16,Eicosanoid metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666
+19,Fatty acid oxidation,1,0,0,,117,1.0,1.0,1.0
+20,Folate metabolism,1,0,0,,117,1.0,1.0,1.0
+22,Fructose and mannose metabolism,1,3,0,,114,0.25,1.0,0.4
+23,Glycerolipid metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666
+24,"Glycine, serine and threonine metabolism",1,2,0,,115,0.3333333333333333,1.0,0.5
+26,Inositol phosphate metabolism,1,3,0,,114,0.25,1.0,0.4
+27,Leukotriene metabolism,1,2,0,,115,0.3333333333333333,1.0,0.5
+28,Linoleate metabolism,0,1,1,,116,0.0,0.0,0.0
+29,Lysine metabolism,1,0,0,,117,1.0,1.0,1.0
+31,Pentose and glucuronate interconversions,1,4,0,,113,0.2,1.0,0.33333333333333337
+32,Pentose phosphate pathway,1,40,0,,77,0.024390243902439025,1.0,0.047619047619047616
+33,"Phenylalanine, tyrosine and tryptophan biosynthesis",1,1,0,,116,0.5,1.0,0.6666666666666666
+34,Propanoate metabolism,0,1,1,,116,0.0,0.0,0.0
+35,Prostaglandin biosynthesis,1,0,0,,117,1.0,1.0,1.0
+38,Sphingolipid metabolism,1,5,0,,112,0.16666666666666666,1.0,0.2857142857142857
+39,Tricarboxylic acid cycle and glyoxylate/dicarboxylate metabolism,1,5,0,,112,0.16666666666666666,1.0,0.2857142857142857
+40,Tyrosine metabolism,1,0,0,,117,1.0,1.0,1.0
+42,Histidine metabolism,1,0,0,,117,1.0,1.0,1.0
+43,Peptide metabolism,1,0,0,,117,1.0,1.0,1.0
+47,Glutathione metabolism,1,0,0,,117,1.0,1.0,1.0
+49,Pyruvate metabolism,0,5,1,,112,0.0,0.0,0.0
+50,Starch and sucrose metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666
+51,Butanoate metabolism,0,0,1,,117,,0.0,0.0
+55,Oxidative phosphorylation,0,0,1,,117,,0.0,0.0
+58,Chondroitin sulfate degradation,1,1,0,,116,0.5,1.0,0.6666666666666666
+59,Glycosphingolipid biosynthesis-ganglio series,1,1,0,,116,0.5,1.0,0.6666666666666666
+61,Glycosphingolipid metabolism,1,7,0,,110,0.125,1.0,0.2222222222222222
+63,Keratan sulfate degradation,1,1,0,,116,0.5,1.0,0.6666666666666666
+64,N-glycan metabolism,1,2,0,,115,0.3333333333333333,1.0,0.5
+65,O-glycan metabolism,1,3,0,,114,0.25,1.0,0.4
+66,Acylglycerides metabolism,0,10,1,,107,0.0,0.0,0.0
+67,Androgen metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666
+71,Beta oxidation of even-chain fatty acids (mitochondrial),0,1,1,,116,0.0,0.0,0.0
+79,Bile acid recycling,1,0,0,,117,1.0,1.0,1.0
+82,Fatty acid biosynthesis,1,16,0,,101,0.058823529411764705,1.0,0.1111111111111111
+92,Heparan sulfate degradation,1,0,0,,117,1.0,1.0,1.0
+94,Steroid metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666
+98,Vitamin B6 metabolism,1,0,0,,117,1.0,1.0,1.0
+106,Tryptophan metabolism,0,0,1,,117,,0.0,0.0
+111,CoA catabolism,1,39,0,,78,0.025,1.0,0.04878048780487806
+114,Beta-alanine metabolism,1,0,0,,117,1.0,1.0,1.0
+117,Riboflavin metabolism,1,1,0,,116,0.5,1.0,0.6666666666666666

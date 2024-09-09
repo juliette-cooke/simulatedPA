@@ -34,12 +34,15 @@ Make a folder and add the path here, with a slash at the end.
 ```{r}
 # model_name = "Recon2.2"
 model_name = "Human1"
-input.path = paste0("../../data/output/",model_name,"/")
-# input.path = "../../data/output/"
+input.path = paste0("../../data/",model_name,"/r_input/")
 # Set to T if using the same categories as in the pathways_db file, aka Human1 categories (used for the colour palette):
 human.pathway.categories = T 
-exch.metab.pattern = "e" # or "_e" for example
-# exch.metab.pattern = "_e" # or "_e" for example
+
+if (model_name == "Human1"){
+  exch.metab.pattern = "e"
+}else if (model_name == "Recon2.2"){
+  exch.metab.pattern = "_e"
+}
 # Change these to suit your tested methods
 methods.indexes = seq(1:3)
 names(methods.indexes) = c("ORA", "GSEA abs", "GSEA raw")
@@ -87,7 +90,7 @@ basic_colour = "#56B4E9" # Used for plots where there are no other colours
 
 # Read pathway category colours if possible:
 if (human.pathway.categories){
-  pathway_cat_cols = read.table("../../data/output/Human1_pathway_category_colours.tsv", sep="\t", header=T, comment.char = "")
+  pathway_cat_cols = read.table(aste0(input.path,"Human1_pathway_category_colours.tsv"), sep="\t", header=T, comment.char = "")
 }else{
   # Otherwise generate a new palette:
   max_n = length(unique(pathway_categories$ManualCategoryLvl1))+4
@@ -126,18 +129,6 @@ names(cat_pathway_cat_cols_line_dict) = append(types_names, paste0("Cat_",pathwa
 ```{r}
 # Read in metrics files
 method_names = filenames %>% unlist()
-# if (model_name=="Human1"){
-#   pathways.to.exclude = c("Triacylglycerol synthesis")
-# }
-# methods_to_test = lapply(filenames, function(x){
-#   if (model_name=="Human1"){
-#     # Manually remove a pathway that was not used in GSEA for Human1
-#     read.table(paste0(input.path,x,".csv"), sep = ",", header = T) %>% 
-#       filter(!Subsystem.name %in% pathways.to.exclude)
-#   }else{
-#     read.table(paste0(input.path,x,".csv"), sep = ",", header = T) 
-#   }
-# })
 methods_to_test = lapply(filenames, function(x){
   read.table(paste0(input.path,x,".csv"), sep = ",", header = T)
 })
@@ -155,20 +146,12 @@ names(all_methods_TP_FN) = filenames
 
 pathways_to_exclude = pathway_categories$Pathway[(!pathway_categories$Pathway %in% all_methods_TP_FN[[methods.indexes[["GSEA abs"]]]]$Subsystem.name) & (!pathway_categories$Pathway %in% infeasible_pathways_ko)]
 
-# infeasible_pathways_df = infeasible_pathways %>% as.data.frame() %>% rename("Subsystem.name" = 1) %>%
-#   left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by=c("Subsystem.name" = "Pathway"))
-
 all_methods_TP_FN_cat = lapply(methods_to_test, function(x){
   not.run = methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name[!(methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name %in% x$Subsystem.name)] %>% as.data.frame() %>% 
     rename("Subsystem.name" =1) %>% 
     mutate(Type = "Unable to be run in ORA", FPR=NA, TNR=NA) %>% 
     filter(!Subsystem.name %in% x$Subsystem.name)
   
-  # wt_infeas = infeasible_pathways_wt %>% as.data.frame() %>% 
-  #   rename("Subsystem.name" =1) %>% 
-  #   mutate(Type = "Unable to produce biomass in WT", FPR=NA, TNR=NA) %>% 
-  #   filter(!Subsystem.name %in% x$Subsystem.name) %>% 
-  #   filter(!Subsystem.name %in% not.run$Subsystem.name)
   blocked = blocked_pathways %>% as.data.frame() %>% 
     rename("Subsystem.name" =1) %>% 
     mutate(Type = "Blocked", FPR=NA, TNR=NA)
@@ -182,8 +165,8 @@ all_methods_TP_FN_cat = lapply(methods_to_test, function(x){
     mutate(Type = ifelse(TPR==1,"TP", ifelse(FNR==1,"FN", ""))) %>%
     filter(!Subsystem.name %in% misc_blocked_pathways) %>%
     select(Subsystem.name, Type, FPR, TNR) %>% 
-    rbind(infeasible_pathways_ko %>% as.data.frame() %>% rename("Subsystem.name" =1) %>% mutate(Type = "Unable to produce biomass when KO'd", FPR=NA, TNR=NA)) %>% 
-    # rbind(wt_infeas) %>% 
+    rbind(infeasible_pathways_ko %>% as.data.frame() %>% rename("Subsystem.name" =1) %>% 
+            mutate(Type = "Unable to produce biomass when KO'd", FPR=NA, TNR=NA)) %>% 
     rbind(not.run) %>% 
     rbind(blocked) %>% 
     filter(!Subsystem.name %in% misc_blocked_pathways) %>%
@@ -216,7 +199,6 @@ raw_method_results = lapply(paste0(filenames, "_results"), function(x){
     read.table(paste0(input.path,x,".tsv"), sep="\t", header=T)
 })
 names(raw_method_results) = method_names
-
 ```
 
 # Pathway stats
@@ -240,7 +222,6 @@ max_counts = max(hist(pathway_sizes_inf_fea_no_misc %>% filter(Type=="All") %>% 
 
 pathway_sizes_plot =
   pathway_sizes_inf_fea_no_misc %>% 
-  # filter(Type == "All") %>% 
   ggplot()+
   geom_histogram(aes(x=size, fill=Type), binwidth = binwidth)+
   facet_wrap(~Type, nrow = 3, labeller = as_labeller(label_dict_no_misc_swap))+
@@ -301,7 +282,7 @@ pathway_stats_feas_plot
 plot_grid(
   plot_grid(NULL,pathway_sizes_plot, NULL, nrow=1, rel_widths = c(0,1,0)), 
   pathway_stats_feas_plot, labels=c("","D"), rel_widths = c(0.4,0.6), nrow=1)
-ggsave(paste0("../../plots/Fig1_",model_name,"-2.png"),bg="white", dpi=300, width = 11, height = 5.5)
+ggsave(paste0("../../plots/",model_name,"/Fig1.png"),bg="white", dpi=300, width = 11, height = 5.5)
 ```
 
 # Fig2
@@ -369,7 +350,7 @@ Run GSEA plots first to get the coordinates for all other circle plots
 ```{r}
 base_layout = methods.indexes["GSEA raw"]
 if (model_name == "Human1"){
-  layout_coord = read.table("../../data/output/circlepack_layout.tsv", sep="\t", header=T,quote = "")
+  layout_coord = read.table(paste0(input.path,"circlepack_layout.tsv"), sep="\t", header=T,quote = "")
   i = methods.indexes["GSEA raw"]
   layout[[i]]=layout[[i]] %>% select(-x,-y,-r) %>% left_join(layout_coord %>% select(name,x,y,r), by="name")
 }else{
@@ -379,8 +360,7 @@ if (model_name == "Human1"){
 
 
 ```{r}
-# all_circle_plots = lapply(seq_along(layout), function(i){
-  main_plot =
+main_plot =
     ggraph(layout[[i]]%>% arrange(Type))+
     geom_node_circle(aes(fill=Type, color=Type, group=leaf, linetype=as.factor(Type)))+
     theme_void()+
@@ -413,14 +393,14 @@ cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to produce 
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Pathway category")+
     theme(legend.margin = margin(c(-0.5,0,0,0)))
   
-  p2 = plot_grid(
+p2 = plot_grid(
     main_plot,
     plot_grid(get_legend(TP_FN_legend),
     get_legend(cat_legend),nrow = 2, align = "hv", rel_heights = c(0.3,0.7))
     ,nrow = 1, rel_widths = c(0.6,0.4))
-  p2
+p2
   
-  GSEA_raw_no_leg = main_plot
+GSEA_raw_no_leg = main_plot
 ```
 
 ## GSEA abs
@@ -428,9 +408,10 @@ Match circle coords from GSEA raw
 ```{r}
 i=methods.indexes["GSEA abs"]
 GSEA_abs_layout = layout[[i]] %>% select(-x,-y, -r) %>% left_join(layout[[base_layout]] %>% select(x, y,r, name), by="name")
-#write.table(GSEA_abs_layout, "../../data/output/circlepack_layout.tsv", sep="\t", quote = F, row.names = F)
+# Layout changes each run: if you like the layout for this dataset, you can save the layout and load it next time:
+#write.table(GSEA_abs_layout, paste0(input.path,"circlepack_layout.tsv"), sep="\t", quote = F, row.names = F)
 
-  main_plot =
+main_plot =
     ggraph(GSEA_abs_layout %>% arrange(Type))+
     geom_node_circle(aes(fill=Type, color=Type, group=leaf, linetype=as.factor(Type)))+
     theme_void()+
@@ -460,19 +441,19 @@ TP_FN_legend = layout[[i]] %>% filter(Type %in% c("TP", "FN", "Unable to produce
                                ), name="Predicted")+
     theme(legend.margin = margin(c(-0.5,0,0,0)))
     
-  cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to produce biomass when KO'd")) %>% ggraph()+
+cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to produce biomass when KO'd")) %>% ggraph()+
     geom_node_circle(aes(fill=Type, group=depth, color=Type))+
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "white", name="Pathway category")+
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Pathway category")+
     theme(legend.margin = margin(c(-0.5,0,0,0)))
   
-  p3 = plot_grid(
+p3 = plot_grid(
     main_plot,
     plot_grid(get_legend(TP_FN_legend),
     get_legend(cat_legend),nrow = 2, align = "hv", rel_heights = c(0.3,0.7))
     ,nrow = 1, rel_widths = c(0.6,0.4))
-  p3
-  GSEA_abs_no_leg = main_plot
+p3
+GSEA_abs_no_leg = main_plot
 ```
 ## ORA
 
@@ -480,8 +461,7 @@ TP_FN_legend = layout[[i]] %>% filter(Type %in% c("TP", "FN", "Unable to produce
 i=methods.indexes["ORA"]
 ORA_layout = layout[[i]] %>% select(-x,-y, -r) %>% left_join(layout[[base_layout]] %>% select(x, y,r, name), by="name")
 
-# all_circle_plots = lapply(seq_along(layout), function(i){
-  main_plot =
+main_plot =
     ggraph(ORA_layout%>% arrange(Type))+
     geom_node_circle(aes(fill=Type, color=Type, group=leaf, linetype=as.factor(Type)))+
     theme_void()+
@@ -516,15 +496,13 @@ cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to be run i
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Pathway category")#+
     # theme(legend.margin = margin(c(0,0,0,0)))
   
-  p1 = plot_grid(
+p1 = plot_grid(
     main_plot,
     plot_grid(get_legend(TP_FN_legend),
     get_legend(cat_legend),nrow = 2, align = "hv", rel_heights = c(0.3,0.7))
     ,nrow = 1, rel_widths = c(0.6,0.4))
-  p1
-  ORA_no_leg = main_plot
-  
-# })
+p1
+ORA_no_leg = main_plot
 ```
 
 ## Fig2
@@ -564,7 +542,7 @@ circle_legend =
 plot_grid(ORA_no_leg, circle_legend, NULL,NULL, GSEA_abs_no_leg, GSEA_raw_no_leg,  labels = c("A","","","","B","C"), nrow=3, rel_heights = c(0.45,0.03,0.45),
           hjust=c(-0.5,0,0,0,-0.3,-0.3))
 
-ggsave(paste0("../../plots/Fig2_",model_name,".png"), bg="white", width=11, height = 10, dpi=300)
+ggsave(paste0("../../plots",model_name,"/Fig2.png"), bg="white", width=11, height = 10, dpi=300)
 #ggsave("../../plots/Fig2-2-no-bg.png", width=11, height = 10, dpi=300)
 ```
 
@@ -589,25 +567,19 @@ TP_FN_plot =
   summarise(n = n()) %>% 
   mutate(total = sum(n), value = n/total) %>% 
   ungroup() %>% 
-  mutate(Type = fct_relevel(Type, c("Unable to be run in ORA","FN",
-                                    # "FN_WT_default", 
-                                    "TP"
-                                    # "TP_WT_default"
-                                    )),
-         method = fct_relevel(method, paste0(model_name, "_",c("ORA_pval_005_metrics_external", "GSEA_absolute_metric_external", "GSEA_raw_metric_external"), "_with_WT_default_all"
-                                             )),
-         group=1) %>% 
+  mutate(Type = fct_relevel(Type, c("Unable to be run in ORA","FN","TP")),
+         method = fct_relevel(method, paste0(model_name, "_", 
+                                             c("ORA_pval_005_metrics_external", 
+                                               "GSEA_absolute_metric_external", 
+                                               "GSEA_raw_metric_external"), 
+                                             "_with_WT_default_all")), group=1) %>% 
   select(method, Type, value, group) %>% 
   ggplot(aes(x=method, y= value, fill=Type))+
   geom_bar(stat="identity", col="white")+
   geom_text(aes(label=round(value,2)), position = position_stack(vjust=0.5), col="white", size=4)+
   theme_minimal_hgrid()+
   scale_fill_manual(values = pathway_cat_cols_dict[all_methods_df$Type], 
-                    labels=c("Unable to be\nrun in ORA","FN",
-                             # "FN (default WT)", 
-                             "TP"
-                             # "TP (default WT)"
-                             ))+
+                    labels=c("Unable to be\nrun in ORA","FN","TP"))+
   scale_x_discrete(labels = c("ORA", "GSEA\nabs", "GSEA\nraw"))+
   xlab("")+
   ylab("Proportion")+
@@ -633,6 +605,7 @@ ggplot(aes(x=method, y= value, fill=Type))+
 
 ggarrange(TP_FN_plot, FPR_TNR_plot, widths = c(0.55,0.45), labels = "AUTO", align="h")
 ```
+
 ## Z-scores
 ```{r}
 zthr=50
@@ -671,7 +644,6 @@ zscores.plot
 
 
 ```{r}
-
 zscores.all.df = z.scores.long %>% 
   left_join(all_methods_TP_FN_long_df %>% 
               mutate(Method = str_replace_all(Method, method_names_clean))%>% 
@@ -731,7 +703,7 @@ zscores.all.df.plot=zscores.all.df.all %>%
   guides(col=guide_legend(reverse=TRUE))
 zscores.all.df.plot
 
-ggsave(paste0("../../plots/test.png"), dpi=300, bg="white", width=11, height=7)
+# ggsave(paste0("../../plots",model_name,"/test.png"), dpi=300, bg="white", width=11, height=7)
 ```
 
 ```{r}
@@ -744,10 +716,6 @@ TNR.counts %>%
 ```
 
 
-```{r}
-# ggsave(paste0("../../plots/exchangeable_metabs_WT_default_all_",model_name,"_3.png"), width = 12, height = 10, bg= "white")
-```
-
 ## Fig3
 ```{r}
 plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5), 
@@ -755,7 +723,7 @@ plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5),
   nrow=2,
   zscores.plot,
   labels = c("", "C"), rel_heights = c(0.33,0.33, 0.33))
-ggsave(paste0("../../plots/Fig3_", model_name,".png"), dpi=300, bg="white", width=10, height=7)
+ggsave(paste0("../../plots/",model_name,"/Fig3.png"), dpi=300, bg="white", width=10, height=7)
 ```
 
 ## Fig3 with all
@@ -766,17 +734,7 @@ plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5),
   zscores.plot, 
   zscores.all.df.plot,
   labels = c("", "C", "D"), rel_heights = c(0.33,0.33, 0.33))
-ggsave(paste0("../../plots/Fig3_", model_name,"_all.png"), dpi=300, bg="white", width=11, height=12)
-```
-
-
-```{r}
-# plot_grid(plot_grid(plot_grid(NULL,TP_FN_plot,NULL, FPR_TNR_plot,NULL, rel_widths = c(0.1,0.4,0.2,0.4,0.1), 
-#                     ncol = 5, labels=c("A","","","B","")),
-#   upset.plot.all,
-#   labels = c("","D"), 
-#   nrow=2),exch_plot, labels = c("", "C"), rel_widths = c(0.4,0.6))
-# ggsave("../../plots/Fig3_Human1_2.png", dpi=300, bg="white", width=15, height=8)
+# ggsave(paste0("../../plots/Fig3_", model_name,"_all.png"), dpi=300, bg="white", width=11, height=12)
 ```
 
 
@@ -928,34 +886,22 @@ exch_plot
 plot_grid(exch_plot)#, 
           # labels = c("","", "C"), 
           # rel_widths = c(0.2,0.05,0.8))
-ggsave(paste0("../../plots/Fig4_", model_name,".png"), dpi=300, bg="white", width=15, height=12)
+ggsave(paste0("../../plots/",model_name,"/Fig4.png"), dpi=300, bg="white", width=15, height=12)
 ```
 
 
 # Fig5
 
 ```{r}
-network_stats = read.table(paste0("../../data/input/",model_name,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
+network_stats = read.table(paste0(input.path,model_name,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
 GSEA.abs.results = read.table(paste0(input.path,model_name,"_GSEA_absolute_metric_external_with_WT_default_all_results.tsv"), sep="\t", header=T)
-if (model_name == "Human1"){
-  z.scores = read.table('../../data/large/zscores_WT_default_all.tsv', sep="\t", header=T) %>%
+z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
   filter(Metab %in% metabolites$ID)
-}else if (model_name == "Recon2.2"){
-  z.scores = read.table("/home/juliette/work/pipelines/simpa/Recon2.2/zscores.tsv", sep='\t', header=T)
-}
 ```
 
 ## Uniqueness
 ```{r}
-# z.scores = read.table('../../data/large/zscores.tsv', sep="\t", header=T) %>% 
-  # filter(Metab %in% metabolites$ID)
 thr=2
-# z.scores %>% pivot_longer(-Metab) %>% 
-#   left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
-#   group_by(Metab) %>% 
-#   reframe(zscores = (value - mean(value)) / sd(value), Pathway) %>% 
-#   group_by(Metab) %>% 
-#   summarise(m = summary(zscores))
 uniqueness = z.scores %>% pivot_longer(-Metab) %>% 
   left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
   rename("zscores" = value) %>% 
@@ -1008,8 +954,6 @@ metab.uniqueness.plot %>%
   scale_fill_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot$Type])+
   scale_colour_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot$Type])+
   xlab("")
-  # scale_x_continuous(transform = "log")
-
 ```
 
 ```{r}
@@ -1034,8 +978,6 @@ pathway_metrics_plot=
   xlab("")+
   ylab("")
 pathway_metrics_plot
-#ggsave(paste0("../../plots/Fig4_",model_name,".png"), bg="white", dpi=300, width = 9, height=5)
-
 ```
 
 ## PCA
@@ -1178,8 +1120,8 @@ pca_biplot_cat
 
 ## Fig5 
 ```{r}
-pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"_pathway_graph_edited.png"))
-fig4 = plot_grid(plot_grid(pathway_metrics_plot,pathway_graph, nrow=2, rel_heights = c(0.35,0.65), labels = c("A","B")), 
+pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"/",model_name,"_pathway_graph_edited.png"))
+fig5 = plot_grid(plot_grid(pathway_metrics_plot,pathway_graph, nrow=2, rel_heights = c(0.35,0.65), labels = c("A","B")), 
                  plot_grid(NULL, pca_biplot, NULL, nrow=3, labels = c("","C",""), rel_heights = c(0.2,0.6,0.2)), nrow=1, rel_widths = c(0.45,0.55))
-ggsave(plot=fig4, paste0("../../plots/Fig5_", model_name,".png"), dpi=300, bg="white", width = 15, height=10)
+ggsave(plot=fig5, paste0("../../plots/",model_name,"/Fig5.png"), dpi=300, bg="white", width = 15, height=10)
 ```

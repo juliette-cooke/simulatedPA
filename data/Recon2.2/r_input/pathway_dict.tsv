@@ -1,0 +1,100 @@
+Group	Pathway
+subsystem1	beta-Alanine metabolism
+subsystem10	Valine, leucine, and isoleucine metabolism
+subsystem11	Sphingolipid metabolism
+subsystem12	Tryptophan metabolism
+subsystem13	Butanoate metabolism
+subsystem14	Purine catabolism
+subsystem15	Taurine and hypotaurine metabolism
+subsystem16	Arginine and Proline Metabolism
+subsystem17	Cytochrome metabolism
+subsystem18	Steroid metabolism
+subsystem19	N-glycan degradation
+subsystem2	Vitamin D metabolism
+subsystem20	O-glycan synthesis
+subsystem21	Blood group synthesis
+subsystem22	Glutamate metabolism
+subsystem23	Pentose phosphate pathway
+subsystem24	Cholesterol metabolism
+subsystem25	Fatty acid oxidation
+subsystem26	Aminosugar metabolism
+subsystem27	Phosphatidylinositol phosphate metabolism
+subsystem28	Urea cycle
+subsystem29	Glycerophospholipid metabolism
+subsystem3	Lysine metabolism
+subsystem30	Citric acid cycle
+subsystem31	Pyruvate metabolism
+subsystem32	Bile acid synthesis
+subsystem33	Vitamin B2 metabolism
+subsystem34	Glycolysis/gluconeogenesis
+subsystem35	Nucleotide interconversion
+subsystem36	Nucleotide salvage pathway
+subsystem37	Selenoamino acid metabolism
+subsystem38	Purine synthesis
+subsystem39	Keratan sulfate synthesis
+subsystem4	Glycine, serine, alanine and threonine metabolism
+subsystem40	Triacylglycerol synthesis
+subsystem41	Alanine and aspartate metabolism
+subsystem42	Miscellaneous
+subsystem43	Eicosanoid metabolism
+subsystem44	Glutathione metabolism
+subsystem45	Starch and sucrose metabolism
+subsystem46	Biotin metabolism
+subsystem47	R group synthesis
+subsystem48	Vitamin C metabolism
+subsystem49	Pyrimidine synthesis
+subsystem5	Methionine and cysteine metabolism
+subsystem50	Vitamin A metabolism
+subsystem51	Stilbene, coumarine and lignin synthesis
+subsystem52	N-glycan synthesis
+subsystem53	Heme degradation
+subsystem54	Limonene and pinene degradation
+subsystem55	ROS detoxification
+subsystem56	Vitamin B12 metabolism
+subsystem57	C5-branched dibasic acid metabolism
+subsystem58	Alkaloid synthesis
+subsystem59	Heme synthesis
+subsystem6	Pyrimidine catabolism
+subsystem60	Chondroitin sulfate degradation
+subsystem61	D-alanine metabolism
+subsystem62	Fatty acid synthesis
+subsystem63	Folate metabolism
+subsystem64	Tetrahydrobiopterin metabolism
+subsystem65	Exchange/demand reaction
+subsystem66	CoA synthesis
+subsystem67	Keratan sulfate degradation
+subsystem68	Fructose and mannose metabolism
+subsystem69	Glyoxylate and dicarboxylate metabolism
+subsystem7	Propanoate metabolism
+subsystem70	Galactose metabolism
+subsystem71	Nucleotide sugar metabolism
+subsystem72	Chondroitin synthesis
+subsystem73	Heparan sulfate degradation
+subsystem74	Hyaluronan metabolism
+subsystem75	Histidine metabolism
+subsystem76	Vitamin B6 metabolism
+subsystem77	Inositol phosphate metabolism
+subsystem78	CoA catabolism
+subsystem79	NAD metabolism
+subsystem8	Tyrosine metabolism
+subsystem80	Phenylalanine metabolism
+subsystem81	Oxidative phosphorylation
+subsystem82	Thiamine metabolism
+subsystem83	Cysteine Metabolism
+subsystem84	Transport, mitochondrial
+subsystem85	Androgen and estrogen synthesis and metabolism
+subsystem86	Lipoate metabolism
+subsystem87	Arachidonic acid metabolism
+subsystem88	Vitamin E metabolism
+subsystem89	Linoleate metabolism
+subsystem9	Ubiquinone synthesis
+subsystem90	Glycosphingolipid metabolism
+subsystem91	Xenobiotics metabolism
+subsystem92	Transport, peroxisomal
+subsystem93	Transport, extracellular
+subsystem94	Dietary fiber binding
+subsystem95	Squalene and cholesterol synthesis
+subsystem96	Transport, lysosomal
+subsystem97	Transport, endoplasmic reticular
+subsystem98	Transport, nuclear
+subsystem99	Transport, golgi apparatus

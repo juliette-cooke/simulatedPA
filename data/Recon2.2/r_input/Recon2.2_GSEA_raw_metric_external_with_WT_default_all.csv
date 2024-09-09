@@ -1,0 +1,77 @@
+Unique_reaction_id,Subsystem name,TPR,FPR,FNR,TNR,Precision,Recall,F1
+0,Phosphatidylinositol phosphate metabolism,0,0,1,75,,0.0,0.0
+1,Vitamin B6 metabolism,0,1,1,74,0.0,0.0,0.0
+2,Galactose metabolism,1,2,0,73,0.3333333333333333,1.0,0.5
+3,Starch and sucrose metabolism,0,0,1,75,,0.0,0.0
+4,Ubiquinone synthesis,0,0,1,75,,0.0,0.0
+5,Nucleotide sugar metabolism,0,11,1,64,0.0,0.0,0.0
+6,"Stilbene, coumarine and lignin synthesis",0,1,1,74,0.0,0.0,0.0
+7,Glyoxylate and dicarboxylate metabolism,1,0,0,75,1.0,1.0,1.0
+8,Heme synthesis,0,1,1,74,0.0,0.0,0.0
+9,Pyrimidine catabolism,0,14,1,61,0.0,0.0,0.0
+10,Cytochrome metabolism,1,11,0,64,0.08333333333333333,1.0,0.15384615384615385
+11,Androgen and estrogen synthesis and metabolism,0,1,1,74,0.0,0.0,0.0
+12,Heparan sulfate degradation,0,0,1,75,,0.0,0.0
+13,Citric acid cycle,0,7,1,68,0.0,0.0,0.0
+14,Glycosphingolipid metabolism,0,7,1,68,0.0,0.0,0.0
+15,Vitamin B12 metabolism,0,15,1,60,0.0,0.0,0.0
+16,Triacylglycerol synthesis,1,4,0,71,0.2,1.0,0.33333333333333337
+17,Histidine metabolism,0,4,1,71,0.0,0.0,0.0
+18,D-alanine metabolism,0,6,1,69,0.0,0.0,0.0
+19,Tryptophan metabolism,0,3,1,72,0.0,0.0,0.0
+20,Taurine and hypotaurine metabolism,0,1,1,74,0.0,0.0,0.0
+21,Xenobiotics metabolism,0,5,1,70,0.0,0.0,0.0
+22,Vitamin C metabolism,0,1,1,74,0.0,0.0,0.0
+23,N-glycan degradation,1,3,0,72,0.25,1.0,0.4
+24,Methionine and cysteine metabolism,0,1,1,74,0.0,0.0,0.0
+25,Purine synthesis,0,5,1,70,0.0,0.0,0.0
+26,"Valine, leucine, and isoleucine metabolism",0,1,1,74,0.0,0.0,0.0
+27,Nucleotide salvage pathway,0,4,1,71,0.0,0.0,0.0
+28,Propanoate metabolism,0,2,1,73,0.0,0.0,0.0
+29,Keratan sulfate synthesis,0,14,1,61,0.0,0.0,0.0
+30,CoA catabolism,0,6,1,69,0.0,0.0,0.0
+31,Folate metabolism,0,3,1,72,0.0,0.0,0.0
+32,Vitamin D metabolism,1,12,0,63,0.07692307692307693,1.0,0.14285714285714288
+33,Tyrosine metabolism,1,3,0,72,0.25,1.0,0.4
+34,Blood group synthesis,1,2,0,73,0.3333333333333333,1.0,0.5
+35,ROS detoxification,0,2,1,73,0.0,0.0,0.0
+36,Vitamin B2 metabolism,0,16,1,59,0.0,0.0,0.0
+37,Fructose and mannose metabolism,1,3,0,72,0.25,1.0,0.4
+38,Vitamin E metabolism,0,2,1,73,0.0,0.0,0.0
+39,Purine catabolism,0,1,1,74,0.0,0.0,0.0
+40,Phenylalanine metabolism,0,2,1,73,0.0,0.0,0.0
+41,Linoleate metabolism,0,0,1,75,,0.0,0.0
+42,Cysteine Metabolism,0,1,1,74,0.0,0.0,0.0
+43,Chondroitin sulfate degradation,0,2,1,73,0.0,0.0,0.0
+44,Hyaluronan metabolism,1,1,0,74,0.5,1.0,0.6666666666666666
+45,Limonene and pinene degradation,0,1,1,74,0.0,0.0,0.0
+46,NAD metabolism,0,37,1,38,0.0,0.0,0.0
+47,O-glycan synthesis,0,4,1,71,0.0,0.0,0.0
+48,Arginine and Proline Metabolism,0,18,1,57,0.0,0.0,0.0
+49,Lysine metabolism,1,2,0,73,0.3333333333333333,1.0,0.5
+50,Urea cycle,0,0,1,75,,0.0,0.0
+51,R group synthesis,0,11,1,64,0.0,0.0,0.0
+52,"Glycine, serine, alanine and threonine metabolism",0,8,1,67,0.0,0.0,0.0
+53,Thiamine metabolism,0,0,1,75,,0.0,0.0
+54,Glutamate metabolism,0,4,1,71,0.0,0.0,0.0
+55,Arachidonic acid metabolism,0,8,1,67,0.0,0.0,0.0
+56,Keratan sulfate degradation,0,0,1,75,,0.0,0.0
+57,Inositol phosphate metabolism,0,1,1,74,0.0,0.0,0.0
+58,Glutathione metabolism,0,4,1,71,0.0,0.0,0.0
+59,Alkaloid synthesis,0,2,1,73,0.0,0.0,0.0
+60,Biotin metabolism,0,0,1,75,,0.0,0.0
+61,Pentose phosphate pathway,1,4,0,71,0.2,1.0,0.33333333333333337
+62,Heme degradation,0,1,1,74,0.0,0.0,0.0
+63,Pyrimidine synthesis,1,0,0,75,1.0,1.0,1.0
+64,CoA synthesis,0,6,1,69,0.0,0.0,0.0
+65,N-glycan synthesis,0,7,1,68,0.0,0.0,0.0
+66,Chondroitin synthesis,0,8,1,67,0.0,0.0,0.0
+67,Fatty acid synthesis,0,2,1,73,0.0,0.0,0.0
+68,Pyruvate metabolism,0,0,1,75,,0.0,0.0
+69,Alanine and aspartate metabolism,0,4,1,71,0.0,0.0,0.0
+70,Butanoate metabolism,0,1,1,74,0.0,0.0,0.0
+71,Aminosugar metabolism,1,9,0,66,0.1,1.0,0.18181818181818182
+72,Selenoamino acid metabolism,0,13,1,62,0.0,0.0,0.0
+73,beta-Alanine metabolism,0,2,1,73,0.0,0.0,0.0
+74,Lipoate metabolism,0,2,1,73,0.0,0.0,0.0
+75,Oxidative phosphorylation,0,1,1,74,0.0,0.0,0.0

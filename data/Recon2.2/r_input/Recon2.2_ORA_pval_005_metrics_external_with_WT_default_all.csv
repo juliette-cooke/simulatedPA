@@ -1,0 +1,35 @@
+Unique_reaction_id,Subsystem name,TPR,FPR,FNR,TNR,TNR2,Precision,Recall,F1
+2,Galactose metabolism,1,0,0,,75,1.0,1.0,1.0
+3,Starch and sucrose metabolism,1,0,0,,75,1.0,1.0,1.0
+7,Glyoxylate and dicarboxylate metabolism,0,0,1,,75,,0.0,0.0
+8,Heme synthesis,1,3,0,,72,0.25,1.0,0.4
+9,Pyrimidine catabolism,1,6,0,,69,0.14285714285714285,1.0,0.25
+13,Citric acid cycle,0,0,1,,75,,0.0,0.0
+14,Glycosphingolipid metabolism,1,4,0,,71,0.2,1.0,0.33333333333333337
+16,Triacylglycerol synthesis,1,0,0,,75,1.0,1.0,1.0
+17,Histidine metabolism,1,1,0,,74,0.5,1.0,0.6666666666666666
+22,Vitamin C metabolism,1,4,0,,71,0.2,1.0,0.33333333333333337
+23,N-glycan degradation,1,1,0,,74,0.5,1.0,0.6666666666666666
+24,Methionine and cysteine metabolism,1,1,0,,74,0.5,1.0,0.6666666666666666
+26,"Valine, leucine, and isoleucine metabolism",1,2,0,,73,0.3333333333333333,1.0,0.5
+30,CoA catabolism,1,4,0,,71,0.2,1.0,0.33333333333333337
+31,Folate metabolism,0,1,1,,74,0.0,0.0,0.0
+33,Tyrosine metabolism,1,1,0,,74,0.5,1.0,0.6666666666666666
+36,Vitamin B2 metabolism,1,3,0,,72,0.25,1.0,0.4
+37,Fructose and mannose metabolism,1,0,0,,75,1.0,1.0,1.0
+39,Purine catabolism,1,6,0,,69,0.14285714285714285,1.0,0.25
+42,Cysteine Metabolism,1,0,0,,75,1.0,1.0,1.0
+44,Hyaluronan metabolism,1,0,0,,75,1.0,1.0,1.0
+46,NAD metabolism,1,11,0,,64,0.08333333333333333,1.0,0.15384615384615385
+48,Arginine and Proline Metabolism,0,2,1,,73,0.0,0.0,0.0
+49,Lysine metabolism,0,2,1,,73,0.0,0.0,0.0
+50,Urea cycle,1,0,0,,75,1.0,1.0,1.0
+52,"Glycine, serine, alanine and threonine metabolism",0,3,1,,72,0.0,0.0,0.0
+58,Glutathione metabolism,1,0,0,,75,1.0,1.0,1.0
+61,Pentose phosphate pathway,1,13,0,,62,0.07142857142857142,1.0,0.13333333333333333
+63,Pyrimidine synthesis,1,0,0,,75,1.0,1.0,1.0
+67,Fatty acid synthesis,1,1,0,,74,0.5,1.0,0.6666666666666666
+68,Pyruvate metabolism,1,0,0,,75,1.0,1.0,1.0
+69,Alanine and aspartate metabolism,1,0,0,,75,1.0,1.0,1.0
+71,Aminosugar metabolism,1,2,0,,73,0.3333333333333333,1.0,0.5
+73,beta-Alanine metabolism,1,0,0,,75,1.0,1.0,1.0

@@ -1,0 +1,100 @@
+Pathway	Type
+beta-Alanine metabolism	able_to_run
+Valine, leucine, and isoleucine metabolism	able_to_run
+Sphingolipid metabolism	infeasible
+Tryptophan metabolism	unable_to_run_ORA
+Butanoate metabolism	unable_to_run_ORA
+Purine catabolism	able_to_run
+Taurine and hypotaurine metabolism	unable_to_run_ORA
+Arginine and Proline Metabolism	able_to_run
+Cytochrome metabolism	unable_to_run_ORA
+Steroid metabolism	infeasible
+N-glycan degradation	able_to_run
+Vitamin D metabolism	unable_to_run_ORA
+O-glycan synthesis	unable_to_run_ORA
+Blood group synthesis	unable_to_run_ORA
+Glutamate metabolism	unable_to_run_ORA
+Pentose phosphate pathway	able_to_run
+Cholesterol metabolism	infeasible
+Fatty acid oxidation	infeasible
+Aminosugar metabolism	able_to_run
+Phosphatidylinositol phosphate metabolism	unable_to_run_ORA
+Urea cycle	able_to_run
+Glycerophospholipid metabolism	infeasible
+Lysine metabolism	able_to_run
+Citric acid cycle	able_to_run
+Pyruvate metabolism	able_to_run
+Bile acid synthesis	infeasible
+Vitamin B2 metabolism	able_to_run
+Glycolysis/gluconeogenesis	infeasible
+Nucleotide interconversion	infeasible
+Nucleotide salvage pathway	unable_to_run_ORA
+Selenoamino acid metabolism	blocked
+Purine synthesis	unable_to_run_ORA
+Keratan sulfate synthesis	unable_to_run_ORA
+Glycine, serine, alanine and threonine metabolism	able_to_run
+Triacylglycerol synthesis	able_to_run
+Alanine and aspartate metabolism	able_to_run
+Miscellaneous	removed_but_ran
+Eicosanoid metabolism	infeasible
+Glutathione metabolism	able_to_run
+Starch and sucrose metabolism	able_to_run
+Biotin metabolism	unable_to_run_ORA
+R group synthesis	unable_to_run_ORA
+Vitamin C metabolism	able_to_run
+Pyrimidine synthesis	able_to_run
+Methionine and cysteine metabolism	able_to_run
+Vitamin A metabolism	infeasible
+Stilbene, coumarine and lignin synthesis	blocked
+N-glycan synthesis	unable_to_run_ORA
+Heme degradation	unable_to_run_ORA
+Limonene and pinene degradation	unable_to_run_ORA
+ROS detoxification	unable_to_run_ORA
+Vitamin B12 metabolism	blocked
+C5-branched dibasic acid metabolism	infeasible
+Alkaloid synthesis	blocked
+Heme synthesis	able_to_run
+Pyrimidine catabolism	able_to_run
+Chondroitin sulfate degradation	blocked
+D-alanine metabolism	unable_to_run_ORA
+Fatty acid synthesis	able_to_run
+Folate metabolism	able_to_run
+Tetrahydrobiopterin metabolism	infeasible
+Exchange/demand reaction	infeasible
+CoA synthesis	unable_to_run_ORA
+Keratan sulfate degradation	unable_to_run_ORA
+Fructose and mannose metabolism	able_to_run
+Glyoxylate and dicarboxylate metabolism	able_to_run
+Propanoate metabolism	unable_to_run_ORA
+Galactose metabolism	able_to_run
+Nucleotide sugar metabolism	blocked
+Chondroitin synthesis	blocked
+Heparan sulfate degradation	blocked
+Hyaluronan metabolism	able_to_run
+Histidine metabolism	able_to_run
+Vitamin B6 metabolism	unable_to_run_ORA
+Inositol phosphate metabolism	unable_to_run_ORA
+CoA catabolism	able_to_run
+NAD metabolism	able_to_run
+Tyrosine metabolism	able_to_run
+Phenylalanine metabolism	unable_to_run_ORA
+Oxidative phosphorylation	unable_to_run_ORA
+Thiamine metabolism	unable_to_run_ORA
+Cysteine Metabolism	able_to_run
+Transport, mitochondrial	infeasible
+Androgen and estrogen synthesis and metabolism	unable_to_run_ORA
+Lipoate metabolism	blocked
+Arachidonic acid metabolism	unable_to_run_ORA
+Vitamin E metabolism	blocked
+Linoleate metabolism	blocked
+Ubiquinone synthesis	unable_to_run_ORA
+Glycosphingolipid metabolism	able_to_run
+Xenobiotics metabolism	blocked
+Transport, peroxisomal	infeasible
+Transport, extracellular	infeasible
+Dietary fiber binding	removed_but_ran
+Squalene and cholesterol synthesis	infeasible
+Transport, lysosomal	removed_but_ran
+Transport, endoplasmic reticular	infeasible
+Transport, nuclear	infeasible
+Transport, golgi apparatus	removed_but_ran

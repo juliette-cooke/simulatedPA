@@ -1,0 +1,629 @@
+ID	Name	metabID
+EX_biomass_c	biomass	biomass
+EX_11_cis_retfa_e	fatty acid 11-cis-retinol	11_cis_retfa
+EX_13_cis_retnglc_e	1-O-all-trans-retinoyl-beta-glucuronic acid	13_cis_retnglc
+EX_1glyc_hs_e	1-acyl-sn-glycerol 3-phosphate	1glyc_hs
+EX_1mncam_e	1-methylnicotinamide	1mncam
+EX_2425dhvitd3_e	(24R)-24,25-dihydroxycalciol	2425dhvitd3
+EX_24nph_e	2-hydroxy-4-nitrophenolate	24nph
+EX_25hvitd3_e	calcidiol	25hvitd3
+EX_2hb_e	2-hydroxybutyric acid	2hb
+EX_2mcit_e	2-methylcitrate(3-)	2mcit
+EX_34dhoxpeg_e	3,4-dihydroxyphenylethyleneglycol	34dhoxpeg
+EX_34dhphe_e	L-dopa	34dhphe
+EX_35cgmp_e	3',5'-cyclic GMP(1-)	35cgmp
+EX_3aib_e	(S)-3-aminoisobutyric acid	3aib
+EX_3aib_D_e	(R)-3-aminoisobutyric acid	3aib_D
+EX_3mlda_e	1-methyl-4-imidazoleacetic acid	3mlda
+EX_4abut_e	gamma-aminobutyric acid	4abut
+EX_4hdebrisoquine_e	4-hydroxydebrisoquin	4hdebrisoquine
+EX_4hphac_e	4-hydroxyphenylacetate	4hphac
+EX_4mptnl_e	4-methylpentanal	4mptnl
+EX_4mtolbutamide_e	4-hydroxytolbutamide	4mtolbutamide
+EX_4nph_e	4-nitrophenolate	4nph
+EX_4nphsf_e	4-nitrophenyl hydrogen sulfate	4nphsf
+EX_4pyrdx_e	4-pyridoxate	4pyrdx
+EX_5adtststerone_e	17beta-hydroxy-5alpha-androstan-3-one	5adtststerone
+EX_5adtststeroneglc_e	5alpha-Dihydrotestosterone glucuronide	5adtststeroneglc
+EX_5fthf_e	(6S)-5-formyltetrahydrofolate(2-)	5fthf
+EX_5homeprazole_e	5 hydroxy omeprazole	5homeprazole
+EX_5htrp_e	5-hydroxy-L-tryptophan	5htrp
+EX_5mthf_e	5-methyltetrahydrofolate(2-)	5mthf
+EX_6htststerone_e	6beta-hydroxytestosterone	6htststerone
+EX_9_cis_retfa_e	fatty acid 9-cis-retinol	9_cis_retfa
+EX_abt_e	L-arabinitol	abt
+EX_ac_e	acetate	ac
+EX_acac_e	acetoacetate	acac
+EX_acald_e	acetaldehyde	acald
+EX_acetone_e	acetone	acetone
+EX_acgalfucgalacgalfuc12gal14acglcgalgluside_hs_e	alpha-GalNAc-(1->3)-[alpha-Fuc-(1->2)]-beta-Gal-(1->3)-alpha-GalNAc-(1->3)-[alpha-Fuc-(1->2)]-beta-Gal-(1->4)-beta-GlcNAc-(1->3)-beta-Gal-(1->4)-beta-Glc-(1->1')-Cer	acgalfucgalacgalfuc12gal14acglcgalgluside_hs
+EX_acgalfucgalacgalfucgalacglcgal14acglcgalgluside_hs_e	Type IIIAb	acgalfucgalacgalfucgalacglcgal14acglcgalgluside_hs
+EX_acgam_e	aldehydo-N-acetyl-D-glucosamine	acgam
+EX_ach_e	acetylcholine	ach
+EX_ade_e	adenine	ade
+EX_adn_e	adenosine	adn
+EX_adp_	ADP(3-)	adp
+EX_adprbp_e	ADP-D-ribose 2'-phosphate(4-)	adprbp
+EX_adprib_e	ADP-D-ribose(2-)	adprib
+EX_adrn_e	all-cis-docosa-7,10,13,16-tetraenoic acid	adrn
+EX_adrnl_e	adrenaline	adrnl
+EX_aflatoxin_e	aflatoxin B1	aflatoxin
+EX_ak2lgchol_hs_e	1-alkyl-sn-glycero-3-phosphocholine	ak2lgchol_hs
+EX_akg_e	2-oxoglutarate(2-)	akg
+EX_ala_B_e	beta-alanine	ala_B
+EX_ala_D_e	D-alanine	ala_D
+EX_ala_L_e	L-alanine	ala_L
+EX_aldstrn_e	aldosterone	aldstrn
+EX_amp_e	AMP(2-)	amp
+EX_andrstrn_e	androsterone	andrstrn
+EX_andrstrnglc_e	androsterone 3-glucosiduronic acid	andrstrnglc
+EX_antipyrene_e	antipyrine	antipyrene
+EX_apnnox_e	alpha-pinene oxide	apnnox
+EX_appnn_e	(+)-alpha-pinene	appnn
+EX_aprgstrn_e	(20S)-20-hydroxypregn-4-en-3-one	aprgstrn
+EX_arab_L_e	L-arabinose	arab_L
+EX_arach_e	arachidate	arach
+EX_arachd_e	arachidonate	arachd
+EX_arg_L_e	L-argininium(1+)	arg_L
+EX_ascb_L_e	L-ascorbate	ascb_L
+EX_asn_L_e	L-asparagine	asn_L
+EX_asp_D_e	D-aspartate(1-)	asp_D
+EX_asp_L_e	L-aspartate(1-)	asp_L
+EX_atp_e	ATP(4-)	atp
+EX_avite1_e	(+)-alpha-tocopherol	avite1
+EX_avite2_e	alpha-tocotrienol	avite2
+EX_bhb_e	(R)-3-hydroxybutyrate	bhb
+EX_bildglcur_e	bis(beta-glucosyluronate)bilirubin	bildglcur
+EX_bilglcur_e	mono(glucosyluronic acid)bilirubin(2-)	bilglcur
+EX_bilirub_e	bilirubin(2-)	bilirub
+EX_biocyt_e	biocytin	biocyt
+EX_btn_e	biotinate	btn
+EX_but_e	butyrate	but
+EX_bvite_e	beta-tocopherol	bvite
+EX_camp_e	3',5'-cyclic AMP(1-)	camp
+EX_caro_e	beta-carotene	caro
+EX_carveol_e	(-)-trans-carveol	carveol
+EX_cgly_e	L-cysteinylglycine	cgly
+EX_chol_e	choline	chol
+EX_cholate_e	cholate	cholate
+EX_chsterol_e	cholesterol	chsterol
+EX_chtn_e	chitin	chtn
+EX_cit_e	citrate(3-)	cit
+EX_cl_e	chloride	cl
+EX_CLPND_e	(7Z,10Z,13Z,16Z,19Z)-docosapentaenoic acid	clpnd
+EX_cmp_e	CMP(2-)	cmp
+EX_co_e	carbon monoxide	co
+EX_co2_e	carbon dioxide	co2
+EX_coumarin_e	coumarin	coumarin
+EX_creat_e	creatine	creat
+EX_crmp_hs_e	N-acylsphingosine 1-phosphate(2-)	crmp_hs
+EX_crn_e	(R)-carnitine	crn
+EX_crtsl_e	cortisol	crtsl
+EX_crtstrn_e	corticosterone	crtstrn
+EX_crvnc_e	(4Z,7Z,10Z,13Z,16Z,19Z)-docosahexaenoate	crvnc
+EX_csn_e	cytosine	csn
+EX_cyan_e	hydrogen cyanide	cyan
+EX_cys_L_e	L-cysteine	cys_L
+EX_cytd_e	cytidine	cytd
+EX_dad_2_e	2'-deoxyadenosine	dad_2
+EX_dag_hs_e	diglyceride	dag_hs
+EX_dcsptn1_e	(4Z,7Z,10Z,13Z,16Z)-docosa-4,7,10,13,16-pentaenoic acid	dcsptn1
+EX_dcyt_e	2'-deoxycytidine	dcyt
+EX_debrisoquine_e	debrisoquin	debrisoquine
+EX_dgchol_e	glycochenodeoxycholate	dgchol
+EX_dgsn_e	2'-deoxyguanosine	dgsn
+EX_dhdascb_e	dehydroascorbide(1-)	dhdascb
+EX_dheas_e	dehydroepiandrosterone sulfate(1-)	dheas
+EX_digalsgalside_hs_e	Digalactosylceramidesulfate	digalsgalside_hs
+EX_din_e	2'-deoxyinosine	din
+EX_dlnlcg_e	all-cis-icosa-8,11,14-trienoate	dlnlcg
+EX_dmantipyrine_e	edaravone	dmantipyrine
+EX_dmhptcrn_e	2,6 dimethylheptanoyl carnitine	dmhptcrn
+EX_dopa_e	dopaminium(1+)	dopa
+EX_dopasf_e	dopamine 3-O-sulfate	dopasf
+EX_drib_e	2-deoxy-D-ribose	drib
+EX_duri_e	2'-deoxyuridine	duri
+EX_eaflatoxin_e	aflatoxin B1 exo-8,9-epoxide	eaflatoxin
+EX_ebastine_e	Ebastine	ebastine
+EX_ebastineoh_e	hydroxylated ebastine	ebastineoh
+EX_eicostet_e	icosatetraenoic acid	eicostet
+EX_elaid_e	elaidate	elaid
+EX_estradiol_e	17beta-estradiol	estradiol
+EX_estradiolglc_e	17beta-estradiol 3-glucosiduronic acid	estradiolglc
+EX_estroneglc_e	Estrone glucuronide	estroneglc
+EX_estrones_e	estrone 3-sulfate(1-)	estrones
+EX_etoh_e	ethanol	etoh
+EX_fe2_e	iron(2+)	fe2
+EX_fe3_e	iron(3+)	fe3
+EX_fol_e	folic acid	fol
+EX_for_e	formate	for
+EX_fru_e	D-fructose	fru
+EX_fuc13galacglcgal14acglcgalgluside_hs_e	III3Fuc-nLc6Cer	fuc13galacglcgal14acglcgalgluside_hs
+EX_fuc14galacglcgalgluside_hs_e	Lea glycolipid	fuc14galacglcgalgluside_hs
+EX_fucacgalfucgalacglcgalgluside_hs_e	alpha-D-GalNAc-(1->3)-[alpha-L-Fuc-(1->2)]-beta-D-Gal-(1->3)-[alpha-L-Fuc-(1->4)]-beta-D-GlcNAc-(1->3)-beta-D-Gal-(1->4)-beta-D-Glc-(1->1')-Cer	fucacgalfucgalacglcgalgluside_hs
+EX_fucacngal14acglcgalgluside_hs_e	alpha-Neu5Ac-(2->3)-beta-D-Gal (1->4)-[alpha-L-Fuc-(1->3)]-beta-D-GlcNAc-(1->3)-beta-D-Gal-(1->4)-beta-D-Glc-(1<->1')-Cer	fucacngal14acglcgalgluside_hs
+EX_fucfuc12gal14acglcgalgluside_hs_e	alpha-L-Fuc-(1->2)-beta-D-Gal-(1->4)-[alpha-L-Fuc-(1->3)]-beta-D-GlcNAc-(1->3)-beta-D-Gal-(1->4)-beta-D-Glc-(1->1')-Cer	fucfuc12gal14acglcgalgluside_hs
+EX_fucfuc132galacglcgal14acglcgalgluside_hs_e	V3Fuc,III3Fuc-nLc6Cer	fucfuc132galacglcgal14acglcgalgluside_hs
+EX_fucfucfucgalacglc13galacglcgal14acglcgalgluside_hs_e	(Gal)4 (Glc)1 (GlcNAc)3 (LFuc)3 (Cer)1	fucfucfucgalacglc13galacglcgal14acglcgalgluside_hs
+EX_fucfucfucgalacglcgal14acglcgalgluside_hs_e	(Gal)3 (Glc)1 (GlcNAc)2 (LFuc)3 (Cer)1	fucfucfucgalacglcgal14acglcgalgluside_hs
+EX_fucfucgalacglcgalgluside_hs_e	Leb glycolipid	fucfucgalacglcgalgluside_hs
+EX_fucgal14acglcgalgluside_hs_e	Lacto-N-fucopentaosyl III ceramide	fucgal14acglcgalgluside_hs
+EX_fucgalfucgalacglcgalgluside_hs_e	(Gal)3 (Glc)1 (GlcNAc)1 (LFuc)2 (Cer)1	fucgalfucgalacglcgalgluside_hs
+EX_fucgalgbside_hs_e	fucosyl galactosylgloboside	fucgalgbside_hs
+EX_fuc_L_e	L-fucose	fuc_L
+EX_gal_e	D-galactose	gal
+EX_galacglcgalgbside_hs_e	Gal-GlcNAc-Gal globoside	galacglcgalgbside_hs
+EX_galfuc12gal14acglcgalgluside_hs_e	(Gal)3 (Glc)1 (GlcNAc)1 (LFuc)1 (Cer)1	galfuc12gal14acglcgalgluside_hs
+EX_galfucgalacglcgal14acglcgalgluside_hs_e	(Gal)4 (Glc)1 (GlcNAc)2 (LFuc)1 (Cer)1	galfucgalacglcgal14acglcgalgluside_hs
+EX_galgalfucfucgalacglcgalacglcgal14acglcgalgluside_hs_e	alpha-D-Gal-(1->3)-beta-D-Gal-(1->4)-[alpha-L-Fuc-(1->3)]-beta-D-GlcNAc-(1->3)-[alpha-D-Gal-(1->3)-beta-D-Gal-(1->4)-[alpha-L-Fuc-(1->3)]-beta-D-GlcNAc-(1->6)]-beta-D-Gal-(1->4)-beta-D-GlcNAc-(1->3)-beta-D-Gal-(1->4)-beta-D-Glc-(1<->1')-Cer	galgalfucfucgalacglcgalacglcgal14acglcgalgluside_hs
+EX_galgalgalthcrm_hs_e	Gal-Gal-Gal-Gal-Gal-Glc-Cer	galgalgalthcrm_hs
+EX_gam_e	D-glucosamine	gam
+EX_gbside_hs_e	N-acetyl-beta-D-galactosaminyl-(1->3)-alpha-D-galactosyl-(1->4)-beta-D-galactosyl-(1->4)-beta-D-glucosylceramide	gbside_hs
+EX_gchola_e	glycocholate	gchola
+EX_gdp_e	GDP(3-)	gdp
+EX_glc_e	D-glucopyranose	glc_D
+EX_gln_L_e	L-glutamine	gln_L
+EX_gluala_e	L-gamma-glutamyl-L-alanine	gluala
+EX_glu_L_e	L-glutamate(1-)	glu_L
+EX_gly_e	glycine	gly
+EX_glyb_e	glycine betaine	glyb
+EX_glyc_e	glycerol	glyc
+EX_glyc_S_e	glycerate	glyc_S
+EX_glygn2_e	glycogen, structure 2 (glycogenin-1,6-{7[1,4-Glc], 4[1,4-Glc]})	glygn2
+EX_glygn4_e	glycogen, structure 4 (glycogenin-1,6-{2[1,4-Glc], [1,4-Glc]})	glygn4
+EX_glygn5_e	glycogen, structure 5 (glycogenin-2[1,4-Glc])	glygn5
+EX_gmp_e	GMP(2-)	gmp
+EX_gsn_e	guanosine	gsn
+EX_gt1a_hs_e	alpha-Neu5Ac-(2->8)-alpha-Neu5Ac-(2->3)-beta-Gal-(1->3)-beta-GalNAc-(1->4)-[alpha-Neu5Ac-(2->3)]-beta-Gal-(1->4)-beta-Glc-(1<->1')-Cer	gt1a_hs
+EX_gthox_e	glutathione disulfide(2-)	gthox
+EX_gthrd_e	glutathionate(1-)	gthrd
+EX_gtp_e	GTP(4-)	gtp
+EX_gua_e	guanine	gua
+EX_h_e	proton	h
+EX_h2o_e	water	h2o
+EX_h2o2_e	hydrogen peroxide	h2o2
+EX_ha_e	hyaluronic acid	ha
+EX_ha_pre1_e	3-(4-deoxy-beta-D-gluc-4-enosyluronic acid)-N-acetyl-D-glucosamine	ha_pre1
+EX_hco3_e	hydrogencarbonate	hco3
+EX_hcoumarin_e	umbelliferone	hcoumarin
+EX_hdca_e	palmitate	hdca
+EX_hdcea_e	palmitoleate	hdcea
+EX_hestratriol_e	M_hestratriol_e	hestratriol
+EX_hexc_e	cerotate	hexc
+EX_his_L_e	L-histidine	his_L
+EX_hista_e	histaminium	hista
+EX_hpdca_e	margarate	hpdca
+EX_htaxol_e	6-hydroxypaclitaxel	htaxol
+EX_hxan_e	hypoxanthine	hxan
+EX_i_e	iodide	i
+EX_idp_e	IDP(3-)	idp
+EX_ile_L_e	L-isoleucine	ile_L
+EX_imp_e	IMP(2-)	imp
+EX_inost_e	myo-inositol	inost
+EX_ins_e	inosine	ins
+EX_lac_D_e	(R)-lactate	lac_D
+EX_lac_L_e	(S)-lactate	lac_L
+EX_lcts_e	lactose	lcts
+EX_Lcystin_e	L-cystine	Lcystin
+EX_leuktrA4_e	leukotriene A4(1-)	leuktrA4
+EX_leuktrB4_e	leukotriene B4(1-)	leuktrB4
+EX_leuktrC4_e	leukotriene C4(2-)	leuktrC4
+EX_leuktrD4_e	leukotriene D4	leuktrD4
+EX_leuktrE4_e	leukotriene E4(1-)	leuktrE4
+EX_leuktrF4_e	leukotriene F4	leuktrF4
+EX_leu_L_e	L-leucine	leu_L
+EX_lgnc_e	lignocerate	lgnc
+EX_limnen_e	limonene	limnen
+EX_lnlc_e	linoleate	lnlc
+EX_lnlnca_e	alpha-linolenate	lnlnca
+EX_lnlncg_e	gamma-linolenate	lnlncg
+EX_lpchol_hs_e	1-lysophosphatidylcholine	lpchol_hs
+EX_lys_L_e	L-lysinium(1+)	lys_L
+EX_mag_hs_e	monoglyceride	mag_hs
+EX_malt_e	maltose	malt
+EX_malttr_e	alpha-maltotriose	malttr
+EX_man_e	D-mannose	man
+EX_meoh_e	methanol	meoh
+EX_mepi_e	L-Metanephrine	mepi
+EX_met_L_e	L-methionine	met_L
+EX_mthgxl_e	methylglyoxal	mthgxl
+EX_n2m2nmasn_e	N-Acetyl-beta-D-glucosaminyl-1,2-alpha-D-mannosyl-1,3-(N-acetyl-beta-D-glucosaminyl-1,2-alpha-D-mannosyl-1,6)-(N-acetyl-beta-D-glucosaminyl-1,4)-beta-D-mannosyl-1,4-N-acetyl-beta-D-glucosaminyl-R	n2m2nmasn
+EX_nac_e	nicotinic acid	nac
+EX_nad_e	NAD(1-)	nad
+EX_nadp_e	NADP(3-)	nadp
+EX_ncam_e	nicotinamide	ncam
+EX_nh4_e	ammonium	nh4
+EX_no_e	nitric oxide	no
+EX_npthl_e	naphthalene	npthl
+EX_nrpphr_e	noradrenaline	nrpphr
+EX_nrpphrsf_e	Sulfate derivative of norepinephrine	nrpphrsf
+EX_nrvnc_e	(15Z)-tetracosenoate	nrvnc
+EX_o2_e	dioxygen	o2
+EX_o2s_e	superoxide	o2s
+EX_ocdca_e	stearate	ocdca
+EX_ocdcea_e	oleate	ocdcea
+EX_octa_e	octanoate	octa
+EX_omeprazole_e	omeprazole	omeprazole
+EX_onpthl_e	naphthalene 1,2-oxide	onpthl
+EX_orn_e	ornithine	orn
+EX_oxa_e	oxalate(2-)	oxa
+EX_paf_hs_e	2-acetyl-1-alkyl-sn-glycero-3-phosphocholine	paf_hs
+EX_pchol_hs_e	phosphatidylcholine	pchol_hs
+EX_pe_hs_e	phosphatidylethanolamine	pe_hs
+EX_perillyl_e	perillyl alcohol	perillyl
+EX_pglyc_hs_e	phosphatidylglycerol(1-)	pglyc_hs
+EX_pheacgln_e	N(2)-phenylacetyl-L-glutaminate	pheacgln
+EX_phe_L_e	L-phenylalanine	phe_L
+EX_pheme_e	ferroheme b	pheme
+EX_phyt_e	phytanate	phyt
+EX_pi_e	hydrogenphosphate	pi
+EX_pnto_R_e	pantothenic acid	pnto_R
+EX_ppa_e	propionate	ppa
+EX_prgstrn_e	progesterone	prgstrn
+EX_pro_L_e	L-proline	pro_L
+EX_prostgd2_e	prostaglandin D2(1-)	prostgd2
+EX_prostge1_e	prostaglandin E1(1-)	prostge1
+EX_prostge2_e	prostaglandin E2(1-)	prostge2
+EX_prostgf2_e	prostaglandin F2alpha(1-)	prostgf2
+EX_ps_hs_e	phosphatidyl-L-serine(1-)	ps_hs
+EX_ptdca_e	pentadecanoic acid	ptdca
+EX_pydam_e	pyridoxaminium(1+)	pydam
+EX_pydx_e	pyridoxal	pydx
+EX_pydxn_e	pyridoxine	pydxn
+EX_pyr_e	pyruvate	pyr
+EX_rbt_e	D-ribitol	rbt
+EX_retfa_e	fatty acid retinol	retfa
+EX_retinol_e	retinol	retinol
+EX_retinol_9_cis_e	all-trans-retinol	retinol_9_cis
+EX_retinol_cis_11_e	11-cis-retinol	retinol_cis_11
+EX_retn_e	all-trans-retinoate	retn
+EX_retnglc_e	1-O-all-trans-retinoyl-beta-glucuronic acid	retnglc
+EX_rib_D_e	D-ribose	rib_D
+EX_ribflv_e	riboflavin	ribflv
+EX_Rtotal_e	fatty acid anion	Rtotal
+EX_sarcs_e	sarcosine	sarcs
+EX_ser_L_e	L-serine	ser_L
+EX_sl_L_e	(S)-3-sulfonatolactate(2-)	sl_L
+EX_so4_e	sulfate	so4
+EX_spc_hs_e	sphingosylphosphocholine acid	spc_hs
+EX_sph1p_e	sphinganine 1-phosphate(1-)	sph1p
+EX_sphs1p_e	sphingosine 1-phosphate(1-)	sphs1p
+EX_srtn_e	serotonin(1+)	srtn
+EX_strch1_e	starch, structure 1 (1,6-{7[1,4-Glc], 4[1,4-Glc]})	strch1
+EX_strch2_e	starch, structure 2 (1,6-{2[1,4-Glc], [1,4-Glc]})	strch2
+EX_strdnc_e	all-cis-octadeca-6,9,12,15-tetraenoic acid	strdnc
+EX_succ_e	succinate(2-)	succ
+EX_sucr_e	sucrose	sucr
+EX_tag_hs_e	triglyceride	tag_hs
+EX_tagat_D_e	D-tagatose	tagat_D
+EX_taur_e	taurine	taur
+EX_taxol_e	paclitaxel	taxol
+EX_tchola_e	taurocholate	tchola
+EX_tcynt_e	thiocyanate	tcynt
+EX_tdchola_e	taurochenodeoxycholate	tdchola
+EX_tethex3_e	(6Z,9Z,12Z,15Z,18Z,21Z)-tetracosahexaenoate	tethex3
+EX_tetpent3_e	(6Z,9Z,12Z,15Z,18Z)-tetracosapentaenoate	tetpent3
+EX_thf_e	(6S)-5,6,7,8-tetrahydrofolate(2-)	thf
+EX_thm_e	thiamine(1+)	thm
+EX_thmmp_e	thiamine(1+) monophosphate(2-)	thmmp
+EX_thmtp_e	thiamine(1+) triphosphate(4-)	thmtp
+EX_thr_L_e	L-threonine	thr_L
+EX_thym_e	thymine	thym
+EX_thymd_e	thymidine	thymd
+EX_thyox_L_e	L-thyroxine	thyox_L
+EX_tmndnc_e	all-cis-5,8,11,14,17-icosapentaenoate	tmndnc
+EX_tolbutamide_e	tolbutamide	tolbutamide
+EX_tre_e	alpha,alpha-trehalose	tre
+EX_triodthy_e	3,3',5-triiodo-L-thyronine	triodthy
+EX_triodthysuf_e	3,3',5-triiodo-L-thyronine sulfate	triodthysuf
+EX_trp_L_e	L-tryptophan	trp_L
+EX_tststerone_e	testosterone	tststerone
+EX_tststeroneglc_e	testosterone 17-glucosiduronic acid	tststeroneglc
+EX_tsul_e	thiosulfate(2-)	tsul
+EX_ttdca_e	myristate	ttdca
+EX_txa2_e	thromboxane A2(1-)	txa2
+EX_tymsf_e	Tyramine O-sulfate	tymsf
+EX_Tyr_ggn_e	Tyr-194 of apo-glycogenin protein (primer for glycogen synthesis)	Tyr_ggn
+EX_tyr_L_e	L-tyrosine	tyr_L
+EX_udp_e	UDP(3-)	udp
+EX_ump_e	UMP(2-)	ump
+EX_ura_e	uracil	ura
+EX_urate_e	7,9-dihydro-1H-purine-2,6,8(3H)-trione	urate
+EX_urea_e	urea	urea
+EX_uri_e	uridine	uri
+EX_utp_e	UTP(4-)	utp
+EX_vacc_e	trans-vaccenate	vacc
+EX_val_L_e	L-valine	val_L
+EX_vitd3_e	calciol	vitd3
+EX_whddca_e	3-hydroxypalmitic acid	whddca
+EX_whhdca_e	16-hydroxypalmitate	whhdca
+EX_xolest2_hs_e	cholesterol ester	xolest2_hs
+EX_xoltri24_e	(24S)-7alpha,24-dihydroxycholesterol	xoltri24
+EX_xoltri25_e	7alpha,25-dihydroxycholesterol	xoltri25
+EX_xoltri27_e	7alpha,26-dihydroxycholesterol	xoltri27
+EX_xylt_e	xylitol	xylt
+EX_yvite_e	gamma-tocopherol	yvite
+EX_4abutn_e	4-ammoniobutanal	4abutn
+EX_acmana_e	aldehydo-N-acetyl-D-mannosamine	acmana
+EX_ahdt_e	7,8-dihydroneopterin 3'-triphosphate(4-)	ahdt
+EX_ctp_e	CTP(4-)	ctp
+EX_dgmp_e	dGMP(2-)	dgmp
+EX_dgtp_e	dGTP	dgtp
+EX_dha_e	glycerone	dha
+EX_dhap_e	glycerone phosphate(2-)	dhap
+EX_dtmp_e	dTMP(2-)	dtmp
+EX_dttp_e	dTTP(4-)	dttp
+EX_fad_e	FAD	fad
+EX_fald_e	formaldehyde	fald
+EX_g1p_e	alpha-D-glucose 1-phosphate(2-)	g1p
+EX_HC00229_e	isomaltose	HC00229
+EX_HC00250_e	hydrosulfide	HC00250
+EX_HC01104_e	4-nitrophenyl phosphate(2-)	HC01104
+EX_HC01361_e	7,8-dihydroneopterin	HC01361
+EX_HC01440_e	3-keto-beta-D-galactose	HC01440
+EX_HC01441_e	Lactose-6P	HC01441
+EX_HC01444_e	3-O-beta-D-galactosyl-sn-glycerol	HC01444
+EX_HC01446_e	3-Ketolactose	HC01446
+EX_HC01577_e	gamma-Glutamyl-beta-cyanoalanine	HC01577
+EX_HC01609_e	uroporphyrinogen I(8-)	HC01609
+EX_HC01610_e	coproporphyrinogen I(4-)	HC01610
+EX_HC01700_e	gamma-Glutamyl-3-aminopropiononitrile	HC01700
+EX_HC02160_e	GM2-pool	HC02160
+EX_HC02161_e	GM1-pool	HC02161
+EX_itp_e	ITP(3-)	itp
+EX_orot_e	orotate	orot
+EX_prpp_e	5-O-phosphonato-alpha-D-ribofuranosyl diphosphate(5-)	prpp
+EX_ptrc_e	1,4-butanediammonium	ptrc
+EX_pydx5p_e	pyridoxal 5'-phosphate(2-)	pydx5p
+EX_spmd_e	spermidine(3+)	spmd
+EX_udpg_e	UDP-D-glucose(2-)	udpg
+EX_no2_e	nitrite	no2
+EX_so3_e	hydrogensulfite	so3
+EX_sprm_e	spermine(4+)	sprm
+EX_prostgh2_e	prostaglandin H2(1-)	prostgh2
+EX_prostgi2_e	prostaglandin I2(1-)	prostgi2
+EX_ppi_e	diphosphate(3-)	ppi
+EX_cdp_e	CDP(3-)	cdp
+EX_dtdp_e	dTDP(3-)	dtdp
+EX_HC00955_e	3-cyano-L-alanine	HC00955
+EX_citr_L_e	L-citrulline	citr_L
+EX_C02470_e	Xanthurenic acid	C02470
+EX_HC00822_e	N,N'-diacetylchitobiose	HC00822
+EX_C02528_e	chenodeoxycholate	C02528
+EX_HC02192_e	taurolithocholate	HC02192
+EX_CE5560_e	glycolithocholate	CE5560
+EX_ddca_e	dodecanoate	ddca
+EX_HC02191_e	lithocholate	HC02191
+EX_HC02202_e	prostaglandin A1(1-)	HC02202
+EX_HC02203_e	prostaglandin A2	HC02203
+EX_HC02204_e	prostaglandin B1	HC02204
+EX_HC02205_e	prostaglandin B2	HC02205
+EX_HC02206_e	prostaglandin C1(1-)	HC02206
+EX_HC02207_e	prostaglandin C2	HC02207
+EX_malcoa_e	malonyl-CoA(5-)	malcoa
+EX_arachcoa_e	icosanoyl-CoA	arachcoa
+EX_coa_e	coenzyme A(4-)	coa
+EX_CE2250_e	3-oxodocosanoyl-CoA	CE2250
+EX_CE1940_e	N-(3-aminopropyl)-4-aminobutanal	CE1940
+EX_CE2011_e	hypothiocyanite	CE2011
+EX_maltttr_e	maltotetraose	maltttr
+EX_maltpt_e	alpha-maltopentaose	maltpt
+EX_malthx_e	alpha-maltohexaose	malthx
+EX_malthp_e	maltoheptaose	malthp
+EX_CE2839_e	maltodecaose	CE2839
+EX_CE2838_e	maltononaose	CE2838
+EX_CE1950_e	cyanosulfurous acid anion	CE1950
+EX_cynt_e	cyanate	cynt
+EX_23cump_e	2',3'-cyclic UMP(1-)	23cump
+EX_3ump_e	3'-UMP(2-)	3ump
+EX_CE5797_e	neuromedin N	CE5797
+EX_CE5798_e	neuromedin N (1-4)	CE5798
+EX_CE4633_e	hypochlorous acid	CE4633
+EX_CE4881_e	nitryl chloride	CE4881
+EX_udpgal_e	UDP-D-galactose(2-)	udpgal
+EX_crm_hs_e	N-acylsphingosine	crm_hs
+EX_galside_hs_e	N-acyl-beta-D-galactosylsphingosine	galside_hs
+EX_CE0074_e	alloxan	CE0074
+EX_12HPET_e	12(S)-HPETE(1-)	12HPET
+EX_C04849_e	(5Z,9E,14Z)-(8xi,11R,12S)-11,12-epoxy-8-hydroxyicosa-5,9,14-trienoate	C04849
+EX_3bcrn_	3-hydroxy butyryl carnitine	3bcrn
+EX_3ddcrn_	3-hydroxydodecanoylcarnitine	3ddcrn
+EX_3deccrn_	3-hydroxydecanoylcarnitine	3deccrn
+EX_3hdececrn_	3-hydroxyhexadecenoylcarnitine	3hdececrn
+EX_3hexdcrn_	3-hydroxyhexadecanoylcarnitine	3hexdcrn
+EX_3ivcrn_	3-hydroxy-isovaleryl carnitine	3ivcrn
+EX_3octdec2crn_	3-hydroxyoctadecadienoylcarnitine	3octdec2crn
+EX_3octdeccrn_	3-hydroxyoctadecanoyl carnitine	3octdeccrn
+EX_3octdece1crn_	3-hydroxy-octadecenoyl carnitine	3octdece1crn
+EX_3tdcrn_	3-hydroxy-tetradecanoyl carnitine	3tdcrn
+EX_3tetd7ecoacrn_	3-hydroxy tetradecenoyl-7-carnitine	3tetd7ecoacrn
+EX_3thexddcoacrn_	3-hydroxy trans7,10-hexadecadienoyl carnitine	3thexddcoacrn
+EX_3ttetddcoacrn_	3-hydroxy trans5,8tetradecadienoyl carnitine	3ttetddcoacrn
+EX_c10crn_	O-decanoylcarnitine	c10crn
+EX_c4crn_	O-butanoylcarnitine	c4crn
+EX_c51crn_	tiglyl carnitine	c51crn
+EX_c5dc_	glutaryl carnitine	c5dc
+EX_c6crn_	O-hexanoylcarnitine	c6crn
+EX_c81crn_	octenoyl carnitine	c81crn
+EX_c8crn_	O-octanoyl-L-carnitine	c8crn
+EX_ddece1crn_	dodecenoyl carnitine	ddece1crn
+EX_ddecrn_	O-lauroyl-L-carnitine	ddeccrn
+EX_decdicrn_	decadienoyl carnitine	decdicrn
+EX_doco13ac_	erucic acid	doco13ac
+EX_docosac_e	behenate	docosac
+EX_ivcrn_	isovaleryl carnitine	ivcrn
+EX_tdcrn_	O-tetradecanoyl-L-carnitine	ttdcrn
+EX_tetdece1crn_	tetradecenoyl carnitine	tetdece1crn
+EX_dca_e	decanoate	dca
+EX_4hpro_e	trans-4-hydroxy-L-proline	4hpro_LT
+EX_alaala_e	D-alanyl-D-alanine	alaala
+EX_bglc_e	beta-glucans	bglc
+EX_carn_e	carnosine	carn
+EX_glgchlo_e	beta glucan-glycocholate complex	glgchlo
+EX_gltcho_e	beta glucan-taurocholic acid complex	gltcho
+EX_glygly_e	glycylglycine	glygly
+EX_glyleu_e	Glycylleucine	glyleu
+EX_glyphe_e	Glycylphenylalanine	glyphe
+EX_glypro_e	Gly-Pro	glypro
+EX_glysar_e	Glycylsarcosine	glysar
+EX_gum_e	gums	gum
+EX_gumgchol_e	guar gum-glycocholate complex	gumgchol
+EX_gumtchol_e	guar gum-taurocholic acid complex	gumtchol
+EX_leugly_e	Leucylglycine	leugly
+EX_leuleu_e	Leucylleucine	leuleu
+EX_progly_e	L-prolylglycine	progly
+EX_psyl_e	psyllium	psyl
+EX_psylchol_e	psillium-glycocholic acid complex	psylchol
+EX_psyltchol_e	psyllium-taurocholic acid complex	psyltchol
+EX_sbt_DASH_d_e	sorbitol	sbt_D
+EX_sfcys_e	S-sulfo-L-cysteine	slfcys
+EX_cysam_e	cysteaminium	cysam
+EX_dpcoa_e	3'-dephospho-CoA(2-)	dpcoa
+EX_fmn_e	FMN(3-)	fmn
+EX_hyptaur_e	hypotaurine	hyptaur
+EX_pan4p_e	pantetheine 4'-phosphate(2-)	pan4p
+EX_ptth_e	pantetheine	ptth
+EX_q10_e	coenzyme Q10	q10
+EX_q10h2_e	ubiquinol-10	q10h2
+EX_34hpp_	3-(4-hydroxyphenyl)pyruvate	34hpp
+EX_3mob_e	3-methyl-2-oxobutanoate	3mob
+EX_3mop_e	3-methyl-2-oxovalerate	3mop
+EX_4mop_e	4-methyl-2-oxopentanoate	4mop
+EX_5mta_e	5'-S-methyl-5'-thioadenosine	5mta
+EX_5oxpro_e	5-oxoprolinate	5oxpro
+EX_ahcys_e	S-adenosyl-L-homocysteine	ahcys
+EX_aicar_e	5-amino-1-(5-phospho-D-ribosyl)imidazole-4-carboxamide(2-)	aicar
+EX_anth_e	anthranilate	anth
+EX_cbasp_e	N-carbamoyl-L-aspartate(2-)	cbasp
+EX_mal_L_e	(S)-malate(2-)	mal_L
+EX_fum_e	fumarate(2-)	fum
+EX_xmp_e	5'-xanthylate(2-)	xmp
+EX_dcmp_e	dCMP(2-)	dcmp
+EX_HC00342_e	cis-aconitate(3-)	HC00342
+EX_glyc3p_e	sn-glycerol 3-phosphate(2-)	glyc3p
+EX_retinal_e	retinal	retinal
+EX_12htacr_e	12-HT or M-VI, 12-hydroxy tacrolimus	12htacr
+EX_1331tacr_e	13,31-O-Didesmethyl-tacrolimus	1331tacr
+EX_13dmt_e	13-O-desmethyl tacrolimus, 13-DMT or M-I	13dmt
+EX_14hmdz_e	1,4-Dihydroxy-midazolam	14hmdz
+EX_1513tacr_e	13,15-O-didesmethyl tacrolimus	1513tacr
+EX_1531tacr_e	15, 31-O-Didesmethyl-tacrolimus	1531tacr
+EX_15dmt_e	15-DMT or M-III, 15-O-desmethyl tacrolimus	15dmt
+EX_1hmdgluc_e	1'-OH-midazolam-glucuronide	1hmdgluc
+EX_1ohmdz_e	1'-OH-midazolam	1ohmdz
+EX_2hatvacid_e	2-hydroxy-atorvastatin-acid / ortho-hydroxy-atorvastatin acid	2hatvacid
+EX_2hatvacidgluc_e	2-hydroxy-atorvastatin-acyl-glucuronide	2hatvacidgluc
+EX_2hatvlac_e	2-hydroxy-atorvastatin-lactone / ortho-hydroxy-atorvastatin lactone	2hatvlac
+EX_2hatvlacgluc_e	2-hydroxy-atorvastatin-lactone-glucuronide	2hatvlacgluc
+EX_31dmt_e	31-DMT or M-II, 31-O-desmethyl tacrolimus	31dmt
+EX_35dhpvs_e	3'-alpha,5'beta-dihydroxy-pravastatin / 3'-alpha5'beta6'beta-trihydroxy pravastatin	35dhpvs
+EX_35dsmv_e	3',5'-dihydrodiol-simvastatin-lactone form	35dsmv
+EX_3hlvstacid_e	3''-hydroxy-lovastatin acid form	3hlvstacid
+EX_3hpvs_e	3'-S-hydroxy-pravastatin	3hpvs
+EX_3hpvstet_e	3'-S-hydroxy-pravastatin-tetranor	3hpvstet
+EX_3hsmvacid_e	3'-hydroxy-simvastatin-acid form	3hsmvacid
+EX_3ispvs_e	3-alpha-iso-pravastatin	3ispvs
+EX_3ohacmp_e	3-hydroxy-acetaminophen	3ohacmp
+EX_4bhglz_e	4-beta-OH-gliclazide	4bhglz
+EX_4hatvacid_e	4-hydroxy-atorvastatin-acid / para-hydroxy-atorvastatin acid	4hatvacid
+EX_4hatvlac_e	4-hydroxy-atorvastatin-lactone / para-hydroxy-atorvastatin lactone	4hatvlac
+EX_4hmdgluc_e	4-OH-midazolam-glucuronide	4hmdgluc
+EX_4ohmdz_e	4-OH-midazolam	4ohmdz
+EX_56dhpvs_e	3-keto-5,6,-dihydroxy-pravastatin	56dhpvs
+EX_56eppvs_e	5,6-epoxy-3-alpha-iso-pravastatin	56eppvs
+EX_5ohfvs_e	5-hydroxy-fluvastatin	5ohfvs
+EX_5ohfvsglu_e	5-hydroxy-fluvastatin-glucuronide	5ohfvsglu
+EX_6ahglz_e	6-alpha-OH-gliclazide	6ahglz
+EX_6bhglz_e	6-beta-OH-gliclazide	6bhglz
+EX_6bhglzglc_e	6-beta-OH-gliclazide-glucuronide	6bhglzglc
+EX_6csmvacid_e	6'-beta-carboxy-simvastatin-acid form	6csmvacid
+EX_6epvs_e	6-epipravastatin	6epvs
+EX_6hlvst_e	6'-beta-hydroxy-lovastatin lactone form	6hlvst
+EX_6hmsmvacid_e	6'-beta-hydroxy-methyl-simvastatin-acid form	6hmsmvacid
+EX_6hsmvacid_e	6'-beta-hydroxy simvastatin acid	6hsmvacid
+EX_6melvacid_e	6'-exomethylene-lovastatin-acid form	6melvacid
+EX_6melvst_e	6'-exomethylene-lovastatin lactone form	6melvst
+EX_6ohfvs_e	6-hydroxy-fluvastatin	6ohfvs
+EX_6ohfvsglu_e	6-hydroxy-fluvastatin-glucuronide	6ohfvsglu
+EX_7ahglz_e	7-alpha-OH-gliclazide	7ahglz
+EX_7bhglz_e	7-beta-OH-gliclazide	7bhglz
+EX_7bhglzglc_e	7-beta-OH-gliclazide-glucuronide	7bhglzglc
+EX_7hpvs_e	7-hydroxy-3-alpha-iso-pravastatin	7hpvs
+EX_acmp_e	acetaminophen/paracetamol	acmp
+EX_acmpglu_e	Acetaminophen glucuronide	acmpglu
+EX_acmpglut_e	acetaminophen glutathione conjugate	acmpglut
+EX_allop_e	allopurinol	allop
+EX_am19cs_e	AM19 (cyclosporine)	am19cs
+EX_am1a4ncs_e	AM1A4N (cyclosporine)	am1a4ncs
+EX_am1accs_e	AM1Ac (cyclosporine)	am1accs
+EX_am1acs_e	AM1A (cyclosporine)	am1acs
+EX_am1alcs_e	AM1AL (cyclosporine)	am1alcs
+EX_am1c4n9cs_e	AM1c4N9 (cyclosporine)	am1c4n9cs
+EX_am1c9cs_e	AM1c9 (cyclosporine)	am1c9cs
+EX_am1ccs_e	AM1c (cyclosporine)	am1ccs
+EX_am1cglc_e	AM1c-glucuronide (cyclosporine)	am1cglc
+EX_am1csa_e	AM1 (cyclosporine)	am1csa
+EX_am4n9cs_e	AM4N9 (cyclosporine)	am4n9cs
+EX_am4ncs_e	AM4N (cyclosporine)	am4ncs
+EX_am9csa_e	AM9 (cyclosporine)	am9csa
+EX_atvacid_e	atorvastatin-acid	atvacid
+EX_atvlac_e	atorvastatin-lactone	atvlac
+EX_caribup_s_e	S-carboxy ibuprofen	caribup_s
+EX_caribupglu_S_e	S-carboxy ibuprofen glucuronide	caribupglu_S
+EX_crglz_e	carboxy-gliclazide	crglz
+EX_crvs_e	cerivastatin	crvs
+EX_crvsm1_e	cerivastatin-M1	crvsm1
+EX_crvsm23_e	cerivastatin-M23	crvsm23
+EX_crvsm24_e	cerivastatin-M24	crvsm24
+EX_csa_e	cyclosporine	csa
+EX_csasulp_e	cyclosporine-sulphate	csasulp
+EX_cysacmp_e	cysteine-conjugate-acetaminophen	cysacmp
+EX_deoxfvs_e	deoxy-fluvastatin-dinor	deoxfvs
+EX_desfvs_e	N-desisopropyl-fluvastatin	desfvs
+EX_dhglz_e	dehydro-gliclazide	dhglz
+EX_epoxtac_e	31-O-Desmethyl,19-Hydroxy,37, 39-Epoxy-tacrolimus	epoxtac
+EX_fvs_e	fluvastatin	fvs
+EX_fvstet_e	des-isopropyl-dihydro-fluvastatin-tetranor	fvstet
+EX_fvstetglu_e	des-isopropyl-dihydro-fluvastatin-tetranor-glucuronide	fvstetglu
+EX_glc3meacp_e	glucuronide-conjugate of 3-methoxy-acetaminophen	glc3meacp
+EX_glz_e	Gliclazide	glz
+EX_isolvstacid_e	3'-hydroxy-iso-delta-4',5'-hydroxy acid form of lovastatin	isolvstacid
+EX_lst4exp_e	Losartan-E3174/ losartan-M6	lst4exp
+EX_lstn_e	Losartan	lstn
+EX_lstn1gluc_e	Losartan-N1-glucuronide	lstn1gluc
+EX_lstnm1_e	Losartan-M1	lstnm1
+EX_lstnm2_e	Losartan-M2	lstnm2
+EX_lstnm4_e	Losartan-M4 (glucuronide derivative)	lstnm4
+EX_lstnm5_e	Losartan-M5	lstnm5
+EX_lstnm7_e	Losartan-N2-glucuronide / Losartan-M7	lstnm7
+EX_lvst_e	lovastatin lactone form	lvst
+EX_mdz_e	Midazolam	mdz
+EX_mdzglc_e	Midazolam-glucuronide	mdzglc
+EX_meracmp_e	acetaminophen-mercapturate-conjugate/N-acetyl-cysteine-acetaminophen	meracmp
+EX_mhglz_e	Methyl-hydroxy-gliclazide	mhglz
+EX_ndersv_e	N-desmethyl-rosuvastatin	ndersv
+EX_oxyp_e	oxypurinol	oxyp
+EX_oxy1rb_e	oxypurinol-1-riboside	oxy1rb
+EX_oxy7rb_e	oxypurinol-7-riboside	oxy7rb
+EX_ptvst_e	pitavastatin	ptvst
+EX_ptvstlac_e	pitavastatin-lactone	ptvstlac
+EX_ptvstm3_e	pitavastatin-M3	ptvstm3
+EX_pvs_e	pravastatin	pvs
+EX_pvsgluc_e	pravastatin glucuronide	pvsgluc
+EX_rsv_e	rosuvastatin	rsv
+EX_rsvlac_e	rosuvastatin-5S-lactone	rsvlac
+EX_s3meacmp_e	sulphate-conjugate-3-methoxy-acetaminophen	s3meacmp
+EX_smv_e	simvastatin lactone form	smv
+EX_smvacid_e	simvastatin dihydroxy acid form	smvacid
+EX_sulpacmp_e	sulphate-conjugate-acetaminophen	sulpacmp
+EX_tacr_e	Tacrolimus	tacr
+EX_thrfvs_e	threo-isomer of fluvastain	thrfvs
+EX_tlacfvs_e	trans-lactone-fluvastatin	tlacfvs
+EX_tmd_e	Torasemide	tmd
+EX_tmdm1_e	Torasemide-M1	tmdm1
+EX_tmdm3_e	Torasemide-M3	tmdm3
+EX_tmdm5_e	Torasemide-M5	tmdm5
+EX_tripvs_e	triol metabolite of pravastatin	tripvs
+EX_lvstacid_e	lovastatin-hydroxyacid form	lvstacid
+EX_ptvstm13_e	pitavastatin-M13	ptvstm13
+EX_hx_e	hexanoate	hx

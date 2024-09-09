@@ -1,0 +1,1 @@
+{"biomass_prod": {"MAM01285c": "ADP", "MAM02039c": "H+", "MAM02751c": "Pi", "MAM03970c": "biomass"}, "biomass_reac": {"MAM01371c": "ATP", "MAM01721n": "DNA", "MAM02040c": "H2O", "MAM02847c": "RNA", "MAM03161c": "glycogen", "MAM10012c": "cofactor_pool_biomass", "MAM10013c": "protein_pool_biomass", "MAM10014c": "lipid_pool_biomass", "MAM10015c": "metabolite_pool_biomass"}}

@@ -6,6 +6,21 @@ date: "2024-09-06"
 # Setup
 ## Libraries
 ```{r}
+library(dplyr)
+library(tibble)
+library(ggplot2)
+library(stringr)
+library(ggrepel)
+library(ggnewscale)
+library(pals)
+library(cowplot)
+library(tidyr)
+library(forcats)
+library(jsonlite)
+library(ggh4x)
+# PCA
+library(FactoMineR)
+library(factoextra)
 library(ribiosUtils)
 library(ComplexHeatmap)
 ```
@@ -16,12 +31,15 @@ Make a folder and add the path here, with a slash at the end.
 ```{r}
 # model_name = "Recon2.2"
 model_name = "Human1"
-input.path = paste0("../../data/output/",model_name,"/")
-# input.path = "../../data/output/"
+input.path = paste0("../../data/",model_name,"/r_input/")
 # Set to T if using the same categories as in the pathways_db file, aka Human1 categories (used for the colour palette):
 human.pathway.categories = T 
-exch.metab.pattern = "e" # or "_e" for example
-# exch.metab.pattern = "_e" # or "_e" for example
+
+if (model_name == "Human1"){
+  exch.metab.pattern = "e"
+}else if (model_name == "Recon2.2"){
+  exch.metab.pattern = "_e"
+}
 # Change these to suit your tested methods
 methods.indexes = seq(1:3)
 names(methods.indexes) = c("ORA", "GSEA abs", "GSEA raw")
@@ -61,6 +79,63 @@ pathway_categories = read.table(paste0(input.path,"pathway_db.tsv"), sep="\t", h
 misc_pathways = pathway_categories %>% filter(ManualCategoryLvl1 == "Miscellaneous") %>% pull(Pathway)
 blocked_pathways = pathway.states %>% filter(Type == "blocked") %>% pull(Pathway)
 misc_blocked_pathways = c(misc_pathways, blocked_pathways) %>% unique()
+
+side_compounds = read.table(paste0(input.path,"side_compounds.txt"), header = T) %>% 
+  rename("Identifier"=1) %>% 
+  mutate(Identifier = stringr::str_sub(Identifier, end=-str_length(exch.metab.pattern)-1)) %>% unique() %>% 
+  mutate(Identifier = ifelse(startsWith(Identifier, "M_"), str_sub(Identifier, start=3), Identifier))
+
+exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.pattern)) %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+  filter(!(metabolite %in% (side_compounds %>%
+           mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+           pull(Identifier)))) %>%
+  pull(metabolite) %>% unique()
+  
+
+exchangeable_metabolites_per_pathway = pathways %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% group_by(subsystem) %>% 
+  filter(metabolite %in% exchange_metabolites) %>% unique() %>% summarise(Exchangeable = length(metabolite)) %>% 
+  left_join(pathways %>% group_by(subsystem) %>% summarise(Total=length(metabolite)), by = "subsystem") %>% 
+  mutate(ExchangeableRatio = Exchangeable/Total) 
+
+if (exists("pathways.to.exclude")){
+  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>%
+  filter(!subsystem %in% pathways.to.exclude)
+}
+
+for (i in 1:length(all_methods_TP_FN)){
+  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>% 
+    left_join(all_methods_TP_FN[[i]] %>% select(Subsystem.name, Type) %>% rename(!!filenames[[i]] := "Type"), by = c("subsystem" = "Subsystem.name"))
+}
+
+exchangeable_m_filtered = exchangeable_metabolites_per_pathway %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("subsystem" = "Pathway")) %>% 
+  filter(!subsystem %in% misc_blocked_pathways)
+
+exchangeable_m_filtered$subsystem = factor(exchangeable_m_filtered$subsystem, levels=exchangeable_m_filtered %>% arrange(ExchangeableRatio) %>% pull(subsystem))
+
+exchangeable_m_filtered = exchangeable_m_filtered %>% 
+  pivot_longer(!!method_names) 
+exchangeable_m_filtered$name = factor(exchangeable_m_filtered$name, levels=method_names)
+
+exchangeable_m_filtered = exchangeable_m_filtered %>% 
+  filter(!subsystem %in% infeasible_pathways_ko) %>% 
+  mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Unable to be run in ORA", value)) %>% 
+  filter(Total >= 3)
+
+z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
+  filter(Metab %in% metabolites$ID)
+
+pathways_no_comp2 = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
+  rename("Pathway" = subsystem)
+
+all_methods_TP_FN_long = lapply(c(1:3), function(i){
+  all_methods_TP_FN_cat[[i]] %>% mutate(method = method_names[i])
+})
+all_methods_TP_FN_long_df = all_methods_TP_FN_long %>% bind_rows() %>% rename("Pathway" = Subsystem.name)
+
+network_stats = read.table(paste0(input.path,model_name,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
 ```
 
 ## Colour scheme
@@ -69,7 +144,7 @@ basic_colour = "#56B4E9" # Used for plots where there are no other colours
 
 # Read pathway category colours if possible:
 if (human.pathway.categories){
-  pathway_cat_cols = read.table("../../data/output/Human1_pathway_category_colours.tsv", sep="\t", header=T, comment.char = "")
+  pathway_cat_cols = read.table(paste0(input.path,"Human1_pathway_category_colours.tsv"), sep="\t", header=T, comment.char = "")
 }else{
   # Otherwise generate a new palette:
   max_n = length(unique(pathway_categories$ManualCategoryLvl1))+4
@@ -102,28 +177,20 @@ cat_pathway_cat_cols_dict_light = pathway_cat_cols_dict_light
 names(cat_pathway_cat_cols_dict_light) = append(types_names, paste0("Cat_", pathway_cat_cols$ManualCategoryLvl1))
 cat_pathway_cat_cols_line_dict = pathway_cat_cols_line_dict
 names(cat_pathway_cat_cols_line_dict) = append(types_names, paste0("Cat_",pathway_cat_cols$ManualCategoryLvl1))
+
+FPR_TNR_colours = c("#ed978c", "#8a82ed")
+names(FPR_TNR_colours) = c("FPR", "TNR")
 ```
 
 
 ```{r}
 # Read in metrics files
 method_names = filenames %>% unlist()
-# if (model_name=="Human1"){
-#   pathways.to.exclude = c("Triacylglycerol synthesis")
-# }
-# methods_to_test = lapply(filenames, function(x){
-#   if (model_name=="Human1"){
-#     # Manually remove a pathway that was not used in GSEA for Human1
-#     read.table(paste0(input.path,x,".csv"), sep = ",", header = T) %>% 
-#       filter(!Subsystem.name %in% pathways.to.exclude)
-#   }else{
-#     read.table(paste0(input.path,x,".csv"), sep = ",", header = T) 
-#   }
-# })
 methods_to_test = lapply(filenames, function(x){
   read.table(paste0(input.path,x,".csv"), sep = ",", header = T)
 })
 names(methods_to_test) = method_names
+method_names_clean = setNames(c("ORA", "GSEA abs","GSEA raw"), method_names)
 
 # Compile all files into one list object while converting data into a usable format
 all_methods_TP_FN = lapply(methods_to_test, function(x){
@@ -137,20 +204,12 @@ names(all_methods_TP_FN) = filenames
 
 pathways_to_exclude = pathway_categories$Pathway[(!pathway_categories$Pathway %in% all_methods_TP_FN[[methods.indexes[["GSEA abs"]]]]$Subsystem.name) & (!pathway_categories$Pathway %in% infeasible_pathways_ko)]
 
-# infeasible_pathways_df = infeasible_pathways %>% as.data.frame() %>% rename("Subsystem.name" = 1) %>%
-#   left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by=c("Subsystem.name" = "Pathway"))
-
 all_methods_TP_FN_cat = lapply(methods_to_test, function(x){
   not.run = methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name[!(methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name %in% x$Subsystem.name)] %>% as.data.frame() %>% 
     rename("Subsystem.name" =1) %>% 
     mutate(Type = "Unable to be run in ORA", FPR=NA, TNR=NA) %>% 
     filter(!Subsystem.name %in% x$Subsystem.name)
   
-  # wt_infeas = infeasible_pathways_wt %>% as.data.frame() %>% 
-  #   rename("Subsystem.name" =1) %>% 
-  #   mutate(Type = "Unable to produce biomass in WT", FPR=NA, TNR=NA) %>% 
-  #   filter(!Subsystem.name %in% x$Subsystem.name) %>% 
-  #   filter(!Subsystem.name %in% not.run$Subsystem.name)
   blocked = blocked_pathways %>% as.data.frame() %>% 
     rename("Subsystem.name" =1) %>% 
     mutate(Type = "Blocked", FPR=NA, TNR=NA)
@@ -164,8 +223,8 @@ all_methods_TP_FN_cat = lapply(methods_to_test, function(x){
     mutate(Type = ifelse(TPR==1,"TP", ifelse(FNR==1,"FN", ""))) %>%
     filter(!Subsystem.name %in% misc_blocked_pathways) %>%
     select(Subsystem.name, Type, FPR, TNR) %>% 
-    rbind(infeasible_pathways_ko %>% as.data.frame() %>% rename("Subsystem.name" =1) %>% mutate(Type = "Unable to produce biomass when KO'd", FPR=NA, TNR=NA)) %>% 
-    # rbind(wt_infeas) %>% 
+    rbind(infeasible_pathways_ko %>% as.data.frame() %>% rename("Subsystem.name" =1) %>% 
+            mutate(Type = "Unable to produce biomass when KO'd", FPR=NA, TNR=NA)) %>% 
     rbind(not.run) %>% 
     rbind(blocked) %>% 
     filter(!Subsystem.name %in% misc_blocked_pathways) %>%
@@ -198,17 +257,19 @@ raw_method_results = lapply(paste0(filenames, "_results"), function(x){
     read.table(paste0(input.path,x,".tsv"), sep="\t", header=T)
 })
 names(raw_method_results) = method_names
-
 ```
 
 # Biomass
 Exported from python (cobrapy)
 Only do this for Human1.
 ```{r}
+pathway_sizes = pathways %>% group_by(subsystem) %>% summarise(size = n()) %>% rename("Pathway" = "subsystem") %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("Pathway"))
+pathway_sizes_inf_fea = all_pathway_feas_infeas %>% left_join(pathway_sizes, by = c("Pathway", "ManualCategoryLvl1")) %>%  rbind(pathway_sizes %>% mutate(Type = "All"))
 if (model_name=="Human1"){
-  lvl1_ss = jsonlite::read_json("../../data/output/lvl1_subsystems_all.json")
-  lvl2_ss = jsonlite::read_json("../../data/output/lvl2_subsystems.json")
-  biomass_metabs = jsonlite::read_json("../../data/output/biomass_metabs.json")
+  lvl1_ss = jsonlite::read_json(paste0(input.path,"../supp/lvl1_subsystems_all.json"))
+  lvl2_ss = jsonlite::read_json(paste0(input.path,"../supp/lvl2_subsystems.json"))
+  biomass_metabs = jsonlite::read_json(paste0(input.path,"../supp/biomass_metabs.json"))
   
   lvl1_ss_cats = lapply(lvl1_ss, function(x){
     t = lapply(x, function(y){
@@ -316,20 +377,12 @@ if (model_name=="Human1"){
 
 ```{r}
 biomass_cat_plot
-ggsave("../../plots/biomass_plot.png", plot = biomass_cat_plot, dpi=300, width =12, height =6, bg="white")
-```
-
-Fig with biomass
-```{r}
-plot_grid(plot_grid(pathway_sizes_plot, pathway_stats_feas_plot, labels=c("","D"), rel_widths = c(0.35,0.65), nrow=1, vjust=1.7#, vjust=1.9
-                    ), NULL,
-          biomass_cat_plot, nrow=3, rel_heights = c(0.5,0.03,0.5), labels=c("","","E"), vjust=-0.1, hjust=-2.8#,font.label = list(size = 12)
-          )
-ggsave(paste0("../../plots/Fig1_biomass_",model_name,"-2.png"), bg="white", dpi=300, width = 11, height = 9.5)
+ggsave(paste0("../../plots/",model_name,"/supp/biomass_plot.png"), plot = biomass_cat_plot, dpi=300, width =12, height =6, bg="white")
 ```
 
 # Overlap heatmap
 ```{r}
+length.to.strip = str_length(exch.metab.pattern)+1
 # Calculate overlap between each pathway (n of shared metabolites regardless of compartment and without side compounds)
 pathways_no_comp = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
   filter(!(metabolite %in% c(side_compounds$Identifier, "MAM01597"))) %>%  # Add CoA to list of side compounds (?)
@@ -399,8 +452,7 @@ p=  Heatmap(all_overlap_df, show_column_names = F,
         )
 ```
 ```{r}
-# ggsave("../../plots/overlap_heatmap_Human1.png", dpi=300, height =8, width=10, bg="white")
-png("../../plots/overlap_heatmap_Human1.png", width = 12.5,height=11, units="in", res=600)
+png(paste0("../../plots/",model_name,"/supp/",model_name,"_overlap_heatmap.png"), width = 12.5,height=11, units="in", res=600)
 draw(p, merge_legend=T)
 dev.off()
 ```
@@ -421,7 +473,7 @@ z.scores.long = z.scores %>% pivot_longer(-Metab) %>%
   left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
   left_join(metabolites, by = c("Metab" = "ID"))
 
-GSEA.abs.results %>% 
+raw_method_results[[methods.indexes["GSEA abs"]]] %>% 
   filter(NOM.p.val < 0.05) %>% 
   select(Term, Lead_genes, unique_id) %>% 
   separate_longer_delim(Lead_genes,";") %>% 
@@ -449,8 +501,8 @@ zscore.boxplot.df = pathways_no_comp2 %>%
   group_by(Pathway) %>% 
   summarise(value = mean(value)) %>%
   left_join(all_methods_TP_FN_long_df %>% 
-              mutate(Method = str_replace_all(Method, method_names_clean))%>% 
-              filter(Method == "GSEA abs"), 
+              mutate(method = str_replace_all(method, method_names_clean))%>% 
+              filter(method == "GSEA abs"), 
             by = c("Pathway")) %>% 
   ungroup() %>% 
   mutate(Type = fct_relevel(Type, rev(c("TP", "FN"))) )
@@ -465,16 +517,17 @@ zscore.boxplot.df %>%
   theme_minimal()+
   xlab("Average z-score for each KO'd pathway's metabolites")
 ```
+
+# Boxplots with all
+
 ```{r}
 zthr=50
 zscores.kod.pathways = pathways_no_comp2 %>% 
   left_join(z.scores.long, by = c("Pathway", "metabolite" = "metabID")) %>% 
   filter(!is.na(value)) %>% 
-  # group_by(Pathway) %>% 
-  # summarise(value = mean(value)) %>%
   left_join(all_methods_TP_FN_long_df %>% 
-              mutate(Method = str_replace_all(Method, method_names_clean))%>% 
-              filter(Method == "GSEA abs"), 
+              mutate(method = str_replace_all(method, method_names_clean))%>% 
+              filter(method == "GSEA abs"), 
             by = c("Pathway")) %>% 
   group_by(Pathway) %>% 
   reframe(sd =sd(value), metabolite, Pathway, value, Type) %>% 
@@ -483,82 +536,88 @@ zscores.kod.pathways = pathways_no_comp2 %>%
   mutate(value = ifelse(value >= zthr, zthr, 
                         ifelse(value <= -zthr, -zthr, value)))
 
-
-zscores.kod.pathways %>% 
-  filter(value >= zthr | value <= -zthr) 
-# 6 metabolites modified for plotting purposes
-
-zscores.kod.pathways %>%
-  ggplot(aes(y=(value), x= Pathway, col=Type))+
-  geom_boxplot(outliers=T,outlier.alpha = 0.2)+
-  scale_colour_manual(values = pathway_cat_cols_dict[zscores.kod.pathways$Type], name = "GSEA abs prediction")+
-  theme_minimal()+
-  theme(axis.text.x = element_blank())+
-  xlab("KO'd pathways (sorted by std)")+
-  ylab("KO'd pathway's metabolite z-scores")+
-  guides(col=guide_legend(reverse=TRUE))
-```
-
-
-```{r}
-zscore.all.pathways = z.scores.long %>% 
+zscores.all.df = z.scores.long %>% 
   left_join(all_methods_TP_FN_long_df %>% 
-              mutate(Method = str_replace_all(Method, method_names_clean))%>% 
-              filter(Method == "GSEA abs"), 
+              mutate(method = str_replace_all(method, method_names_clean))%>% 
+              filter(method == "GSEA abs"), 
             by = c("Pathway")) %>% 
-  arrange(factor(Pathway, zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>% 
-  mutate(Pathway = fct_inorder(Pathway)) %>% 
-  filter(!is.na(Type))
+  rename("KOd.pathway" = "Pathway") %>% 
+  left_join(pathways_no_comp2 %>% filter(!Pathway %in% misc_blocked_pathways), by = c("metabID" = "metabolite")) %>% 
+  filter(!metabID %in% side_compounds$Identifier) %>% 
+  group_by(KOd.pathway) %>%
+  mutate(KOd.p.metab = ifelse(KOd.pathway == Pathway, T, F)) %>% 
+  select(-Pathway) %>%
+  unique() %>%
+  group_by(KOd.pathway, metabID) %>% 
+  filter(!any(KOd.p.metab)) %>% 
+  mutate(KOd.pathway = factor(KOd.pathway, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique()))
 
-zscore.all.pathways %>% 
-  ggplot(aes(y=value, x= Pathway, col=Type))+
-  geom_boxplot(outliers=F)+
-  theme_minimal()+
-  theme(axis.text.x = element_blank())
+  zscores.all.df$KOd.pathway
 
-zthr=40
-zscores.kod.pathways %>% 
-  mutate(p = "Only KO'd pathway metabolites") %>% 
-  select(-sd) %>% 
-  rbind(zscore.all.pathways %>% 
-          select(Pathway, metabID, value, Type) %>% 
-          rename("metabolite" = "metabID") %>% 
-          mutate(p = "All pathway metabolites")) %>% 
-  # mutate(value = log(abs(value))) %>% 
-  filter(value < zthr & value > -zthr) %>%
-  ggplot(aes(y=value, x= Pathway, col=Type))+
-  geom_boxplot(outliers=T, outlier.alpha = 0.2)+
-  facet_wrap(~p, nrow = 2, scales="free_y")+
+TNR.counts = raw_method_results[[methods.indexes["GSEA abs"]]] %>% 
+  select(Term, NES, NOM.p.val, unique_id) %>% 
+    mutate(TNR = ifelse(NOM.p.val < 0.05, "FP", "TN")) %>% 
+  group_by(unique_id, TNR) %>% 
+  summarise(counts = n())
+  
+TNR.for.barplot = TNR.counts %>% 
+  mutate(unique_id = factor(unique_id, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>% 
+  filter(!is.na(unique_id)) %>% 
+  rename("KOd.pathway" = "unique_id")
+FP_TN_colours = FPR_TNR_colours
+names(FP_TN_colours) = c("FP", "TN")
+
+
+zscores.all.df.all = zscores.all.df %>%
+    filter(!is.na(Type)) %>% 
+  rename("TNR.counts" = "TNR") %>% 
+  left_join(TNR.counts %>%
+  mutate(unique_id = factor(unique_id, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>%
+  filter(!is.na(unique_id)),
+  by = c("KOd.pathway" = "unique_id")) %>% 
+  group_by(KOd.pathway) %>% 
+  reframe(sd =sd(value), metabID, KOd.pathway, value, Type, TNR, counts) %>% 
+  arrange(sd) %>% 
+  mutate(KOd.pathway = fct_inorder(KOd.pathway)) 
+
+zscores.all.df.plot = zscores.all.df.all %>%
+  ggplot()+
+  geom_bar( aes(x=KOd.pathway, y=counts/6, fill=TNR),stat="unique", inherit.aes = F, alpha=0.8)+
+    scale_y_continuous(sec.axis=sec_axis(~.*6,breaks = c(0,40,80,120), name = "Ratio of TN/FP pathways"))+
+  geom_boxplot(aes(y=value, x= KOd.pathway, col=Type), outliers=T,outlier.alpha = 0.2, inherit.aes = F)+
+  scale_colour_manual(values = pathway_cat_cols_dict[zscores.all.df.all$Type], name = "GSEA abs\nprediction")+
+    scale_fill_manual(values = FP_TN_colours[zscores.all.df.all$TNR], name = "GSEA abs\n TN / FP")+
   theme_minimal()+
   theme(axis.text.x = element_blank())+
-  xlab("KO'd pathway")+
-  ylab("Metabolite z-scores")
-  # scale_y_continuous(transform = "log")
-  
-
+    # theme(axis.text.x = element_text(angle = 45))+
+  xlab("KO'd pathways (sorted by std)")+
+  ylab("Metabolite z-scores\n(without the KO'd pathway's metabolites)")+
+  guides(col=guide_legend(reverse=TRUE))
+zscores.all.df.plot
 ```
+
 ```{r}
-ggsave("../../plots/zscore_boxplots.png", dpi = 300, width=9, height=10, bg="white")
+ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_zscore_boxplots.png"), dpi = 300, width=10, height=6, bg="white")
 ```
 
 # TP and FP
 Do the TPs tend to also have FPs?
 How are the FPs distributed?
 ```{r}
-TNR.counts = GSEA.abs.results %>% select(Term, NES, NOM.p.val, unique_id) %>% 
+TNR.counts = raw_method_results[[methods.indexes["GSEA abs"]]] %>% select(Term, NES, NOM.p.val, unique_id) %>% 
     mutate(TNR = ifelse(NOM.p.val < 0.05, "FP", "TN")) %>% 
   group_by(unique_id, TNR) %>% 
   summarise(counts = n())
 
-"Human1_ORA_pval_005_metrics_external_with_WT_default_all"
-
+all_methods_df = do.call(rbind, all_methods_TP_FN_long)
 all_methods_df %>% pivot_longer(c(FPR, TNR)) %>% select(-Type) %>% group_by(method, name) %>% rename("Type" = name) 
 
 all_methods_TP_FN_long_df %>% 
+  rename("TNR.counts" = "TNR") %>% 
   # filter(Method == "Human1_GSEA_absolute_metric_external_with_WT_default_all") %>%
   # select(-Method) %>%
   left_join(all_methods_df %>% pivot_longer(c(FPR, TNR)) %>% select(-Type) %>% group_by(method, name) %>% rename("TNR" = name),
-            by = c("Pathway" = "Subsystem.name", "Method" = "method")) %>% 
+            by = c("Pathway" = "Subsystem.name", "method" = "method")) %>% 
   # left_join(TNR.counts, by = c("Pathway" = "Term")) %>% 
   filter(!is.na(TNR)) 
 
@@ -576,8 +635,8 @@ all_methods_df %>%
 
 
 ```{r}
-GSEA.abs.results %>% select(Term, NES, NOM.p.val, unique_id) %>% 
-    left_join(all_methods_TP_FN_long_df %>% filter(Method == "Human1_GSEA_absolute_metric_external_with_WT_default_all") %>% select(-Method), by = c("Term"= "Pathway")) %>% 
+raw_method_results[[methods.indexes["GSEA abs"]]] %>% select(Term, NES, NOM.p.val, unique_id) %>% 
+    left_join(all_methods_TP_FN_long_df %>% filter(method == "Human1_GSEA_absolute_metric_external_with_WT_default_all") %>% select(-method), by = c("Term"= "Pathway")) %>% 
     mutate(Type2 = ifelse(NOM.p.val < 0.05, "FP", "TN")) %>% 
   # pivot_longer(c(Type, Type2)) %>% 
   ggplot(aes(y=Type, fill=Type2))+
@@ -601,17 +660,9 @@ GSEA.abs.results %>% select(Term, NES, NOM.p.val, unique_id) %>%
   # scale_x_upset()
 ```
 
-# Boxplots with all
-```{r}
-zscores.all.df.plot
-ggsave("../../plots/zscores_all_boxplots.png", plot = zscores.all.df.plot, dpi=300, width =10, height =5, bg="white")
-
-```
-
-
 # Nearby pathways
 ```{r}
-pathway.graph = read.table("/home/juliette/work/code/met4j_code/met4j-1.5.0/simPA/Human1_reaction_dist/Human-GEM-1.11.0_no_blocked_pathway_distance_matrix_weighted.csv", sep=",", header=T) %>% 
+pathway.graph = read.table(paste0(input.path,"../supp/",model_name,"_no_blocked_pathway_distance_matrix_weighted.csv"), sep=",", header=T) %>% 
   mutate(id = str_remove(id,"^G_")) %>% 
   rename_with(str_remove, pattern="^G_") %>% 
   left_join(pathway_dict, by = c("id" = "Group")) %>% 
@@ -659,10 +710,10 @@ con.plot.df =
   # filter(n.shared.metabs > 1) %>% 
   group_by(KOd.pathway) %>% 
   filter(n() > 2) %>% 
-  left_join(GSEA.abs.results %>% select(Term, NES, NOM.p.val, unique_id), 
+  left_join(raw_method_results[[methods.indexes["GSEA abs"]]] %>% select(Term, NES, NOM.p.val, unique_id), 
             by = c("KOd.pathway" = "unique_id",
                    "neighbour.pathway" = "Term")) %>% 
-    left_join(all_methods_TP_FN_long_df %>% filter(Method == "Human1_GSEA_absolute_metric_external_with_WT_default_all") %>% select(-Method), by = c("KOd.pathway"= "Pathway")) %>% 
+    left_join(all_methods_TP_FN_long_df %>% filter(method == "Human1_GSEA_absolute_metric_external_with_WT_default_all") %>% select(-method), by = c("KOd.pathway"= "Pathway")) %>% 
     mutate(Type2 = ifelse(NOM.p.val < 0.05, "FP", "TN")) %>% 
   group_by(KOd.pathway,Type2) %>% 
   filter(n()>3) %>% 
@@ -677,7 +728,11 @@ con.plot =
               strip=strip_themed(background_x = elem_list_rect(fill = pathway_cat_cols_dict[bg])))+
   geom_point()+
   geom_smooth(aes(col=NA),method = "lm")
-ggsave("../../plots/all_connected.png", plot=con.plot, dpi=300, bg="white", width = 19, height=15)
+con.plot
+```
+
+```{r}
+# ggsave(paste0(input.path,"../supp/all_connected.png"), plot=con.plot, dpi=300, bg="white", width = 19, height=15)
 ```
 
 ```{r}
@@ -708,28 +763,6 @@ z.scores.long %>% filter(Pathway == pathway1) %>%
   ggplot(aes(x=impact, y=ratio.shared.metabs))+
   geom_point()
 ```
-
-
-```{r}
-# Zscores for a given pathway knockout for all other connected pathways
-z.scores.long %>% filter(Pathway == pathway1) %>% 
-  rename("KOd.pathway" = Pathway) %>% 
-  left_join(pathways_no_comp2 %>% filter(Pathway %in% connected.pathways$Pathway), 
-            by=c("metabID"="metabolite")) %>% 
-  rename("neighbour.pathway" = Pathway) %>% 
-  left_join(connected.pathways, by=c("neighbour.pathway" = "Pathway")) %>% 
-  rename("n.shared.metabs" = pathway1) %>% 
-  # filter(value >)
-  group_by(neighbour.pathway) %>% 
-  reframe(impact = n(value),n.shared.metabs) %>% 
-  # reframe(sd = sd(value), n.shared.metabs) %>% 
-  unique() %>% 
-  ggplot(aes(x=impact, y=n.shared.metabs))+
-  geom_point()#+
-  # geom_smooth(method = "lm")
-```
-
-
 # FN: KO'd pathway metabolites
 ```{r}
 z.scores.long %>% group_by(Pathway) %>% 
@@ -747,9 +780,9 @@ all_methods_TP_FN_long_df %>%
   left_join(z.scores.long , by = c("Pathway", "metabolite" = "metabID")) %>% 
   filter(!is.na(value)) %>% 
   group_by(Pathway) %>% 
-  summarise(mean = mean(abs(value)), Type, Method) %>% unique() %>% 
+  summarise(mean = mean(abs(value)), Type, method) %>% unique() %>% 
   ggplot(aes(x=mean, y=Type, col=Type))+
-  facet_wrap(~Method)+
+  facet_wrap(~method)+
   geom_boxplot(outliers = F)+
   # scale_x_continuous(transform = "log")+
   xlab("Mean z-score for the KO'd pathway's metabolites")+
@@ -758,7 +791,7 @@ all_methods_TP_FN_long_df %>%
 ```
 
 ```{r}
-GSEA.abs.FP = GSEA.abs.results %>% 
+GSEA.abs.FP = raw_method_results[[methods.indexes["GSEA abs"]]] %>% 
   filter(NOM.p.val < 0.05) %>% 
   select(Term, unique_id) %>% 
   mutate(Type = ifelse(Term == unique_id, "TP", "FP")) %>% 
@@ -815,7 +848,7 @@ pathway_sizes_TP_FN %>%
   # facet_grid(~Type)
 ```
 ```{r}
-ggsave("../../plots/pathway_sizes_TP_FN.png", bg="white", dpi=300, width = 5, height=4)
+ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_pathway_sizes_TP_FN.png"), bg="white", dpi=300, width = 5, height=4)
 ```
 
 
@@ -838,9 +871,9 @@ times.enriched = raw_method_results_df %>% filter(merged.p.adj < 0.05) %>% group
 times.enriched.TP.FN =  times.enriched %>% 
   group_by(Method, merged.ss, label) %>% 
   count(n.times.enriched) %>%
-  left_join(all_methods_TP_FN_long_df, by = c("Method", "merged.ss" = "Pathway"))
+  left_join(all_methods_TP_FN_long_df, by = c("Method"="method", "merged.ss" = "Pathway"))
 
-times.enriched.TP.FN %>% filter(Method == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all")) %>% 
+times.enriched.TP.FN %>% filter(method == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all")) %>% 
   filter(!is.na(Type)) %>% 
   ggplot(aes(y=1, x= n.times.enriched, col=Type, group=Type))+
   geom_boxplot()
@@ -858,17 +891,158 @@ times.enriched.TP.FN %>%
 ```
 
 # PCA: categories
+
+```{r}
+thr=2
+uniqueness = z.scores %>% pivot_longer(-Metab) %>% 
+  left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
+  rename("zscores" = value) %>% 
+  group_by(Metab) %>% 
+  # reframe(zscores = (value - mean(value)) / sd(value), Pathway) %>% 
+  filter(zscores > thr | zscores < -thr) %>% 
+  left_join(metabolites %>% select(-metabID), by = c("Metab" = "ID")) %>% 
+  select("Pathway","Name","zscores") %>% #pull(Pathway) %>% table() %>% sort(decreasing = T)
+  # mutate(direction = ifelse(zscores > 0, "pos", "neg")) %>% 
+  group_by(Name) %>% 
+  summarise(n=n(), Pathway) %>% #pull(n) %>% table() %>% sort(decreasing = T)
+  group_by(Pathway) %>% 
+  mutate(score = sum(1/n), n.metab = sum(n()), unique = sum(n==1), unique_score = unique/n.metab) %>% 
+  select(-Name, -n) %>% 
+  unique() %>% 
+  arrange(desc(score))
+
+all_methods_TP_FN_long = lapply(names(all_methods_TP_FN), function(x){
+  all_methods_TP_FN[[x]] %>% select(-ManualCategoryLvl1) %>% 
+    mutate(Method = x)
+  })
+all_methods_TP_FN_long_df = all_methods_TP_FN_long %>% bind_rows() %>% rename("Pathway" = Subsystem.name)
+
+metab.uniqueness = all_methods_TP_FN_long_df %>% left_join(uniqueness, by="Pathway") %>% 
+  left_join(exchangeable_m_filtered ,#%>% 
+              # filter(name == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all"))
+              by = c("Pathway" = "subsystem")) %>%
+  select(-name, -Exchangeable, -value) %>% 
+  # filter(unique<100) %>%
+  pivot_longer(-c(Pathway, Type, ManualCategoryLvl1, Method)) %>% 
+  filter(!is.na(value)) 
+
+newnames <- data.frame(name = c("Total","ExchangeableRatio","score","n.metab","unique","unique_score"),
+                      name_label = c("Pathway size", "Exchangeable Ratio", "Profile uniqueness score",
+                                     "N. of significant metabs", "N. of significant unique metabs",
+                                     "N. of significant unique metabs / \nN. of significant metabs"))
+```
+
+### PCA: pathway categories
+```{r}
+mean.zscores = 
+  all_methods_TP_FN_long_df %>% 
+  filter(method == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all")) %>% 
+  select(Pathway, Type)  %>% 
+  left_join(pathways_no_comp2, by = c("Pathway")) %>% 
+  left_join(z.scores.long , by = c("Pathway", "metabolite" = "metabID")) %>% 
+  filter(!is.na(value)) %>% group_by(Pathway) %>% 
+  summarise(mean = mean(abs(value)), Type) %>% unique() 
+
+non.uniques = data.frame("Pathway" = exchangeable_metabolites_per_pathway$subsystem[!exchangeable_metabolites_per_pathway$subsystem %in% uniqueness$Pathway],
+           "score"= 0, "n.metab" = 0, "unique" = 0, "unique_score" = 0)
+
+
+GSEA.NES = raw_method_results[[methods.indexes["GSEA abs"]]] %>% 
+  # filter(Term == unique_id & NOM.p.val > 0.05) %>% 
+  filter(Term == unique_id) %>% 
+  select(Term, NES)
+
+pca.data = exchangeable_metabolites_per_pathway %>% filter(!(subsystem %in% misc_pathways)) %>% 
+  left_join(uniqueness %>% rbind(non.uniques), by = c("subsystem"= "Pathway")) %>% 
+  left_join(mean.zscores, by = c("subsystem"= "Pathway")) %>% 
+  rename("GSEA.abs" = paste0(model_name, "_GSEA_absolute_metric_external_with_WT_default_all"),
+         "ProfileUniquenessScore" = score, "PathwaySize" = Total) %>% 
+  select(subsystem, GSEA.abs, ProfileUniquenessScore, ExchangeableRatio, PathwaySize) %>% 
+  left_join(network_stats %>% select(name, AverageShortestPathLength, BetweennessCentrality, ClosenessCentrality, ClusteringCoefficient, Degree, NeighborhoodConnectivity, Stress, TopologicalCoefficient), by = c("subsystem" = "name")) %>% 
+  filter(!is.na(GSEA.abs))%>%
+  # filter(!subsystem %in% c("Peptide metabolism", "Vitamin B2 metabolism", "Riboflavin metabolism"))%>%
+  # select(-c(Stress,BetweennessCentrality,AverageShortestPathLength, Degree,NeighborhoodConnectivity, TopologicalCoefficient, score))# %>%
+
+  mutate(ProfileUniquenessScore = ifelse(is.na(ProfileUniquenessScore), 0, ProfileUniquenessScore)) %>% 
+  left_join(GSEA.NES, by = c("subsystem" = "Term")) %>% 
+  mutate(NES = ifelse(GSEA.abs == "FN" & is.na(NES), -1.5, NES))%>% 
+  filter(Degree != 0) %>%
+    select(-c(AverageShortestPathLength ,  Stress, ClosenessCentrality,TopologicalCoefficient,BetweennessCentrality))%>%
+  # Recon2.2:
+    # select(-c(Stress, Degree,score, AverageShortestPathLength, Total, TopologicalCoefficient, NeighborhoodConnectivity))
+  filter(PathwaySize > 5) %>%
+  mutate(NES = ifelse(NES <0, min(abs(NES)), NES)) 
+
+
+indiv = pca.data %>% select(-GSEA.abs, -NES) %>% 
+  tibble::column_to_rownames("subsystem")
+
+groups = pca.data %>% column_to_rownames("subsystem") %>% select(GSEA.abs, NES)
+
+res.PCA = PCA(indiv,scale.unit = T) 
+
+arrow_coord = fviz_pca_biplot(res.PCA)$layers[[6]]$data
+# Radial shift function
+rshift = function(r, theta, a=0.1, b=0.7) {
+  r + a + b*abs(cos(theta))
+}
+
+# Calculate shift
+arrow_coord = arrow_coord %>% 
+  mutate(r = sqrt(x^2 + y^2),
+         theta = atan2(y,x),
+         rnew = rshift(r, theta),
+         xnew = rnew*cos(theta),
+         ynew = rnew*sin(theta))
+
+pca.coord = res.PCA$ind$coord %>% as.data.frame() %>% 
+  rownames_to_column("subsystem") %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("subsystem" = "Pathway"))
+
+pca_biplot_cat =
+  pca.coord %>% 
+    ggplot(aes(x=Dim.1, y=Dim.2))+
+    geom_segment(data = arrow_coord, aes(xend=x,yend=y, x=xstart,y=ystart), inherit.aes = F, arrow = arrow(length = unit(0.2, "cm")))+
+    geom_point(aes(shape=factor(groups$GSEA.abs), 
+                   # fill=factor(groups$GSEA.abs), 
+                   fill = ManualCategoryLvl1), size = 3, alpha=0.8)+
+    scale_shape_manual(values = c(23,21), name = "GSEA abs prediction")+
+    # scale_fill_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
+    scale_fill_manual(values = pathway_cat_cols_dict[pca.coord$ManualCategoryLvl1], name = "Pathway category",
+                      labels = function(x) str_wrap(x, width = 15))+
+    scale_colour_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
+    stat_ellipse(aes(col=factor(groups$GSEA.abs)))+
+    coord_cartesian(clip="off")+
+    theme_minimal()+
+    theme(legend.position = "right",
+            legend.title =element_text(margin=margin(b=10)),
+            axis.title.y = element_text(hjust = 0.4),
+          plot.margin = margin(0.4,0.55,0.4,0.7, "cm"),
+          legend.key.spacing.y = unit(0.25,"cm"))+
+    geom_hline(yintercept = 0, linetype="dashed")+
+    geom_vline(xintercept = 0, linetype="dashed")+
+    xlab(paste0("Dim1 ", "(",  round(res.PCA$eig["comp 1", "percentage of variance"],1),"%)"))+
+    ylab(paste0("Dim2 ", "(",  round(res.PCA$eig["comp 2", "percentage of variance"],1),"%)"))+
+    geom_label(data = arrow_coord, 
+               aes(x=xnew,y=ynew, label = str_wrap(str_replace_all(name,"(.)(?=[A-Z])", "\\1 "),50)), 
+               inherit.aes = F,
+               fill=alpha(c("white"), 0.5))+
+    guides(fill = guide_legend(override.aes = list(shape=21, size=4)), 
+           colour="none", 
+           shape="none")
+pca_biplot_cat
+```
 ```{r}
 pca_biplot_cat
-ggsave("../../plots/PCA_categories.png", plot = pca_biplot_cat, dpi=300, width =10, height =5, bg="white")
+ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_PCA_categories.png"), plot = pca_biplot_cat, dpi=300, width =10, height =5, bg="white")
 ```
 
 Fig5 with cat PCA
 ```{r}
-pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"_pathway_graph_edited.png"))
-fig4 = plot_grid(plot_grid(pathway_metrics_plot,pathway_graph, nrow=2, rel_heights = c(0.35,0.65), labels = c("A","B")), 
-                 plot_grid(pca_biplot, pca_biplot_cat, nrow=2, labels = c("C","D")), nrow=1, rel_widths = c(0.45,0.55))
-ggsave(plot=fig4, paste0("../../plots/Fig5_", model_name,"_cat.png"), dpi=300, bg="white", width = 15, height=10)
+# pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"_pathway_graph_edited.png"))
+# fig4 = plot_grid(plot_grid(pathway_metrics_plot,pathway_graph, nrow=2, rel_heights = c(0.35,0.65), labels = c("A","B")), 
+#                  plot_grid(pca_biplot, pca_biplot_cat, nrow=2, labels = c("C","D")), nrow=1, rel_widths = c(0.45,0.55))
+# ggsave(plot=fig4, paste0("../../plots/Fig5_", model_name,"_cat.png"), dpi=300, bg="white", width = 15, height=10)
 ```
 
 
@@ -917,89 +1091,18 @@ pca_biplot_NES =
 pca_biplot_NES
 ```
 ```{r}
-ggsave("../../plots/pca_NES_Human1.png", dpi = 300, width=10, height=5, bg="white")
+ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_pca_NES.png"), dpi = 300, width=10, height=5, bg="white")
 ```
-
-
-```{r}
-# pca_biplot =
-#   fviz_pca_biplot(res.PCA,
-#                   geom.ind =c("point"), 
-#                   geom.var = c("arrow", "text"), 
-#                   col.var = "black",
-#                   title="", alpha.ind=0)+
-#     geom_point(aes(shape=factor(groups$GSEA.abs), fill=factor(groups$GSEA.abs)), size = 3, alpha=0.8)+
-#     scale_shape_manual(values = c(23,21), name = "GSEA abs prediction")+
-#     scale_fill_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
-#     scale_colour_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
-#     stat_ellipse(aes(col=factor(groups$GSEA.abs)))+
-#     coord_cartesian(clip="off")+
-#       theme(legend.position = "bottom",
-#           legend.title =element_text(margin=margin(0,20,0,0)),
-#           axis.title.y = element_text(hjust = 0.4)
-#           # legend.key.spacing = unit(0.5, "cm")
-#           )
-# pca_biplot
-
-
-
-# pca_var_plot = 
-  # fviz_pca_var(res.PCA, title="", labelsize=3)
-# pca_ind_plot
-# pca_var_plot
-# fviz_contrib(res.PCA,choice = "var")
-
-```
-
-```{r}
-# # col_pal = c("#FCFFA4","#FCFFA4","#FCFFA4", "#EC6824", "#781B6C", "#000004")
-# col_pal = c("#FCFFA4", "#EC6824", "#781B6C", "#000004")
-# pca_biplot_NES =
-#   fviz_pca_biplot(res.PCA,geom.ind =c("point"), geom.var = c("arrow", "text"), col.var="black", title="", alpha.ind=0,
-#                # habillage=factor(groups$GSEA.abs)
-#                )+
-#     # geom_point(aes(shape=factor(groups$GSEA.abs), fill=factor(groups$GSEA.abs)), size = 3, alpha=0.8)+
-#         geom_point(aes(shape=factor(groups$GSEA.abs), fill=(groups$NES)), size = 3, alpha=1)+
-#   scale_shape_manual(values = c(23,21), name = "GSEA abs prediction")+
-#   # scale_fill_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
-#     # scale_fill_continuous(na.value="white")+
-#     # scale_fill_gradientn(colours=c("white", "white","darkblue","darkblue"),values = rescale(c(-1,0.6,1.7,2.4)))+
-#     # scale_fill_gradientn(colours=col_pal,values = rescale(c(-1,0.6,1.7,2.4)))+
-#       scale_fill_gradientn(colours=col_pal,values = scales::rescale(c(0.4,1.7,2.4)), name="NES")+
-#   theme(legend.position = "bottom",
-#         legend.title =element_text(margin=margin(0,20,0,0)),
-#         axis.title.y = element_text(hjust = 0.4))+
-#     coord_cartesian(clip="off")+
-#   guides(fill = guide_colorbar(theme = theme(legend.title = element_text(vjust = 0.75))))
-# 
-# # NES_density = groups %>% ggplot(aes(x=NES))+
-# #   geom_histogram()+
-# #   theme_minimal_grid()+
-# #   theme(axis.text = element_blank(),panel.grid = element_blank(),
-# #         axis.ticks = element_blank(), axis.title = element_blank())
-# 
-# pca_biplot_NES
-```
-
-```{r}
-as.data.frame(res.PCA$ind$coord) %>% 
-  rownames_to_column("subsystem") %>% 
-  left_join(pca.data, by = "subsystem") %>% 
-  ggplot(aes(x=Dim.1, y= NES, group=GSEA.abs, col=GSEA.abs)) +
-  geom_point()+
-  geom_smooth(method="lm", se=F)
-```
-
 
 
 # PCA: Recon2.2 on Human1
 ```{r}
 model_name2 = "Recon2.2"
-input.path2 = paste0("../../data/output/",model_name2,"/")
+input.path2 = paste0("../../data/",model_name2,"/r_input/")
 exch.metab.pattern2 = "_e" # or "_e" for example
 GSEA.abs.results2 = read.table(paste0(input.path2,model_name2,"_GSEA_absolute_metric_external_with_WT_default_all_results.tsv"), sep="\t", header=T)
 
-network_stats2 = read.table(paste0("../../data/input/",model_name2,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
+network_stats2 = read.table(paste0(input.path2,model_name2,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
 # Data exported from python:
 # List of all metabolites and their respective pathway
 pathways2 = read.table(paste0(input.path2,"metabolite_pathways.tsv"), sep="\t", header=T) %>% unique()
@@ -1027,7 +1130,7 @@ misc_pathways2 = pathway_categories2 %>% filter(ManualCategoryLvl1 == "Miscellan
 blocked_pathways2 = pathway.states2 %>% filter(Type == "blocked") %>% pull(Pathway)
 misc_blocked_pathways2 = c(misc_pathways2, blocked_pathways2) %>% unique()
 
-z.scores2 = read.table("/home/juliette/work/pipelines/simpa/Recon2.2/zscores.tsv", sep='\t', header=T)
+z.scores2 = read.table(paste0("../../data/large/",model_name2,"_zscores.tsv"), sep="\t", header=T) 
 
 thr=2
 
@@ -1067,62 +1170,6 @@ names(all_methods_TP_FN2) = filenames2
 
 pathways_to_exclude2 = pathway_categories2$Pathway[(!pathway_categories2$Pathway %in% all_methods_TP_FN2[[methods.indexes[["GSEA abs"]]]]$Subsystem.name) & (!pathway_categories2$Pathway %in% infeasible_pathways_ko2)]
 
-# infeasible_pathways_df = infeasible_pathways %>% as.data.frame() %>% rename("Subsystem.name" = 1) %>%
-#   left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by=c("Subsystem.name" = "Pathway"))
-
-# all_methods_TP_FN_cat = lapply(methods_to_test, function(x){
-#   not.run = methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name[!(methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name %in% x$Subsystem.name)] %>% as.data.frame() %>% 
-#     rename("Subsystem.name" =1) %>% 
-#     mutate(Type = "Unable to be run in ORA", FPR=NA, TNR=NA) %>% 
-#     filter(!Subsystem.name %in% x$Subsystem.name)
-#   
-#   blocked = blocked_pathways %>% as.data.frame() %>% 
-#     rename("Subsystem.name" =1) %>% 
-#     mutate(Type = "Blocked", FPR=NA, TNR=NA)
-#   
-#   if ("TNR2" %in% colnames(x)){
-#     x = x %>% select(-TNR) %>% 
-#       rename(TNR = TNR2)
-#   }
-#   
-#   x %>%
-#     mutate(Type = ifelse(TPR==1,"TP", ifelse(FNR==1,"FN", ""))) %>%
-#     filter(!Subsystem.name %in% misc_blocked_pathways) %>%
-#     select(Subsystem.name, Type, FPR, TNR) %>% 
-#     rbind(infeasible_pathways_ko %>% as.data.frame() %>% rename("Subsystem.name" =1) %>% mutate(Type = "Unable to produce biomass when KO'd", FPR=NA, TNR=NA)) %>% 
-#     # rbind(wt_infeas) %>% 
-#     rbind(not.run) %>% 
-#     rbind(blocked) %>% 
-#     filter(!Subsystem.name %in% misc_blocked_pathways) %>%
-#     left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("Subsystem.name" = "Pathway")) %>%
-#     mutate(ManualCategoryLvl1 = paste0("Cat_", ManualCategoryLvl1))
-# })
-# 
-# # Prepare feasibility categories
-# all_pathway_cat_feas_infeas = pathway_categories %>% select(Pathway, ManualCategoryLvl1)  %>%
-#   mutate(Type = ifelse(Pathway %in% infeasible_pathways_ko, "Infeasible", 
-#                        ifelse(Pathway %in% misc_blocked_pathways, "Not run", "Feasible"))) %>%
-#   mutate(ManualCategoryLvl1 = paste0("Cat_",ManualCategoryLvl1)) %>% 
-#   filter(!Pathway %in% misc_blocked_pathways)
-# 
-# all_pathway_feas_infeas = pathway_categories %>% select(Pathway, ManualCategoryLvl1)  %>%
-#   mutate(Type = ifelse(Pathway %in% infeasible_pathways_ko, "Infeasible", 
-#                        ifelse(Pathway %in% misc_pathways, "Not run", 
-#                               ifelse(Pathway %in% blocked_pathways, "Blocked", "Feasible")))) %>% 
-#   filter(Type != "Not run")%>% 
-#   filter(!Pathway %in% misc_blocked_pathways)
-# 
-# label_dict_no_misc = c("Feasible", "Infeasible")
-# names(label_dict_no_misc) = c("Able to produce biomass when KO'd", "Unable to produce biomass when KO'd")
-# 
-# label_dict_no_misc_swap = c("Able to produce biomass when KO'd", "Unable to produce biomass when KO'd", "All pathways", "Blocked pathways")
-# names(label_dict_no_misc_swap) = c("Feasible", "Infeasible", "All","Blocked")
-# 
-# # Read in raw ORA and GSEA results
-# raw_method_results = lapply(paste0(filenames, "_results"), function(x){
-#     read.table(paste0(input.path,x,".tsv"), sep="\t", header=T)
-# })
-# names(raw_method_results) = method_names
 method_names_clean2 = setNames(c("ORA", "GSEA abs","GSEA raw"), method_names2)
 
 all_methods_TP_FN_long2 = lapply(names(all_methods_TP_FN2), function(x){
@@ -1320,14 +1367,13 @@ pca_biplot2 =
 pca_biplot2
 ```
 ```{r}
-ggsave(plot=pca_biplot2, "../../plots/Supp_Recon2.2_on_Human1_plot.png", dpi=300, bg="white", width = 9, height=5)
+ggsave(plot=pca_biplot2, paste0("../../plots/",model_name,"/supp/",model_name2,"_on_",model_name,"_plot.png"), dpi=300, bg="white", width = 9, height=5)
 ```
 
 # ORA Threshold
 
-NEED TO REEXPORT PVALS
 ```{r}
-p_vals_all = read.table("../../data/output/p_vals_all_df.tsv", sep="\t", header=T) %>% 
+p_vals_all = read.table(paste0(input.path,"../supp/p_vals_all_df.tsv"), sep="\t", header=T) %>% 
   left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by=c("subsystem" = "Pathway")) %>% 
   filter(ManualCategoryLvl1 != "Miscellaneous") %>% 
   pivot_longer(c(-unique_id, -subsystem, -ManualCategoryLvl1)) %>% 
@@ -1351,6 +1397,6 @@ p_vals_all %>%
   ylab("Metabolite p-values")
 ```
 ```{r}
-ggsave("../../plots/ORA_pval_threshold_scatterplot.png", bg="white", dpi=300, width=10, height=5)
+ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_ORA_pval_threshold_scatterplot.png"), bg="white", dpi=300, width=10, height=5)
 ```
 

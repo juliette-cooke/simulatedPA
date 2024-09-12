@@ -26,14 +26,15 @@ library(patchwork)
 # PCA
 library(FactoMineR)
 library(factoextra)
+library(magick)
 ```
 
 ## Set variables
 Use the model name that is in the exported files.
 Make a folder and add the path here, with a slash at the end.
 ```{r}
-# model_name = "Recon2.2"
-model_name = "Human1"
+model_name = "Recon2.2"
+# model_name = "Human1"
 input.path = paste0("../../data/",model_name,"/r_input/")
 # Set to T if using the same categories as in the pathways_db file, aka Human1 categories (used for the colour palette):
 human.pathway.categories = T 
@@ -82,6 +83,16 @@ pathway_categories = read.table(paste0(input.path,"pathway_db.tsv"), sep="\t", h
 misc_pathways = pathway_categories %>% filter(ManualCategoryLvl1 == "Miscellaneous") %>% pull(Pathway)
 blocked_pathways = pathway.states %>% filter(Type == "blocked") %>% pull(Pathway)
 misc_blocked_pathways = c(misc_pathways, blocked_pathways) %>% unique()
+
+network_stats = read.table(paste0(input.path,model_name,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
+GSEA.abs.results = read.table(paste0(input.path,model_name,"_GSEA_absolute_metric_external_with_WT_default_all_results.tsv"), sep="\t", header=T)
+z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
+  filter(Metab %in% metabolites$ID)
+
+side_compounds = read.table(paste0(input.path,"side_compounds.txt"), header = T) %>% 
+  rename("Identifier"=1) %>% 
+  mutate(Identifier = stringr::str_sub(Identifier, end=-str_length(exch.metab.pattern)-1)) %>% unique() %>% 
+  mutate(Identifier = ifelse(startsWith(Identifier, "M_"), str_sub(Identifier, start=3), Identifier))
 ```
 
 ## Colour scheme
@@ -90,7 +101,7 @@ basic_colour = "#56B4E9" # Used for plots where there are no other colours
 
 # Read pathway category colours if possible:
 if (human.pathway.categories){
-  pathway_cat_cols = read.table(aste0(input.path,"Human1_pathway_category_colours.tsv"), sep="\t", header=T, comment.char = "")
+  pathway_cat_cols = read.table(paste0("../../data/Human1/r_input/Human1_pathway_category_colours.tsv"), sep="\t", header=T, comment.char = "")
 }else{
   # Otherwise generate a new palette:
   max_n = length(unique(pathway_categories$ManualCategoryLvl1))+4
@@ -199,6 +210,13 @@ raw_method_results = lapply(paste0(filenames, "_results"), function(x){
     read.table(paste0(input.path,x,".tsv"), sep="\t", header=T)
 })
 names(raw_method_results) = method_names
+method_names_clean = setNames(c("ORA", "GSEA abs","GSEA raw"), method_names)
+
+all_methods_TP_FN_long = lapply(names(all_methods_TP_FN), function(x){
+  all_methods_TP_FN[[x]] %>% select(-ManualCategoryLvl1) %>% 
+    mutate(Method = x)
+  })
+all_methods_TP_FN_long_df = all_methods_TP_FN_long %>% bind_rows() %>% rename("Pathway" = Subsystem.name)
 ```
 
 # Pathway stats
@@ -349,7 +367,7 @@ layout = lapply(g, function(x){
 Run GSEA plots first to get the coordinates for all other circle plots
 ```{r}
 base_layout = methods.indexes["GSEA raw"]
-if (model_name == "Human1"){
+if (model_name == "Human1" | model_name == "Recon2.2"){
   layout_coord = read.table(paste0(input.path,"circlepack_layout.tsv"), sep="\t", header=T,quote = "")
   i = methods.indexes["GSEA raw"]
   layout[[i]]=layout[[i]] %>% select(-x,-y,-r) %>% left_join(layout_coord %>% select(name,x,y,r), by="name")
@@ -542,7 +560,7 @@ circle_legend =
 plot_grid(ORA_no_leg, circle_legend, NULL,NULL, GSEA_abs_no_leg, GSEA_raw_no_leg,  labels = c("A","","","","B","C"), nrow=3, rel_heights = c(0.45,0.03,0.45),
           hjust=c(-0.5,0,0,0,-0.3,-0.3))
 
-ggsave(paste0("../../plots",model_name,"/Fig2.png"), bg="white", width=11, height = 10, dpi=300)
+ggsave(paste0("../../plots/",model_name,"/Fig2.png"), bg="white", width=11, height = 10, dpi=300)
 #ggsave("../../plots/Fig2-2-no-bg.png", width=11, height = 10, dpi=300)
 ```
 
@@ -608,6 +626,13 @@ ggarrange(TP_FN_plot, FPR_TNR_plot, widths = c(0.55,0.45), labels = "AUTO", alig
 
 ## Z-scores
 ```{r}
+z.scores.long = z.scores %>% pivot_longer(-Metab) %>% 
+  left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
+  left_join(metabolites, by = c("Metab" = "ID"))
+length.to.strip = str_length(exch.metab.pattern)+1
+pathways_no_comp2 = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
+  rename("Pathway" = subsystem)
+
 zthr=50
 zscores.kod.pathways = pathways_no_comp2 %>% 
   left_join(z.scores.long, by = c("Pathway", "metabolite" = "metabID")) %>% 
@@ -620,6 +645,7 @@ zscores.kod.pathways = pathways_no_comp2 %>%
             by = c("Pathway")) %>% 
   group_by(Pathway) %>% 
   reframe(sd =sd(value), metabolite, Pathway, value, Type) %>% 
+  filter(!is.na(Type)) %>% 
   arrange(sd) %>% 
   mutate(Pathway = fct_inorder(Pathway)) %>% 
   mutate(value = ifelse(value >= zthr, zthr, 
@@ -642,80 +668,6 @@ zscores.plot = zscores.kod.pathways %>%
 zscores.plot
 ```
 
-
-```{r}
-zscores.all.df = z.scores.long %>% 
-  left_join(all_methods_TP_FN_long_df %>% 
-              mutate(Method = str_replace_all(Method, method_names_clean))%>% 
-              filter(Method == "GSEA abs"), 
-            by = c("Pathway")) %>% 
-  rename("KOd.pathway" = "Pathway") %>% 
-  left_join(pathways_no_comp2 %>% filter(!Pathway %in% misc_blocked_pathways), by = c("metabID" = "metabolite")) %>% 
-  filter(!metabID %in% side_compounds$Identifier) %>% 
-  # filter(KOd.pathway == "Lysine metabolism") %>% 
-  group_by(KOd.pathway) %>%
-  mutate(KOd.p.metab = ifelse(KOd.pathway == Pathway, T, F)) %>% 
-  select(-Pathway) %>%
-  unique() %>%
-  group_by(KOd.pathway, metabID) %>% 
-  filter(!any(KOd.p.metab)) %>% 
-  # left_join(zscores.kod.pathways %>% select(Pathway, sd) %>% unique(), by = c("KOd.pathway" = "Pathway"))%>% 
-  # arrange(sd) %>% 
-  mutate(KOd.pathway = factor(KOd.pathway, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique()))
-  # arrange(factor(KOd.pathway, zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>% 
-  # mutate(KOd.pathway = fct_inorder(KOd.pathway)) #%>% 
-  # filter(!is.na(Type))
-
-  zscores.all.df$KOd.pathway
-
-TNR.for.barplot = TNR.counts %>% 
-  mutate(unique_id = factor(unique_id, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>% 
-  filter(!is.na(unique_id)) %>% 
-  rename("KOd.pathway" = "unique_id")
-  
-FP_TN_colours = FPR_TNR_colours
-names(FP_TN_colours) = c("FP", "TN")
-
-# zscores.all.df.plot =
-zscores.all.df.all = zscores.all.df %>%
-    filter(!is.na(Type)) %>% 
-  left_join(TNR.counts %>%
-  mutate(unique_id = factor(unique_id, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>%
-  filter(!is.na(unique_id)),
-  by = c("KOd.pathway" = "unique_id")) %>% 
-  group_by(KOd.pathway) %>% 
-  reframe(sd =sd(value), metabID, KOd.pathway, value, Type, TNR, counts) %>% 
-  arrange(sd) %>% 
-  mutate(KOd.pathway = fct_inorder(KOd.pathway)) 
-
-zscores.all.df.plot=zscores.all.df.all %>%
-  ggplot()+
-  geom_bar( aes(x=KOd.pathway, y=counts/6, fill=TNR),stat="unique", inherit.aes = F, alpha=0.8)+
-    scale_y_continuous(sec.axis=sec_axis(~.*6,breaks = c(0,40,80,120), name = "Ratio of TN/FP pathways"))+
-  geom_boxplot(aes(y=value, x= KOd.pathway, col=Type), outliers=T,outlier.alpha = 0.2, inherit.aes = F)+
-  scale_colour_manual(values = pathway_cat_cols_dict[zscores.all.df.all$Type], name = "GSEA abs\nprediction")+
-    scale_fill_manual(values = FP_TN_colours[zscores.all.df.all$TNR], name = "GSEA abs\n TN / FP")+
-  theme_minimal()+
-  theme(axis.text.x = element_blank())+
-    # theme(axis.text.x = element_text(angle = 45))+
-  xlab("KO'd pathways (sorted by std)")+
-  ylab("Metabolite z-scores\n(without the KO'd pathway's metabolites)")+
-  guides(col=guide_legend(reverse=TRUE))
-zscores.all.df.plot
-
-# ggsave(paste0("../../plots",model_name,"/test.png"), dpi=300, bg="white", width=11, height=7)
-```
-
-```{r}
-TNR.counts %>% 
-  mutate(Term = factor(Term, levels = zscores.kod.pathways %>% pull(Pathway) %>% unique())) %>% 
-  filter(!is.na(Term)) %>% 
-  ggplot(aes(x=Term, y=counts, fill=TNR))+
-  geom_bar(stat="identity")+
-   theme(axis.text.x = element_blank())
-```
-
-
 ## Fig3
 ```{r}
 plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5), 
@@ -724,17 +676,6 @@ plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5),
   zscores.plot,
   labels = c("", "C"), rel_heights = c(0.33,0.33, 0.33))
 ggsave(paste0("../../plots/",model_name,"/Fig3.png"), dpi=300, bg="white", width=10, height=7)
-```
-
-## Fig3 with all
-```{r}
-plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5), 
-                    ncol = 3, labels=c("A","B")),
-  nrow=3,
-  zscores.plot, 
-  zscores.all.df.plot,
-  labels = c("", "C", "D"), rel_heights = c(0.33,0.33, 0.33))
-# ggsave(paste0("../../plots/Fig3_", model_name,"_all.png"), dpi=300, bg="white", width=11, height=12)
 ```
 
 
@@ -749,11 +690,6 @@ This penalises side compounds as even if they are exchangeable, they do not add 
 (most of the time)
 ```{r}
 length.to.strip = str_length(exch.metab.pattern)+1
-
-side_compounds = read.table(paste0(input.path,"side_compounds.txt"), header = T) %>% 
-  rename("Identifier"=1) %>% 
-  mutate(Identifier = stringr::str_sub(Identifier, end=-str_length(exch.metab.pattern)-1)) %>% unique() %>% 
-  mutate(Identifier = ifelse(startsWith(Identifier, "M_"), str_sub(Identifier, start=3), Identifier))
 
 exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.pattern)) %>% 
   mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
@@ -806,7 +742,7 @@ ex_ratio_plot =
   ylab("")+
   xlab("Exchangeable metabolites ratio")
 
-method_names_clean = setNames(c("ORA", "GSEA abs","GSEA raw"), method_names)
+
 exchangeable_m_filtered_clean = exchangeable_m_filtered %>% 
   filter(endsWith(as.character(name), "all"))%>% 
     mutate(name=str_replace_all(name, method_names_clean))
@@ -892,13 +828,6 @@ ggsave(paste0("../../plots/",model_name,"/Fig4.png"), dpi=300, bg="white", width
 
 # Fig5
 
-```{r}
-network_stats = read.table(paste0(input.path,model_name,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
-GSEA.abs.results = read.table(paste0(input.path,model_name,"_GSEA_absolute_metric_external_with_WT_default_all_results.tsv"), sep="\t", header=T)
-z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
-  filter(Metab %in% metabolites$ID)
-```
-
 ## Uniqueness
 ```{r}
 thr=2
@@ -919,11 +848,6 @@ uniqueness = z.scores %>% pivot_longer(-Metab) %>%
   unique() %>% 
   arrange(desc(score))
 
-all_methods_TP_FN_long = lapply(names(all_methods_TP_FN), function(x){
-  all_methods_TP_FN[[x]] %>% select(-ManualCategoryLvl1) %>% 
-    mutate(Method = x)
-  })
-all_methods_TP_FN_long_df = all_methods_TP_FN_long %>% bind_rows() %>% rename("Pathway" = Subsystem.name)
 
 metab.uniqueness = all_methods_TP_FN_long_df %>% left_join(uniqueness, by="Pathway") %>% 
   left_join(exchangeable_m_filtered ,#%>% 

@@ -144,7 +144,7 @@ basic_colour = "#56B4E9" # Used for plots where there are no other colours
 
 # Read pathway category colours if possible:
 if (human.pathway.categories){
-  pathway_cat_cols = read.table(paste0(input.path,"Human1_pathway_category_colours.tsv"), sep="\t", header=T, comment.char = "")
+    pathway_cat_cols = read.table(paste0("../../data/Human1/r_input/Human1_pathway_category_colours.tsv"), sep="\t", header=T, comment.char = "")
 }else{
   # Otherwise generate a new palette:
   max_n = length(unique(pathway_categories$ManualCategoryLvl1))+4

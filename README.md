@@ -10,6 +10,8 @@ git clone https://github.com/juliette-cooke/simulatedPA.git
 ```
 
 - Install Python packages  
+
+Python 3.7 was used for this project.
 ```
 cd simulatedPA/
 pip3 install -r requirements.txt

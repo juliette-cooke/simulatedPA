@@ -33,8 +33,8 @@ library(magick)
 Use the model name that is in the exported files.
 Make a folder and add the path here, with a slash at the end.
 ```{r}
-model_name = "Recon2.2"
-# model_name = "Human1"
+# model_name = "Recon2.2"
+model_name = "Human1"
 input.path = paste0("../../data/",model_name,"/r_input/")
 # Set to T if using the same categories as in the pathways_db file, aka Human1 categories (used for the colour palette):
 human.pathway.categories = T 
@@ -200,9 +200,9 @@ all_pathway_feas_infeas = pathway_categories %>% select(Pathway, ManualCategoryL
   filter(!Pathway %in% misc_blocked_pathways)
 
 label_dict_no_misc = c("Feasible", "Infeasible")
-names(label_dict_no_misc) = c("Able to produce biomass when KO'd", "Unable to produce biomass when KO'd")
+names(label_dict_no_misc) = c("Functional", "Infeasible")
 
-label_dict_no_misc_swap = c("Able to produce biomass when KO'd", "Unable to produce biomass when KO'd", "All pathways", "Blocked pathways")
+label_dict_no_misc_swap = c("Functional", "Infeasible", "All pathways", "Blocked pathways")
 names(label_dict_no_misc_swap) = c("Feasible", "Infeasible", "All","Blocked")
 
 # Read in raw ORA and GSEA results
@@ -285,7 +285,7 @@ pathway_stats_feas_plot =
      # legend.key = element_blank(),
      legend.direction = "horizontal",
      plot.margin = margin(0.5,0.5,0.2,0.5,"cm"))+
-  guides(fill = guide_legend(nrow = 2))+
+  # guides(fill = guide_legend(nrow = 2))+
   xlab("N. of pathways")+
   ylab("")+ 
   scale_x_continuous(expand = c(0, 0))+
@@ -395,13 +395,13 @@ TP_FN_legend =
     geom_node_circle(aes(fill=Type, group=depth, color=Type, linetype=as.factor(Type)))+
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "white", name="Predicted",
                       labels=c("True Positive", "False Negative", 
-                               "Unable to produce biomass when KO'd"))+
+                               "Infeasible"))+
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Predicted",
                       labels=c("True Positive", "False Negative", 
-                               "Unable to produce biomass when KO'd"))+
+                               "Infeasible"))+
   scale_linetype_manual(values=linetype_dict[pathway_counts_run[[i]]$Type], 
                         labels=c("True Positive", "False Negative", 
-                               "Unable to produce biomass when KO'd"), name="Predicted")+
+                               "Infeasible"), name="Predicted")+
     theme(legend.margin = margin(c(-0.5,0,0,0)))
 
 
@@ -445,18 +445,13 @@ TP_FN_legend = layout[[i]] %>% filter(Type %in% c("TP", "FN", "Unable to produce
     geom_node_circle(aes(fill=Type, group=depth, color=Type, linetype=as.factor(Type)))+
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "white", name="Predicted",
                       labels=c("True Positive", "False Negative", 
-                               "Unable to produce biomass when KO'd",
-                               "Unable to produce biomass in WT"
-                               ))+
+                               "Infeasible"))+
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Predicted",
                       labels=c("True Positive", "False Negative", 
-                               "Unable to produce biomass when KO'd",
-                               "Unable to produce biomass in WT"))+
+                               "Infeasible"))+
   scale_linetype_manual(values=linetype_dict[pathway_counts_run[[i]]$Type], 
                         labels=c("True Positive", "False Negative", 
-                               "Unable to produce biomass when KO'd",
-                               "Unable to produce biomass in WT"
-                               ), name="Predicted")+
+                               "Infeasible"), name="Predicted")+
     theme(legend.margin = margin(c(-0.5,0,0,0)))
     
 cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to produce biomass when KO'd")) %>% ggraph()+
@@ -496,16 +491,16 @@ TP_FN_legend =
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "white", name="Predicted",
                       labels=str_wrap(c("True Positive", "False Negative", 
                                "Unable to be run in ORA",
-                               "Unable to produce biomass when KO'd"
+                               "Infeasible"
                                ), 23))+
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Predicted",
                       labels=str_wrap(c("True Positive", "False Negative",  
                                "Unable to be run in ORA",
-                               "Unable to produce biomass when KO'd"), 23))+
+                               "Infeasible"), 23))+
   scale_linetype_manual(values=linetype_dict[pathway_counts_run[[i]]$Type], 
                         labels=str_wrap(c("True Positive", "False Negative", 
                                "Unable to be run in ORA",
-                               "Unable to produce biomass when KO'd"
+                               "Infeasible"
                                ), 23), name="Predicted")
 
 cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to be run in ORA", "Unable to produce biomass when KO'd")) %>% ggraph()+
@@ -598,7 +593,7 @@ TP_FN_plot =
   theme_minimal_hgrid()+
   scale_fill_manual(values = pathway_cat_cols_dict[all_methods_df$Type], 
                     labels=c("Unable to be\nrun in ORA","FN","TP"))+
-  scale_x_discrete(labels = c("ORA", "GSEA\nabs", "GSEA\nraw"))+
+  scale_x_discrete(labels = c("ORA", "GSEA\nunsigned", "GSEA\nsigned"))+
   xlab("")+
   ylab("Proportion")+
   theme(axis.line.x = element_blank(), axis.ticks.x = element_blank(),
@@ -614,7 +609,7 @@ ggplot(aes(x=method, y= value, fill=Type))+
   geom_text(aes(label=round(value,2)), position = position_stack(vjust=0.5), col="white", size=4)+
   theme_minimal_hgrid()+
   scale_fill_manual(values = FPR_TNR_colours[all_methods_df_FPR_TNR$Type], labels=c("FP", "TN"))+
-  scale_x_discrete(labels = c("ORA", "GSEA\nabs", "GSEA\nraw"))+
+  scale_x_discrete(labels = c("ORA", "GSEA\nunsigned", "GSEA\nsigned"))+
   xlab("")+
   ylab("Counts")+
   theme(axis.line.x = element_blank(), axis.ticks.x = element_blank(),
@@ -644,7 +639,7 @@ zscores.kod.pathways = pathways_no_comp2 %>%
               filter(Method == "GSEA abs"), 
             by = c("Pathway")) %>% 
   group_by(Pathway) %>% 
-  reframe(sd =sd(value), metabolite, Pathway, value, Type) %>% 
+  reframe(sd =sd(value), metabolite, Pathway, value, Type, n=n()) %>% 
   filter(!is.na(Type)) %>% 
   arrange(sd) %>% 
   mutate(Pathway = fct_inorder(Pathway)) %>% 
@@ -657,9 +652,10 @@ zscores.kod.pathways %>%
 # 6 metabolites modified for plotting purposes
 
 zscores.plot = zscores.kod.pathways %>%
-  ggplot(aes(y=(value), x= Pathway, col=Type))+
-  geom_boxplot(outliers=T,outlier.alpha = 0.2)+
-  scale_colour_manual(values = pathway_cat_cols_dict[zscores.kod.pathways$Type], name = "GSEA abs\nprediction")+
+  ggplot(aes(y=(value), x= Pathway))+
+  # geom_bar(aes(x=Pathway, y=n, fill=Type), stat="unique", alpha=0.4)+
+  geom_boxplot(aes(col=Type),outliers=T,outlier.alpha = 0.2)+
+  scale_colour_manual(values = pathway_cat_cols_dict[zscores.kod.pathways$Type], name = "GSEA unsigned\nprediction")+
   theme_minimal()+
   theme(axis.text.x = element_blank())+
   xlab("KO'd pathways (sorted by std)")+
@@ -682,9 +678,9 @@ ggsave(paste0("../../plots/",model_name,"/Fig3.png"), dpi=300, bg="white", width
 # Fig4
 ## Exchangeable metabolites ratio
 Exchangeable metabolites ratio is defined by:
-n. of exchangeable metabolites (not counting side compounds)
+n. of unique exchangeable metabolites (not counting side compounds)
 /
-n. of total metabolites in the pathways (counting side compounds)
+n. of total unique metabolites in the pathways (not counting side compounds)
 
 This penalises side compounds as even if they are exchangeable, they do not add information to the metabolic profile. 
 (most of the time)
@@ -702,8 +698,15 @@ exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.patte
 exchangeable_metabolites_per_pathway = pathways %>% 
   mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% group_by(subsystem) %>% 
   filter(metabolite %in% exchange_metabolites) %>% unique() %>% summarise(Exchangeable = length(metabolite)) %>% 
-  left_join(pathways %>% group_by(subsystem) %>% summarise(Total=length(metabolite)), by = "subsystem") %>% 
-  mutate(ExchangeableRatio = Exchangeable/Total) 
+  left_join(pathways %>% 
+              mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+              filter(!(metabolite %in% (side_compounds %>%
+                                          mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+                                          pull(Identifier)))) %>% 
+              unique() %>%  
+              group_by(subsystem) %>% 
+              summarise(Total=length(metabolite)), by = "subsystem") %>% 
+  mutate(ExchangeableRatio = Exchangeable/Total)
 
 if (exists("pathways.to.exclude")){
   exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>%
@@ -748,20 +751,27 @@ exchangeable_m_filtered_clean = exchangeable_m_filtered %>%
     mutate(name=str_replace_all(name, method_names_clean))
 exchangeable_m_filtered_clean$name = factor(exchangeable_m_filtered_clean$name, levels = method_names_clean)
 
+method_names_clean2 = c("ORA", "GSEA\nunsigned", "GSEA\nsigned")
+names(method_names_clean2) = method_names_clean
+
 # TP and FN heatmap
 ex_TP_FN_plot =
   exchangeable_m_filtered_clean %>% 
-    mutate(name = fct_relevel(name, c("ORA", "GSEA abs","GSEA raw"))) %>%
+    mutate(name = fct_relevel(name, c("GSEA abs","GSEA raw", "ORA"))) %>%
+  filter(name == "GSEA abs") %>% 
     ggplot()+
+  facet_wrap(~name,nrow = 1, scales="free_x", labeller = as_labeller(method_names_clean2))+
       geom_tile(aes(x=name, y= subsystem, fill = value), colour = "white", linewidth = 0.7)+
       scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered_clean$value], na.value = "lightgrey")+
-      scale_x_discrete(position="top")+
+      # scale_x_discrete(position="top", label= c("GSEA unsigned", "GSEA signed","ORA"))+
       theme_minimal()+
       theme(axis.text.y = element_blank(),
             axis.title = element_blank(), 
             axis.ticks = element_blank(),
             legend.position = "none", 
-            axis.text.x = element_text(angle=45, hjust = 0.1, vjust = 0),
+            strip.text = element_text(angle=45, hjust = 0.5, vjust = 0.4),
+            axis.text.x=element_blank(),
+            # axis.text.x = element_text(angle=45, hjust = 0.1, vjust = 0),
             panel.grid = element_blank())
 
 # TP and FN legend
@@ -804,9 +814,9 @@ ex_category_plot_legend =
 exch_plot = plot_grid(
   plot_grid(
     ex_ratio_plot,
-    ex_category_plot,
     ex_TP_FN_plot,
-    rel_widths = c(0.85,0.1,0.1), nrow = 1, align = 'h'),
+    ex_category_plot,
+    rel_widths = c(0.83,0.07,0.07), nrow = 1, align = 'h', axis = "tb"),
   plot_grid(NULL,
     get_legend(ex_TP_FN_plot_legend),
     get_legend(ex_category_plot_legend),
@@ -814,7 +824,7 @@ exch_plot = plot_grid(
       rel_heights = c(0.25,0.25,0.25,0.25),
       align = 'hv',
       nrow = 4, ncol = 1),
-rel_widths = c(0.7, 0.3), nrow = 1)
+rel_widths = c(0.8, 0.2), nrow = 1)
 exch_plot
 ```
 ## Fig4
@@ -847,62 +857,94 @@ uniqueness = z.scores %>% pivot_longer(-Metab) %>%
   select(-Name, -n) %>% 
   unique() %>% 
   arrange(desc(score))
-
-
-metab.uniqueness = all_methods_TP_FN_long_df %>% left_join(uniqueness, by="Pathway") %>% 
-  left_join(exchangeable_m_filtered ,#%>% 
-              # filter(name == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all"))
-              by = c("Pathway" = "subsystem")) %>%
-  select(-name, -Exchangeable, -value) %>% 
-  # filter(unique<100) %>%
-  pivot_longer(-c(Pathway, Type, ManualCategoryLvl1, Method)) %>% 
-  filter(!is.na(value)) 
-
-newnames <- data.frame(name = c("Total","ExchangeableRatio","score","n.metab","unique","unique_score"),
-                      name_label = c("Pathway size", "Exchangeable Ratio", "Profile uniqueness score",
-                                     "N. of significant metabs", "N. of significant unique metabs",
-                                     "N. of significant unique metabs / \nN. of significant metabs"))
-
-metab.uniqueness.plot = metab.uniqueness %>% 
-  inner_join(newnames, by="name") %>% 
-  mutate(name_label = fct_inorder(name_label),
-         Method = str_replace_all(Method, method_names_clean)) %>% 
-  unite(Type, Method, col="TypeMethod", sep= ": ",remove = F) %>% 
-  mutate(TypeMethod = fct_relevel(TypeMethod, rev(c("TP: ORA", "FN: ORA", "TP: GSEA abs", "FN: GSEA abs", "TP: GSEA raw", "FN: GSEA raw")))) %>% unique()
-
-metab.uniqueness.plot %>%
-  ggplot(aes(x=value, y=TypeMethod, col=Type, group=TypeMethod, fill=Type))+
-  geom_boxplot(outliers = F, alpha=0.4)+
-  facet_wrap(~name_label, scales = "free",strip.position = "bottom")+
-  theme_minimal()+
-  scale_fill_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot$Type])+
-  scale_colour_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot$Type])+
-  xlab("")
 ```
 
+## Adding significance
 ```{r}
-variables = c("Pathway size", "Exchangeable Ratio", "Profile uniqueness score")
-pathway_metrics_plot=
-  metab.uniqueness.plot %>%
-  filter(name_label %in% variables) %>% 
-  mutate(Type = fct_relevel(Type, c("TP", "FN")),
-         name_label = fct_relevel(name_label, variables),
-         Method = fct_relevel(Method,method_names_clean)) %>% 
-  ggplot(aes(x=value, col=Type, fill=Type, y=Type))+
-  geom_boxplot(outliers = F, alpha=0.4)+
-  facet_nested(Method + Type ~name_label, scales = "free",
-               strip = strip_nested(size = "variable"),switch = "y")+
+z.scores.long = z.scores %>% pivot_longer(-Metab) %>% 
+  left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
+  left_join(metabolites, by = c("Metab" = "ID"))
+
+pathways_no_comp2 = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
+  rename("Pathway" = subsystem)
+
+mean.zscores = 
+  all_methods_TP_FN_long_df %>% 
+  left_join(pathways_no_comp2, by = c("Pathway")) %>% 
+  left_join(z.scores.long , by = c("Pathway", "metabolite" = "metabID")) %>% 
+  filter(!is.na(value)) %>% group_by(Pathway, Method) %>% 
+  summarise(mean = mean(abs(value)), Type) %>% unique() 
+
+non.uniques = data.frame("Pathway" = exchangeable_metabolites_per_pathway$subsystem[!exchangeable_metabolites_per_pathway$subsystem %in% uniqueness$Pathway],
+           "score"= 0, "n.metab" = 0, "unique" = 0, "unique_score" = 0)
+
+
+variables.all = c("PathwaySize", "ExchangeableRatio", "ProfileUniquenessScore", "ClusteringCoefficient", "Degree", "NeighborhoodConnectivity")
+
+boxplot.df = exchangeable_metabolites_per_pathway %>% filter(!(subsystem %in% misc_pathways)) %>% 
+  left_join(uniqueness %>% rbind(non.uniques), by = c("subsystem"= "Pathway")) %>% 
+  select(-paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all"), -paste0(model_name,"_ORA_pval_005_metrics_external_with_WT_default_all"), -paste0(model_name,"_GSEA_raw_metric_external_with_WT_default_all")) %>% 
+  left_join(mean.zscores, by = c("subsystem"= "Pathway")) %>% 
+  rename("ProfileUniquenessScore" = score, "PathwaySize" = Total) %>% 
+  select(subsystem, ProfileUniquenessScore, ExchangeableRatio, PathwaySize, Method, Type) %>% 
+  left_join(network_stats %>% select(name, AverageShortestPathLength, BetweennessCentrality, ClosenessCentrality, ClusteringCoefficient, Degree, NeighborhoodConnectivity, Stress, TopologicalCoefficient), by = c("subsystem" = "name")) %>% 
+  mutate(ProfileUniquenessScore = ifelse(is.na(ProfileUniquenessScore), 0, ProfileUniquenessScore)) %>% 
+  filter(Degree != 0) %>%
+    select(-c(AverageShortestPathLength ,  Stress, ClosenessCentrality,TopologicalCoefficient,BetweennessCentrality))%>%
+  filter(PathwaySize > 5) %>%
+  mutate(Method = str_replace_all(Method, method_names_clean)) %>% 
+  filter(!is.na(Method)) %>%
+  pivot_longer(-c(subsystem, Method, Type)) %>% 
+  mutate(name = fct_relevel(name, variables.all),
+         Method = fct_relevel(Method,method_names_clean))
+
+# Build the boxplot to get boxplot auto outlier data
+boxplot.data.all = ggplot_build(boxplot.df %>% 
+  ggplot(aes(x=Type, y=value))+
+  geom_boxplot(aes(col=Type, fill=Type), outliers = F, alpha=0.4)+
+  facet_grid(Method~name, scales = "free",switch = "y"))$data[[1]]
+
+# Get the max value of each facet
+maxes.all = boxplot.df %>% 
+  group_by(name, Method) %>% 
+  summarise(y_position=max(value)) %>% 
+  cbind(PANEL = c(1,7,13,2,8,14,3,9,15,4,10,16,5,11,17,6,12,18)) %>% # Set the facets manually...
+  left_join(boxplot.data.all %>% 
+              select(ymax, PANEL) %>% 
+              group_by(PANEL) %>% 
+              filter(ymax == max(ymax)) %>% 
+              mutate(PANEL = as.numeric(as.character(PANEL))) %>% unique(), by=c("PANEL")) %>% 
+  rename("y.position" = "ymax")
+
+# Test each TP vs FN statistically
+anno_df.all = compare_means(value ~ Type, group.by = c("name", "Method"), data = boxplot.df, method = "wilcox.test", p.adjust.method = "fdr") %>%
+ mutate(p.adj = format.pval(p.adj, digits = 2)) %>%
+  filter(p.signif != "ns") %>% 
+  left_join(maxes.all, by=c("name", "Method")) %>% 
+  mutate(y.position = y.position *1.1)
+
+label.clean = c(str_wrap(str_replace_all(variables.all,"(.)(?=[A-Z])", "\\1 "),50), method_names_clean2)
+names(label.clean) = c(variables.all, names(method_names_clean2))
+
+all.boxplots = boxplot.df %>% 
+  ggplot(aes(x=Type, y=value))+
+  geom_boxplot(aes(col=Type, fill=Type), outliers = F, alpha=0.4)+
+  facet_grid(Method~name, scales = "free",switch = "y", labeller = as_labeller(label.clean))+
   theme_minimal()+
   theme(strip.text.y.left = element_text(angle = 0,size = 8),
         axis.text.y = element_blank(),
         panel.spacing.x = unit(1, "lines"),
-        legend.position = "none")+
-  scale_fill_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot$Type])+
-  scale_colour_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot$Type])+
+        legend.position = "right", legend.title = element_blank())+
+  scale_fill_manual(values = pathway_cat_cols_dict[boxplot.df$Type])+
+  scale_colour_manual(values = pathway_cat_cols_dict[boxplot.df$Type])+
   xlab("")+
-  ylab("")
-pathway_metrics_plot
+  ylab("")+
+  stat_pvalue_manual(anno_df.all, label="p.signif", coord.flip = T,tip.length = 0)+
+  guides(col=guide_legend(reverse=TRUE), fill=guide_legend(reverse=TRUE))+
+  coord_flip(clip = "off")
+all.boxplots
 ```
+
 
 ## PCA
 ```{r}
@@ -1005,47 +1047,12 @@ pca_biplot =
 pca_biplot
 ```
 
-### PCA: pathway categories
-```{r}
-pca_biplot_cat =
-  pca.coord %>% 
-    ggplot(aes(x=Dim.1, y=Dim.2))+
-    geom_segment(data = arrow_coord, aes(xend=x,yend=y, x=xstart,y=ystart), inherit.aes = F, arrow = arrow(length = unit(0.2, "cm")))+
-    geom_point(aes(shape=factor(groups$GSEA.abs), 
-                   # fill=factor(groups$GSEA.abs), 
-                   fill = ManualCategoryLvl1), size = 3, alpha=0.8)+
-    scale_shape_manual(values = c(23,21), name = "GSEA abs prediction")+
-    # scale_fill_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
-    scale_fill_manual(values = pathway_cat_cols_dict[pca.coord$ManualCategoryLvl1], name = "Pathway category",
-                      labels = function(x) str_wrap(x, width = 15))+
-    scale_colour_manual(values = pathway_cat_cols_dict[groups$GSEA.abs], name = "GSEA abs prediction")+
-    stat_ellipse(aes(col=factor(groups$GSEA.abs)))+
-    coord_cartesian(clip="off")+
-    theme_minimal()+
-    theme(legend.position = "right",
-            legend.title =element_text(margin=margin(b=10)),
-            axis.title.y = element_text(hjust = 0.4),
-          plot.margin = margin(0.4,0.55,0.4,0.7, "cm"),
-          legend.key.spacing.y = unit(0.25,"cm"))+
-    geom_hline(yintercept = 0, linetype="dashed")+
-    geom_vline(xintercept = 0, linetype="dashed")+
-    xlab(paste0("Dim1 ", "(",  round(res.PCA$eig["comp 1", "percentage of variance"],1),"%)"))+
-    ylab(paste0("Dim2 ", "(",  round(res.PCA$eig["comp 2", "percentage of variance"],1),"%)"))+
-    geom_label(data = arrow_coord, 
-               aes(x=xnew,y=ynew, label = str_wrap(str_replace_all(name,"(.)(?=[A-Z])", "\\1 "),50)), 
-               inherit.aes = F,
-               fill=alpha(c("white"), 0.5))+
-    guides(fill = guide_legend(override.aes = list(shape=21, size=4)), 
-           colour="none", 
-           shape="none")
-pca_biplot_cat
-```
-
 
 ## Fig5 
 ```{r}
 pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"/",model_name,"_pathway_graph_edited.png"))
-fig5 = plot_grid(plot_grid(pathway_metrics_plot,pathway_graph, nrow=2, rel_heights = c(0.35,0.65), labels = c("A","B")), 
-                 plot_grid(NULL, pca_biplot, NULL, nrow=3, labels = c("","C",""), rel_heights = c(0.2,0.6,0.2)), nrow=1, rel_widths = c(0.45,0.55))
+fig5 = plot_grid(all.boxplots,labels = c("A"),
+                 plot_grid(pathway_graph, pca_biplot, ncol=2, rel_widths = c(0.45,0.55), labels = c("B","C")), 
+                 nrow=2, rel_heights = c(0.35,0.65))
 ggsave(plot=fig5, paste0("../../plots/",model_name,"/Fig5.png"), dpi=300, bg="white", width = 15, height=10)
 ```

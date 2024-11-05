@@ -85,55 +85,9 @@ side_compounds = read.table(paste0(input.path,"side_compounds.txt"), header = T)
   mutate(Identifier = stringr::str_sub(Identifier, end=-str_length(exch.metab.pattern)-1)) %>% unique() %>% 
   mutate(Identifier = ifelse(startsWith(Identifier, "M_"), str_sub(Identifier, start=3), Identifier))
 
-exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.pattern)) %>% 
-  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
-  filter(!(metabolite %in% (side_compounds %>%
-           mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
-           pull(Identifier)))) %>%
-  pull(metabolite) %>% unique()
-  
+length.to.strip = str_length(exch.metab.pattern)+1
 
-exchangeable_metabolites_per_pathway = pathways %>% 
-  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% group_by(subsystem) %>% 
-  filter(metabolite %in% exchange_metabolites) %>% unique() %>% summarise(Exchangeable = length(metabolite)) %>% 
-  left_join(pathways %>% group_by(subsystem) %>% summarise(Total=length(metabolite)), by = "subsystem") %>% 
-  mutate(ExchangeableRatio = Exchangeable/Total) 
 
-if (exists("pathways.to.exclude")){
-  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>%
-  filter(!subsystem %in% pathways.to.exclude)
-}
-
-for (i in 1:length(all_methods_TP_FN)){
-  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>% 
-    left_join(all_methods_TP_FN[[i]] %>% select(Subsystem.name, Type) %>% rename(!!filenames[[i]] := "Type"), by = c("subsystem" = "Subsystem.name"))
-}
-
-exchangeable_m_filtered = exchangeable_metabolites_per_pathway %>% 
-  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("subsystem" = "Pathway")) %>% 
-  filter(!subsystem %in% misc_blocked_pathways)
-
-exchangeable_m_filtered$subsystem = factor(exchangeable_m_filtered$subsystem, levels=exchangeable_m_filtered %>% arrange(ExchangeableRatio) %>% pull(subsystem))
-
-exchangeable_m_filtered = exchangeable_m_filtered %>% 
-  pivot_longer(!!method_names) 
-exchangeable_m_filtered$name = factor(exchangeable_m_filtered$name, levels=method_names)
-
-exchangeable_m_filtered = exchangeable_m_filtered %>% 
-  filter(!subsystem %in% infeasible_pathways_ko) %>% 
-  mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Unable to be run in ORA", value)) %>% 
-  filter(Total >= 3)
-
-z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
-  filter(Metab %in% metabolites$ID)
-
-pathways_no_comp2 = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
-  rename("Pathway" = subsystem)
-
-all_methods_TP_FN_long = lapply(c(1:3), function(i){
-  all_methods_TP_FN_cat[[i]] %>% mutate(method = method_names[i])
-})
-all_methods_TP_FN_long_df = all_methods_TP_FN_long %>% bind_rows() %>% rename("Pathway" = Subsystem.name)
 
 network_stats = read.table(paste0(input.path,model_name,"_no_blocked_cytoscape_pathway_graph_statistics.csv"), sep = ",", header = T)
 ```
@@ -257,6 +211,63 @@ raw_method_results = lapply(paste0(filenames, "_results"), function(x){
     read.table(paste0(input.path,x,".tsv"), sep="\t", header=T)
 })
 names(raw_method_results) = method_names
+
+
+exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.pattern)) %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+  filter(!(metabolite %in% (side_compounds %>%
+           mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+           pull(Identifier)))) %>%
+  pull(metabolite) %>% unique()
+  
+exchangeable_metabolites_per_pathway = pathways %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% group_by(subsystem) %>% 
+  filter(metabolite %in% exchange_metabolites) %>% unique() %>% summarise(Exchangeable = length(metabolite)) %>% 
+  left_join(pathways %>% 
+              mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+              filter(!(metabolite %in% (side_compounds %>%
+                                          mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+                                          pull(Identifier)))) %>% 
+              unique() %>%  
+              group_by(subsystem) %>% 
+              summarise(Total=length(metabolite)), by = "subsystem") %>% 
+  mutate(ExchangeableRatio = Exchangeable/Total)
+
+if (exists("pathways.to.exclude")){
+  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>%
+  filter(!subsystem %in% pathways.to.exclude)
+}
+
+for (i in 1:length(all_methods_TP_FN)){
+  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>% 
+    left_join(all_methods_TP_FN[[i]] %>% select(Subsystem.name, Type) %>% rename(!!filenames[[i]] := "Type"), by = c("subsystem" = "Subsystem.name"))
+}
+
+exchangeable_m_filtered = exchangeable_metabolites_per_pathway %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("subsystem" = "Pathway")) %>% 
+  filter(!subsystem %in% misc_blocked_pathways)
+
+exchangeable_m_filtered$subsystem = factor(exchangeable_m_filtered$subsystem, levels=exchangeable_m_filtered %>% arrange(ExchangeableRatio) %>% pull(subsystem))
+
+exchangeable_m_filtered = exchangeable_m_filtered %>% 
+  pivot_longer(!!method_names) 
+exchangeable_m_filtered$name = factor(exchangeable_m_filtered$name, levels=method_names)
+
+exchangeable_m_filtered = exchangeable_m_filtered %>% 
+  filter(!subsystem %in% infeasible_pathways_ko) %>% 
+  mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Unable to be run in ORA", value)) %>% 
+  filter(Total >= 3)
+
+z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
+  filter(Metab %in% metabolites$ID)
+
+pathways_no_comp2 = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
+  rename("Pathway" = subsystem)
+
+all_methods_TP_FN_long = lapply(c(1:3), function(i){
+  all_methods_TP_FN_cat[[i]] %>% mutate(method = method_names[i])
+})
+all_methods_TP_FN_long_df = all_methods_TP_FN_long %>% bind_rows() %>% rename("Pathway" = Subsystem.name)
 ```
 
 # Biomass
@@ -382,7 +393,7 @@ ggsave(paste0("../../plots/",model_name,"/supp/biomass_plot.png"), plot = biomas
 
 # Overlap heatmap
 ```{r}
-length.to.strip = str_length(exch.metab.pattern)+1
+
 # Calculate overlap between each pathway (n of shared metabolites regardless of compartment and without side compounds)
 pathways_no_comp = pathways %>% mutate(metabolite = stringr::str_sub(metabolite, end=-length.to.strip)) %>% unique() %>% 
   filter(!(metabolite %in% c(side_compounds$Identifier, "MAM01597"))) %>%  # Add CoA to list of side compounds (?)
@@ -599,6 +610,116 @@ zscores.all.df.plot
 ```{r}
 ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_zscore_boxplots.png"), dpi = 300, width=10, height=6, bg="white")
 ```
+
+# Boxplots with median and absolute
+```{r}
+zscores.kod.pathways.abs = pathways_no_comp2 %>% 
+  left_join(z.scores.long, by = c("Pathway", "metabolite" = "metabID")) %>% 
+  filter(!is.na(value)) %>% 
+  # group_by(Pathway) %>% 
+  # summarise(value = mean(value)) %>%
+  left_join(all_methods_TP_FN_long_df %>% 
+              mutate(method = str_replace_all(method, method_names_clean))%>% 
+              filter(method == "GSEA abs"), 
+            by = c("Pathway")) %>% 
+  mutate(value = abs(value)) %>% 
+  group_by(Pathway) %>% 
+  reframe(med = median(value), sd=sd(value),mean=mean(value), metabolite, Pathway, value, Type, n=n()) %>% 
+  filter(!is.na(Type)) %>% 
+  arrange(med) %>% 
+  mutate(Pathway = fct_inorder(Pathway)) %>% 
+  mutate(value = ifelse(value >= zthr, zthr, 
+                        ifelse(value <= -zthr, -zthr, value)))
+
+# zscores.plot.abs = 
+  zscores.kod.pathways.abs %>%
+  ggplot(aes(y=(value), x= Pathway))+
+  # geom_bar(aes(x=Pathway, y=n, fill=Type), stat="unique", alpha=0.4)+
+  geom_boxplot(aes(col=Type),outliers=T,outlier.alpha = 0.2)+
+  scale_colour_manual(values = pathway_cat_cols_dict[zscores.kod.pathways.abs$Type], name = "GSEA unsigned\nprediction")+
+  theme_minimal()+
+  theme(axis.text.x = element_blank())+
+  xlab("KO'd pathways (sorted by median)")+
+  ylab("KO'd pathway's\nmetabolite z-scores (absolute value)")+
+  guides(col=guide_legend(reverse=TRUE))
+zscores.plot.abs
+```
+
+
+# Pathway properties boxplots
+Combining FN + unable to run in ORA for the boxplots
+```{r}
+all_methods_TP_FN_long_df_with_unable = all_methods_TP_FN_long_df %>% 
+  rbind(pathway.states %>% filter(Type == "unable_to_run_ORA") %>% select(-Type) %>% mutate(Type = "FN", Method = "Human1_ORA_pval_005_metrics_external_with_WT_default_all"))
+
+
+metab.uniqueness.unable = all_methods_TP_FN_long_df_with_unable %>% left_join(uniqueness, by="Pathway") %>% 
+  left_join(exchangeable_m_filtered ,#%>% 
+              # filter(name == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all"))
+              by = c("Pathway" = "subsystem")) %>%
+  select(-name, -Exchangeable, -value) %>% 
+  # filter(unique<100) %>%
+  pivot_longer(-c(Pathway, Type, ManualCategoryLvl1, Method)) %>% 
+  filter(!is.na(value)) 
+
+metab.uniqueness.plot.unable = metab.uniqueness.unable %>% 
+  inner_join(newnames, by="name") %>% 
+  mutate(name_label = fct_inorder(name_label),
+         Method = str_replace_all(Method, method_names_clean)) %>% 
+  unite(Type, Method, col="TypeMethod", sep= ": ",remove = F) %>% 
+  mutate(TypeMethod = fct_relevel(TypeMethod, rev(c("TP: ORA", "FN: ORA", "TP: GSEA abs", "FN: GSEA abs", "TP: GSEA raw", "FN: GSEA raw")))) %>% unique()
+
+metab.uniqueness.plot.unable.df = metab.uniqueness.plot.unable %>%
+  filter(name_label %in% variables) %>% 
+  mutate(Type = fct_relevel(Type, rev(c("TP", "FN","Unable"))),
+         name_label = fct_relevel(name_label, variables),
+         Method = fct_relevel(Method,method_names_clean))
+
+
+# Build the boxplot to get boxplot auto outlier data
+boxplot.data = ggplot_build(metab.uniqueness.plot.unable.df %>% 
+  ggplot(aes(x=Type, y=value))+
+  geom_boxplot(aes(col=Type, fill=Type), outliers = F, alpha=0.4)+
+  facet_grid(Method~name_label, scales = "free",switch = "y"))$data[[1]]
+
+# Get the max value of each facet
+maxes = metab.uniqueness.plot.unable.df %>% 
+  group_by(name_label, Method) %>% 
+  summarise(y_position=max(value)) %>% 
+  cbind(PANEL = c(1,4,7,2,5,8,3,6,9)) %>% 
+  left_join(boxplot.data %>% 
+              select(ymax, PANEL) %>% 
+              group_by(PANEL) %>% 
+              filter(ymax == max(ymax)) %>% 
+              mutate(PANEL = as.numeric(as.character(PANEL))), by=c("PANEL")) %>% 
+  rename("y.position" = "ymax")
+
+# Test each TP vs FN statistically
+anno_df = compare_means(value ~ Type, group.by = c("name_label", "Method"), data = metab.uniqueness.plot.unable.df, method = "wilcox.test", p.adjust.method = "fdr") %>%
+ mutate(p.adj = format.pval(p.adj, digits = 2)) %>%
+  filter(p.signif != "ns") %>% 
+  left_join(maxes, by=c("name_label", "Method")) %>% 
+  mutate(y.position = y.position *1.1)
+
+
+metab.uniqueness.plot.unable.df %>% 
+  ggplot(aes(x=Type, y=value))+
+  geom_boxplot(aes(col=Type, fill=Type), outliers = F, alpha=0.4)+
+  facet_grid(Method~name_label, scales = "free",switch = "y")+
+  theme_minimal()+
+  theme(strip.text.y.left = element_text(angle = 0,size = 8),
+        axis.text.y = element_blank(),
+        panel.spacing.x = unit(1, "lines"),
+        legend.position = "right")+
+  scale_fill_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot.df$Type])+
+  scale_colour_manual(values = pathway_cat_cols_dict[metab.uniqueness.plot.df$Type])+
+  xlab("")+
+  ylab("")+
+  stat_pvalue_manual(anno_df, label="p.signif", coord.flip = T,tip.length = 0)+
+  coord_cartesian(clip = 'off')+
+  coord_flip()
+```
+
 
 # TP and FP
 Do the TPs tend to also have FPs?
@@ -1398,5 +1519,636 @@ p_vals_all %>%
 ```
 ```{r}
 ggsave(paste0("../../plots/",model_name,"/supp/",model_name,"_ORA_pval_threshold_scatterplot.png"), bg="white", dpi=300, width=10, height=5)
+```
+
+# Biomass production
+```{r}
+zscores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) 
+
+biomass.zscores = zscores %>% filter(Metab == "MAR13082") %>% select(-Metab) %>% 
+  pivot_longer(everything(), names_to = "Group", values_to = "zscore") %>% 
+  arrange(zscore) %>% 
+  left_join(pathway_dict, by = "Group")%>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = "Pathway") %>% 
+  mutate(Pathway=fct_inorder(Pathway)) 
+
+biomass.zscores  %>% 
+  filter(Pathway != "group47") %>% 
+  ggplot()+
+  geom_point(aes(x=Pathway, y = zscore, col=ManualCategoryLvl1))+
+  scale_color_manual(values = pathway_cat_cols_dict[biomass.zscores$ManualCategoryLvl1])+
+  theme_minimal()+
+  theme(axis.text.x = element_blank())+
+  ylab("Biomass reaction z-score")+
+  xlab("KO'd pathway")
+```
+```{r}
+#wt = data.table::fread(file="/home/juliette/work/code/git/simPA/data/large/default__sampling__WT.csv.gz", sep=",", header=T)
+#biomass.wt = as_tibble(wt$MAR13082) %>% rownames_to_column("Iteration") %>% 
+#  mutate(Chain=1, Parameter = "MAR13082", Iteration= as.numeric(Iteration))
+#saveRDS(biomass.wt, "/home/juliette/work/code/git/simulatedPA/data/Human1/r_input/biomass_samples_wt.rds")
+biomass.wt = readRDS("/home/juliette/work/code/git/simulatedPA/data/Human1/r_input/biomass_samples_wt.rds")
+
+
+biomass.wt %>% 
+  ggplot()+
+  geom_line(aes(x=Iteration,y=value))+
+  scale_y_continuous(breaks = round(seq(min(biomass.wt$value), max(biomass.wt$value), by = 0.5),1))+
+  theme_minimal()
+
+```
+
+```{r}
+max.biomass = read.table("/home/juliette/work/code/git/simPA/data/biomass_maxes.tsv", sep="\t", header = T) %>% 
+  left_join(pathway_dict, by = "Group") %>% 
+  filter(!(Pathway %in% misc_pathways)) %>% 
+  group_by(Group) %>% mutate(id = row_number()) %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = "Pathway")%>% 
+  arrange(desc(id))%>% distinct(Group, .keep_all = T) %>% 
+  ungroup()  %>% 
+  left_join(all_methods_TP_FN_long_df, by ="Pathway") %>% 
+  mutate(method = str_replace_all(method, method_names_clean)) %>% 
+  filter(Type != "Unable to produce biomass when KO'd")%>% 
+  group_by(method) %>% 
+  arrange(opt_b) %>% 
+  mutate(Pathway = fct_inorder(Pathway))
+
+max.biomass %>% 
+  ggplot()+
+  geom_point(aes(x=Pathway, y = opt_b, col=Type))+
+  facet_wrap(~method, nrow=3)+
+  scale_color_manual(values = pathway_cat_cols_dict[max.biomass$Type])+
+  geom_hline(aes(yintercept = mean(biomass.wt$value), linetype = "dashed"))+
+  scale_linetype_manual(name="",labels = "WT biomass flux", values = "dashed")+
+  # scale_color_manual(values = pathway_cat_cols_dict[max.biomass$ManualCategoryLvl1])+
+  theme_minimal()+
+  theme(axis.text.x = element_blank())+
+  xlab("KO'd pathways (sorted by min. optimal biomass)")+
+  ylab("Minimal optimal biomass")
+```
+Do FVA to test the Drug metabolism biomass production
+
+
+
+
+# Pathway size vs profile size
+```{r}
+pathway_sizes_inf_fea_no_misc
+sizes.df = p_vals_all %>% 
+  filter(value <= 0.05) %>% 
+  group_by(subsystem) %>% 
+  summarise(profile.size = n()) %>% 
+  left_join(pathway_sizes_inf_fea_no_misc %>% filter(Type != "All"), by = c("subsystem" = "Pathway"))
+sizes.df %>% 
+  # filter(profile.size < 100) %>% 
+  ggplot(aes(x= size, y= profile.size))+
+  geom_point(aes(col = ManualCategoryLvl1))+
+  geom_smooth(method = "lm")+
+  scale_color_manual(values = pathway_cat_cols_dict[sizes.df$ManualCategoryLvl1])+
+  theme_minimal()+
+  xlab("Pathway size")+
+  ylab("Metabolic profile size (after cutoff)")
+```
+
+# Pathway compartments
+```{r}
+p.compartments = pathways %>% separate_wider_position(metabolite, widths = c("Metab"=8, "compartment"=1)) %>% 
+  filter(!(subsystem %in% misc_pathways)) %>% 
+  group_by(subsystem, compartment) %>% 
+  summarise(counts = n()) %>% 
+  ungroup() %>% 
+  left_join(exchangeable_metabolites_per_pathway, by = "subsystem") %>% 
+  arrange(desc(ExchangeableRatio)) %>% 
+  mutate(subsystem = fct_inorder(subsystem)) 
+
+p.compartments %>% 
+  filter(subsystem != "Peptide metabolism") %>%
+  filter(subsystem != "Drug metabolism") %>%
+  filter(compartment != "i") %>% 
+  left_join(all_methods_TP_FN_long_df, by =c("subsystem" = "Pathway")) %>% 
+  mutate(method = str_replace_all(method, method_names_clean)) %>% 
+  filter(method == "GSEA abs") %>% 
+  filter(Type != "Unable to produce biomass when KO'd") %>% 
+  ggplot(aes(x=Exchangeable, y = counts))+
+  geom_point(aes(col=Type))+
+  geom_smooth(method = "lm")+
+  facet_wrap(~compartment, scales = "free_y")+
+  xlab("N. exchangeable metabolites")+
+  ylab("N. metabolites per pathway per compartment")+
+  theme(legend.position = "bottom")
+
+p.compartments %>% 
+  ggplot(aes(x=compartment, y=counts))+
+  facet_wrap(~subsystem)+
+  geom_bar(stat="identity")
+ggsave("~/Downloads/compartments.png", width =14, height= 12)
+```
+
+
+
+
+```{r}
+exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.pattern)) %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+  # filter(!(metabolite %in% (side_compounds %>%
+           # mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+           # pull(Identifier)))) %>%
+  pull(metabolite) %>% unique()
+
+comp.exch = pathways %>% select(-subsystem) %>% 
+  unique() %>% 
+  separate_wider_position(metabolite, widths = c("Metab"=8, "compartment"=1)) %>% 
+  mutate(is.exchangeable = ifelse(Metab %in% exchange_metabolites, "Y", "N")) %>% 
+  # filter(is.exchangeable) %>% 
+  group_by(compartment, is.exchangeable) %>% 
+  summarise(n.exch = n()) %>% 
+  ungroup() %>% 
+  pivot_wider(names_from = is.exchangeable, values_from = n.exch,values_fill = 0) %>% 
+  mutate(total = N + Y, Yratio = Y/total, Nratio = N/total)  %>% 
+  pivot_longer(c(N,Y), names_to = "is.exchangeable", values_to = "n.exch")%>% 
+  pivot_longer(c(Nratio,Yratio), names_to = "ratio.type", values_to = "ratio") %>%
+  filter(is.exchangeable == substr(ratio.type,1,1)) %>% 
+  filter(compartment != "i") %>% 
+  filter(n.exch != 0) %>%
+  ungroup() %>% 
+  arrange(desc(total), desc(is.exchangeable)) %>% 
+  mutate(compartment = fct_inorder(compartment)) 
+
+comp.exch %>% 
+  ggplot(aes(x=compartment, y = n.exch))+
+  geom_bar(aes(fill = is.exchangeable), position = "stack", stat="identity")+
+  geom_text(aes(label = paste0(round(ratio,3)*100, "%")), stat="unique",position = position_stack(vjust = 0.5))+
+  ylab("N. metab")+
+  theme_minimal()
+```
+
+```{r}
+library(circlize)
+compartment.pathways =
+  pathways %>%
+  filter(!(subsystem %in% misc_pathways)) %>% 
+  separate_wider_position(metabolite, widths = c("Metab"=8, "compartment"=1)) %>% 
+  group_by(subsystem, compartment) %>% 
+  summarise(n=n()) %>% 
+  ungroup() %>% 
+  group_by(subsystem) %>% 
+  reframe(total = sum(n), n, compartment, ratio = n/total) %>% 
+  filter(total > 5) %>% 
+    select(-total, -n) %>% 
+  pivot_wider(names_from = compartment, values_from = ratio, values_fill = 0) %>% 
+    
+  column_to_rownames("subsystem") %>% 
+  as.matrix()
+  
+ht = Heatmap(compartment.pathways, 
+        col = colorRamp2(c(min(compartment.pathways), max(compartment.pathways)), c("white", "blue")),cluster_columns = F)
+
+png("~/Downloads/heatmap_test.png",width=16,height=15,units="in",res=300)
+ht
+dev.off()
+```
+```{r}
+ht2 = draw(ht)
+row.order  = row_order(ht2)
+col.order = column_order(ht2)
+```
+
+```{r}
+GSEA_abs_annot = compartment.pathways %>% as.data.frame() %>% 
+  tibble::rownames_to_column("Pathway") %>% 
+  select(Pathway) %>%
+  left_join(all_methods_TP_FN[[2]] %>% select(-ManualCategoryLvl1), by=c("Pathway"= "Subsystem.name")) %>% 
+  mutate(Type = ifelse(is.na(Type), "Unable to produce biomass when KO'd", Type))
+  
+exch_barplot_annot = compartment.pathways %>% as.data.frame() %>% 
+  tibble::rownames_to_column("Pathway") %>% 
+  select(Pathway) %>% left_join(exchangeable_metabolites_per_pathway %>% select(subsystem, ExchangeableRatio),by = c("Pathway" = "subsystem"))
+
+row_annot = HeatmapAnnotation("Pathway category" = metadata %>% pull(ManualCategoryLvl1), 
+                              # ORA = ORA_annot$Type,
+                              "GSEA abs" = GSEA_abs_annot$Type,
+                              which = "row",
+                              "Exchangeable ratio" = anno_barplot(exch_barplot_annot$ExchangeableRatio),
+                              annotation_name_rot = 90,
+                              col=list("Pathway category"=pathway_cat_cols_dict,
+                                       # ORA = pathway_cat_cols_dict,
+                                       "GSEA abs" = pathway_cat_cols_dict)
+                              )
+
+
+
+clusters = cutree(hclust(dist(compartment.pathways)), k=10)
+# metadata = rownames(compartment.pathways) %>% as.data.frame() %>% rename("Pathway" = ".") %>% left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = "Pathway")
+# ha = HeatmapAnnotation(df = metadata %>% select(ManualCategoryLvl1),
+                       # which = "row",
+                       # col = list("ManualCategoryLvl1" = pathway_cat_cols_dict))
+png("~/Downloads/heatmap_test.png",width=16,height=17,units="in",res=300)
+Heatmap(compartment.pathways, 
+        col = colorRamp2(c(min(compartment.pathways), max(compartment.pathways)), c("white", "blue")),
+        cluster_columns = F, split=clusters,
+        right_annotation = row_annot)
+dev.off()
+```
+# PCA across pvals
+```{r}
+profile.pca.data = p_vals_all %>% 
+  filter(value <= 0.05) %>% 
+  select(-unique_id) %>% 
+  mutate(subsystem = as.character(subsystem)) %>% 
+  pivot_wider(names_from = name, values_from = value) #%>% 
+  # replace(is.na(.), 0)
+
+indiv = profile.pca.data %>% select(-ManualCategoryLvl1) %>% 
+  tibble::column_to_rownames("subsystem")
+
+groups = profile.pca.data %>% select(ManualCategoryLvl1)
+
+res.prof.PCA = PCA(indiv,scale.unit = T) 
+```
+
+```{r}
+arrow_coord = fviz_pca_biplot(res.prof.PCA)$layers[[6]]$data
+# Radial shift function
+rshift = function(r, theta, a=0.1, b=0.7) {
+  r + a + b*abs(cos(theta))
+}
+
+# Calculate shift
+arrow_coord = arrow_coord %>% 
+  mutate(r = sqrt(x^2 + y^2),
+         theta = atan2(y,x),
+         rnew = rshift(r, theta),
+         xnew = rnew*cos(theta),
+         ynew = rnew*sin(theta))
+
+pca.coord = res.prof.PCA$ind$coord %>% as.data.frame() %>% 
+  rownames_to_column("subsystem") %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("subsystem" = "Pathway"))
+
+# pca_biplot =
+  pca.coord %>% 
+  ggplot(aes(x=Dim.1, y=Dim.2))+
+  # geom_segment(data = arrow_coord, aes(xend=x,yend=y, x=xstart,y=ystart), inherit.aes = F, arrow = arrow(length = unit(0.2, "cm")))+
+  geom_point(aes(fill=factor(groups$ManualCategoryLvl1)), size = 3, alpha=0.8)+
+  # scale_shape_manual(values = c(23,21), name = "GSEA prediction")+
+  scale_fill_manual(values = pathway_cat_cols_dict[groups$ManualCategoryLvl1], name = "Pathway category")+
+  scale_colour_manual(values = pathway_cat_cols_dict[groups$ManualCategoryLvl1], name = "Pathway category")+
+  # stat_ellipse(aes(col=factor(groups$ManualCategoryLvl1)))+
+  coord_cartesian(clip="off")+
+  theme_minimal()+
+  theme(legend.position = "bottom",
+          legend.title =element_text(margin=margin(0,20,0,0)),
+          axis.title.y = element_text(hjust = 0.4),
+        plot.margin = margin(0.4,0.2,0.2,0.7, "cm"))+
+  geom_hline(yintercept = 0, linetype="dashed")+
+  geom_vline(xintercept = 0, linetype="dashed")+
+  xlab(paste0("Dim1 ", "(",  round(res.prof.PCA$eig["comp 1", "percentage of variance"],1),"%)"))+
+  ylab(paste0("Dim2 ", "(",  round(res.prof.PCA$eig["comp 2", "percentage of variance"],1),"%)"))#+
+  # geom_label(data = arrow_coord,
+             # aes(x=xnew,y=ynew, label = str_wrap(str_replace_all(name,"(.)(?=[A-Z])", "\\1 "),50)),
+             # inherit.aes = F,
+             # fill=alpha(c("white"), 0.5))
+#pca_biplot
+```
+
+# Z-scores heatmaps
+```{r}
+profile.pca.data = p_vals_all %>% 
+  filter(value <= 0.1) %>% 
+  select(-unique_id) %>% 
+  mutate(subsystem = as.character(subsystem)) %>% 
+  pivot_wider(names_from = name, values_from = value)
+
+z.scores.t = z.scores %>% 
+  left_join(metabolites, by = c("Metab" = "ID")) %>% 
+  select(-Metab, -Name) %>% 
+  column_to_rownames("metabID") %>% t() %>% as.data.frame() %>% 
+  rownames_to_column("Group") %>% 
+  left_join(pathway_dict, by = "Group") %>% 
+  select(-Group) %>% 
+  column_to_rownames("Pathway")
+
+
+
+profi.mat = profile.pca.data %>% 
+  replace(is.na(.),0) %>% 
+  select(-ManualCategoryLvl1) %>% 
+  column_to_rownames("subsystem") %>% 
+  as.matrix()
+
+z.scores.t.cut = z.scores.t[rownames(profi.mat),colnames(profi.mat)] %>% 
+  rownames_to_column("Pathway") %>% 
+  filter(Pathway != "Starch and sucrose metabolism") %>% 
+  column_to_rownames("Pathway") %>% 
+  as.matrix()
+
+png("~/Downloads/heatmap_test_profile.png",width=16,height=15,units="in",res=300)
+Heatmap(z.scores.t.cut, show_column_names = F,
+        col = colorRamp2(c(min(z.scores.t.cut),0, max(z.scores.t.cut)), c("blue","white", "red"))
+        # cluster_columns = F, 
+  # split=clusters,
+        # right_annotation = ha
+  )
+dev.off()
+```
+```{r}
+z.scores.t = z.scores %>% 
+  left_join(metabolites, by = c("Metab" = "ID")) %>% 
+  select(-Metab, -Name) %>% 
+  column_to_rownames("metabID") %>% t() %>% as.data.frame() %>% 
+  rownames_to_column("Group") %>% 
+  left_join(pathway_dict, by = "Group") %>% 
+  select(-Group) %>% 
+  # filter(Pathway != "Starch and sucrose metabolism") %>% 
+  column_to_rownames("Pathway") %>% 
+  mutate(across(everything(), .fns = function(x) ifelse(x > 2, 2, ifelse(x < -2, -2, x) )))
+
+png("~/Downloads/heatmap_test_profile_zscores2.png",width=16,height=15,units="in",res=300)
+Heatmap(z.scores.t, show_column_names = F,clustering_method_columns = "ward.D2", clustering_method_rows = "ward.D2",
+        col = colorRamp2(c(min(z.scores.t),-0.25, 0,0.25,max(z.scores.t)), c("blue","white","white","white", "red"))
+        # cluster_columns = F, 
+  # split=clusters,
+        # right_annotation = ha
+  )
+dev.off()
+```
+```{r}
+z.scores.t.abs = z.scores %>% 
+  left_join(metabolites, by = c("Metab" = "ID")) %>% 
+  select(-Metab, -Name) %>% 
+  column_to_rownames("metabID") %>% t() %>% as.data.frame() %>% 
+  rownames_to_column("Group") %>% 
+  left_join(pathway_dict, by = "Group") %>% 
+  select(-Group) %>% 
+  # filter(Pathway != "Starch and sucrose metabolism") %>% 
+  column_to_rownames("Pathway") %>% 
+  mutate(across(everything(), .fns = function(x) ifelse(abs(x) > 3, 3, abs(x) )))
+
+png("~/Downloads/heatmap_test_profile_zscores_abs.png",width=16,height=15,units="in",res=300)
+Heatmap(z.scores.t.abs, show_column_names = F,clustering_method_columns = "ward.D2", clustering_method_rows = "ward.D2",
+        col = colorRamp2(c(0,0.25,max(z.scores.t.abs)), c("white","white", "blue"))
+        # cluster_columns = F, 
+  # split=clusters,
+        # right_annotation = ha
+  )
+dev.off()
+```
+# Overlap heatmap using the pathway graph
+```{r}
+dm = read.table("../../data/Human1/supp/Human1_no_blocked_pathway_distance_matrix_weighted.csv", sep=",", header = T) %>% 
+  mutate(id = str_remove(id, "G_")) %>% 
+  left_join(pathway_dict, by = c("id" = "Group")) %>% 
+  select(-id) %>% 
+  filter(!(Pathway %in% misc_blocked_pathways)) %>% 
+  filter(!(Pathway %in% (pathway.states %>% filter(Type == "infeasible") %>% pull(Pathway)))) %>% 
+  column_to_rownames("Pathway") %>% 
+  rename_with(~str_remove(., "G_"))
+
+dm = dm %>% setNames(pathway_dict %>% arrange(match(Group, colnames(dm))) %>% pull(Pathway)) %>% 
+  select(-any_of(misc_blocked_pathways))%>% 
+  select(-any_of(pathway.states %>% filter(Type == "infeasible") %>% pull(Pathway)))
+
+
+
+ORA_with_unable = all_methods_TP_FN[[1]] %>% right_join(all_methods_TP_FN[[2]] %>% select(Subsystem.name), by = "Subsystem.name") %>% mutate(Type = ifelse(is.na(Type), "Unable to be run in ORA", Type))
+
+categ_annot = dm %>% tibble::rownames_to_column("Pathway") %>% select(Pathway) %>% left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = "Pathway")
+
+GSEA_abs_annot = dm %>% 
+  tibble::rownames_to_column("Pathway") %>% 
+  select(Pathway) %>%
+  left_join(all_methods_TP_FN[[2]] %>% select(-ManualCategoryLvl1), by=c("Pathway"= "Subsystem.name")) %>% 
+  mutate(Type = ifelse(is.na(Type), "Unable to produce biomass when KO'd", Type))
+  
+# ORA_annot = dm %>% tibble::rownames_to_column("Pathway") %>% select(Pathway) %>% left_join(ORA_with_unable %>% select(-ManualCategoryLvl1), by=c("Pathway"= "Subsystem.name")) %>% 
+  # mutate(Type = ifelse(is.na(Type), "Unable to produce biomass when KO'd", Type))
+
+exch_barplot_annot = dm %>% 
+  tibble::rownames_to_column("Pathway") %>% 
+  select(Pathway) %>% left_join(exchangeable_metabolites_per_pathway %>% select(subsystem, ExchangeableRatio),by = c("Pathway" = "subsystem"))
+
+
+col_annot = HeatmapAnnotation("Pathway category" = categ_annot$ManualCategoryLvl1, 
+                              # ORA = ORA_annot$Type,
+                              "GSEA abs" = GSEA_abs_annot$Type,
+                              # bar = anno_barplot(exch_barplot_annot$ExchangeableRatio),
+                              col=list("Pathway category"=pathway_cat_cols_dict, 
+                                       # ORA = pathway_cat_cols_dict, 
+                                       "GSEA abs" = pathway_cat_cols_dict), 
+                              show_legend = c(T,F),
+                              annotation_legend_param = list("GSEA abs"=list(title="Prediction")))
+
+
+qn = quantile(dm, c(0.01, 0.99), na.rm = TRUE)
+qn01 <- scales::rescale(c(qn, range(dm))) 
+method="ward.D2"
+
+png(paste0("../../plots/",model_name,"/supp/pathway_overlap_heatmap_graph.png"),
+    width=15,height=12,units="in",
+    res=300)
+draw(Heatmap(dm, show_column_names = F,
+        show_row_names = F,
+        col=circlize::colorRamp2(c(0,qn[2],max(dm)), c("white","#08306B", "#08306B")),
+        # col=c("white",RColorBrewer::brewer.pal(9, "Blues")),
+        width = unit(1, "snpc"), height = unit(1, "snpc"),
+        top_annotation = col_annot,heatmap_legend_param = list(title="Metabolite overlap (legend not to scale)", legend_height = unit(4, "cm"),
+                                                               at = c(0, 5, 10, 50, 150), break_dist = c(1, 1, 2, 2)),
+        clustering_method_columns = method,
+        clustering_method_rows = method,heatmap_height = unit(11.5,"in"), heatmap_width = unit(11.5,"in"),
+        ),merge_legends = T)
+dev.off()
+```
+```{r}
+dm %>% pivot_longer(everything()) %>% 
+  ggplot(aes(x=value))+
+  geom_bar()
+```
+
+
+# Output filtered results for testing in Metaboanalyst
+```{r}
+ora.filtered.metabs = p_vals_all %>% 
+  filter(value < 0.05) %>% 
+  select(-unique_id, -ManualCategoryLvl1, -value) %>% 
+  left_join(metabolites, by = c("name" = "metabID"))
+
+write.table(ora.filtered.metabs, "~/Downloads/ora_filtered.tsv", sep="\t", row.names = F)
+``` 
+
+# Exchangeable full plot
+```{r}
+length.to.strip = str_length(exch.metab.pattern)+1
+
+exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.pattern)) %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+  filter(!(metabolite %in% (side_compounds %>%
+           mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+           pull(Identifier)))) %>%
+  pull(metabolite) %>% unique()
+  
+
+exchangeable_metabolites_per_pathway = pathways %>% 
+  mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% group_by(subsystem) %>% 
+  filter(metabolite %in% exchange_metabolites) %>% unique() %>% summarise(Exchangeable = length(metabolite)) %>% 
+  left_join(pathways %>% 
+              mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+              filter(!(metabolite %in% (side_compounds %>%
+                                          mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
+                                          pull(Identifier)))) %>% 
+              unique() %>%  
+              group_by(subsystem) %>% 
+              summarise(Total=length(metabolite)), by = "subsystem") %>% 
+  mutate(ExchangeableRatio = Exchangeable/Total)
+
+if (exists("pathways.to.exclude")){
+  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>%
+  filter(!subsystem %in% pathways.to.exclude)
+}
+
+for (i in 1:length(all_methods_TP_FN)){
+  exchangeable_metabolites_per_pathway = exchangeable_metabolites_per_pathway %>% 
+    left_join(all_methods_TP_FN[[i]] %>% select(Subsystem.name, Type) %>% rename(!!filenames[[i]] := "Type"), by = c("subsystem" = "Subsystem.name"))
+}
+
+exchangeable_m_filtered = exchangeable_metabolites_per_pathway %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("subsystem" = "Pathway")) %>% 
+  filter(!subsystem %in% misc_blocked_pathways)
+
+exchangeable_m_filtered$subsystem = factor(exchangeable_m_filtered$subsystem, levels=exchangeable_m_filtered %>% arrange(ExchangeableRatio) %>% pull(subsystem))
+
+exchangeable_m_filtered = exchangeable_m_filtered %>% 
+  pivot_longer(!!method_names) 
+exchangeable_m_filtered$name = factor(exchangeable_m_filtered$name, levels=method_names)
+
+exchangeable_m_filtered = exchangeable_m_filtered %>% 
+  filter(!subsystem %in% infeasible_pathways_ko) %>% 
+  mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Unable to be run in ORA", value)) %>% 
+  filter(Total >= 3)
+
+# Exchangeable Ratio bar plot
+ex_ratio_plot =
+  exchangeable_m_filtered %>% 
+  filter(endsWith(as.character(name), "all")) %>% 
+  select(subsystem, ExchangeableRatio) %>% unique() %>% 
+  ggplot()+
+  geom_bar(aes(x=ExchangeableRatio, y = subsystem), stat = "identity", fill = basic_colour)+
+  theme_minimal()+
+    theme(axis.text.y = element_text(size=7))+
+  ylab("")+
+  xlab("Exchangeable metabolites ratio")
+
+
+exchangeable_m_filtered_clean = exchangeable_m_filtered %>% 
+  filter(endsWith(as.character(name), "all"))%>% 
+    mutate(name=str_replace_all(name, method_names_clean))
+exchangeable_m_filtered_clean$name = factor(exchangeable_m_filtered_clean$name, levels = method_names_clean)
+
+method_names_clean2 = c("ORA", "GSEA\nunsigned", "GSEA\nsigned")
+names(method_names_clean2) = method_names_clean
+
+# TP and FN heatmap
+ex_TP_FN_plot =
+  exchangeable_m_filtered_clean %>% 
+    mutate(name = fct_relevel(name, c("GSEA abs","GSEA raw", "ORA"))) %>%
+    ggplot()+
+  facet_wrap(~name,nrow = 1, scales="free_x", labeller = as_labeller(method_names_clean2))+
+      geom_tile(aes(x=name, y= subsystem, fill = value), colour = "white", linewidth = 0.7)+
+      scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered_clean$value], na.value = "lightgrey")+
+      # scale_x_discrete(position="top", label= c("GSEA unsigned", "GSEA signed","ORA"))+
+      theme_minimal()+
+      theme(axis.text.y = element_blank(),
+            axis.title = element_blank(), 
+            axis.ticks = element_blank(),
+            legend.position = "none", 
+            strip.text = element_text(angle=45, hjust = 0.5, vjust = 0.4),
+            axis.text.x=element_blank(),
+            # axis.text.x = element_text(angle=45, hjust = 0.1, vjust = 0),
+            panel.grid = element_blank())
+
+# TP and FN legend
+ex_TP_FN_plot_legend =
+  exchangeable_m_filtered %>% 
+  mutate(value = fct_relevel(value, c("TP", "FN", "Unable to be run in ORA"))) %>%
+  ggplot()+
+  geom_tile(aes(x=name, y= subsystem, fill = value))+
+  scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered_clean$value], name="Predicted", na.value = "lightgrey",
+                    labels=c("True Positive", "False Negative", "Unable to be run in ORA", "Unable to produce biomass when KO'd"))+
+  theme_void()+
+  theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank())
+
+# Pathway category plot
+ex_category_plot =
+  exchangeable_m_filtered %>% 
+  select(subsystem, ManualCategoryLvl1) %>% 
+    mutate("label" = "Pathway\ncategory") %>% 
+  ggplot()+
+  geom_tile(aes(x = label, y= subsystem, fill = ManualCategoryLvl1), linewidth = 0.7, colour = "white")+
+  scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered$ManualCategoryLvl1])+
+    scale_x_discrete(position="top")+
+  theme_minimal()+
+  theme(axis.text.y = element_blank(), axis.title = element_blank(), axis.ticks = element_blank(),
+        legend.position = "none",
+        axis.text.x = element_text(angle=45, hjust = 0.1, vjust = 0), panel.grid = element_blank())
+
+# Pathway category plot legend
+ex_category_plot_legend =
+  exchangeable_m_filtered %>% 
+  select(subsystem, ManualCategoryLvl1) %>% 
+  ggplot()+
+  geom_tile(aes(x=1, y= subsystem, fill = ManualCategoryLvl1))+
+  scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered$ManualCategoryLvl1], name = "Pathway category")+
+  theme_void()+
+  theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank())+
+  guides(fill = guide_legend(override.aes = list(alpha = 1))) 
+
+# Join all the plots together
+exch_plot = plot_grid(
+  plot_grid(
+    ex_ratio_plot,
+    ex_TP_FN_plot,
+    ex_category_plot,
+    rel_widths = c(0.83,0.15,0.07), nrow = 1, align = 'h', axis = "tb"),
+  plot_grid(NULL,
+    get_legend(ex_TP_FN_plot_legend),
+    get_legend(ex_category_plot_legend),
+    NULL,
+      rel_heights = c(0.25,0.25,0.25,0.25),
+      align = 'hv',
+      nrow = 4, ncol = 1),
+rel_widths = c(0.8, 0.2), nrow = 1)
+exch_plot
+```
+
+```{r}
+ggsave(paste0("../../plots/",model_name,"/supp/exch_full.png"), dpi=300, bg="white", width=15, height=12)
+```
+
+# Metabolite belonging
+```{r}
+pathways %>% mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+  unique() %>% 
+  group_by(metabolite) %>% summarise(count = n(), ratio = count/142) %>% 
+  left_join(metabolites, by = c("metabolite" = "metabID")) %>% 
+  mutate(lbl = ifelse(ratio > 0.25, Name, "")) %>% 
+  ggplot(aes(x=ratio))+
+  geom_bar(fill=basic_colour)+
+  geom_label_repel(aes(label=lbl, y = 0),min.segment.length = 0.1, nudge_y = 50)+
+  theme_minimal()+ 
+  scale_x_continuous(labels = scales::percent, limits = c(0, 1))+
+  xlab("Percentage of pathways each metabolite is in")+
+  ylab("Counts")
+ggsave(paste0("../../plots/",model_name,"/supp/metabolite_distrib.png"), dpi=300, bg="white", width=7, height=5)
+```
+
+```{r}
+metab.pathways = pathways %>% mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% 
+  unique() %>% mutate(value = 1) %>% pivot_wider(names_from = subsystem,values_fill = 0) %>% 
+  column_to_rownames("metabolite") %>% as.matrix()
+
+png(paste0("../../plots/",model_name,"/supp/metabolite_distrib_heatmap.png"),width=12,height=11,units="in",res=300)
+ComplexHeatmap::Heatmap(metab.pathways,show_column_names = F,
+        show_row_names = F,col = c("white", "blue"),row_title = "Metabolites", column_title = "Pathways",name="Presence",
+        use_raster = F)
+dev.off()
 ```
 

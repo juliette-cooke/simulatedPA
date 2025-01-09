@@ -1057,7 +1057,7 @@ newnames <- data.frame(name = c("Total","ExchangeableRatio","score","n.metab","u
 ```{r}
 mean.zscores = 
   all_methods_TP_FN_long_df %>% 
-  filter(method == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all")) %>% 
+  filter(Method == paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all")) %>% 
   select(Pathway, Type)  %>% 
   left_join(pathways_no_comp2, by = c("Pathway")) %>% 
   left_join(z.scores.long , by = c("Pathway", "metabolite" = "metabID")) %>% 
@@ -1593,12 +1593,21 @@ Do FVA to test the Drug metabolism biomass production
 
 # Pathway size vs profile size
 ```{r}
-pathway_sizes_inf_fea_no_misc
+# pathway_sizes_inf_fea_no_misc
+pathway_sizes = pathways %>% group_by(subsystem) %>% summarise(size = n()) %>% rename("Pathway" = "subsystem") %>% 
+  left_join(pathway_categories %>% select(Pathway, ManualCategoryLvl1), by = c("Pathway"))
+pathway_sizes_inf_fea = all_pathway_feas_infeas %>% left_join(pathway_sizes, by = c("Pathway", "ManualCategoryLvl1")) %>%  rbind(pathway_sizes %>% mutate(Type = "All"))
+pathway_sizes_inf_fea_no_misc = pathway_sizes_inf_fea %>% 
+  filter(ManualCategoryLvl1 != "Miscellaneous") 
+
 sizes.df = p_vals_all %>% 
   filter(value <= 0.05) %>% 
   group_by(subsystem) %>% 
   summarise(profile.size = n()) %>% 
-  left_join(pathway_sizes_inf_fea_no_misc %>% filter(Type != "All"), by = c("subsystem" = "Pathway"))
+  left_join(pathway_sizes_inf_fea_no_misc %>% filter(Type != "All"), by = c("subsystem" = "Pathway")) %>% 
+  right_join(pathway_sizes, by = c("subsystem" = "Pathway", "size", "ManualCategoryLvl1")) %>% 
+  mutate(profile.size = ifelse(is.na(profile.size), 0, profile.size)) %>% 
+  filter(!(subsystem %in% misc_pathways))
 sizes.df %>% 
   # filter(profile.size < 100) %>% 
   ggplot(aes(x= size, y= profile.size))+
@@ -2150,5 +2159,47 @@ ComplexHeatmap::Heatmap(metab.pathways,show_column_names = F,
         show_row_names = F,col = c("white", "blue"),row_title = "Metabolites", column_title = "Pathways",name="Presence",
         use_raster = F)
 dev.off()
+```
+
+# Uniqueness analysis
+```{r}
+z.scores %>% pivot_longer(-Metab) %>% 
+  left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
+  rename("zscores" = value) %>% 
+  group_by(Metab) %>% 
+  # reframe(zscores = (value - mean(value)) / sd(value), Pathway) %>% 
+  filter(zscores > thr | zscores < -thr) %>% 
+  left_join(metabolites %>% select(-metabID), by = c("Metab" = "ID")) %>% 
+  select("Pathway","Name","zscores") %>% #pull(Pathway) %>% table() %>% sort(decreasing = T)
+  # mutate(direction = ifelse(zscores > 0, "pos", "neg")) %>% 
+  group_by(Name) %>% 
+  summarise(n=n(), Pathway) #%>% #pull(n) %>% table() %>% sort(decreasing = T)
+  group_by(Pathway) %>% 
+  mutate(score = sum(1/n), n.metab = sum(n()), unique = sum(n==1), unique_score = unique/n.metab) %>% 
+  select(-Name, -n) #%>% 
+  unique() %>% 
+  arrange(desc(score))
+```
+
+```{r}
+thr=1
+z.scores %>% pivot_longer(-Metab) %>% 
+  left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
+  rename("zscores" = value) %>% 
+  group_by(Metab) %>% 
+  # reframe(zscores = (value - mean(value)) / sd(value), Pathway) %>% 
+  filter(zscores > thr | zscores < -thr) %>% 
+  left_join(metabolites %>% select(-metabID), by = c("Metab" = "ID")) %>% 
+  select("Pathway","Name","zscores") %>% 
+  group_by(Name) %>% 
+  summarise(n=n(), Pathway) %>% 
+  # select(-Pathway) %>% 
+  # unique() %>% 
+  filter(n!=1) %>% 
+  left_join(all_methods_TP_FN_long_df %>% filter(Method == "Human1_GSEA_absolute_metric_external_with_WT_default_all"), by="Pathway") %>% 
+  arrange(n)
+  # filter(n>10)
+  ggplot(aes(x = n))+
+  geom_bar()
 ```
 

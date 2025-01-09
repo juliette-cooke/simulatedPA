@@ -112,10 +112,11 @@ if (human.pathway.categories){
 }
 
 types_names = c("FN", "TP", "Infeasible", "Feasible", "Not run", 
-                "Unable to be run in ORA", "Unable to produce biomass when KO'd", "Blocked")
+                "Insufficient significant metabolites", "Unable to produce biomass when KO'd", "Blocked")
 
-colours = c("#FF0000", "#3660d6","#c40d00", "#1a57ba", "#5c5c5c", "#808080", "lightgrey","#808080")
-dark_colours = c("#a80000", "#2d4ba1","#800800", "#203b8a", "#5c5c5c", "#5c5c5c","#5c5c5c","#808080")
+
+colours = c("#FF0000", "#3660d6","#c40d00", "#1a57ba", "#5c5c5c", "#fc86a6", "lightgrey","#808080")
+dark_colours = c("#a80000", "#2d4ba1","#800800", "#203b8a", "#5c5c5c", "#e04f76","#5c5c5c","#808080")
 
 # Base colours
 pathway_cat_cols_dict = append(colours , paste0(pathway_cat_cols$col,"B3"))
@@ -160,7 +161,7 @@ pathways_to_exclude = pathway_categories$Pathway[(!pathway_categories$Pathway %i
 all_methods_TP_FN_cat = lapply(methods_to_test, function(x){
   not.run = methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name[!(methods_to_test[[methods.indexes["GSEA abs"]]]$Subsystem.name %in% x$Subsystem.name)] %>% as.data.frame() %>% 
     rename("Subsystem.name" =1) %>% 
-    mutate(Type = "Unable to be run in ORA", FPR=NA, TNR=NA) %>% 
+    mutate(Type = "Insufficient significant metabolites", FPR=NA, TNR=NA) %>% 
     filter(!Subsystem.name %in% x$Subsystem.name)
   
   blocked = blocked_pathways %>% as.data.frame() %>% 
@@ -351,7 +352,7 @@ pathway_counts_run = lapply(seq_along(pathways_to_TP_FN), function(i){
 })
 
 linetype_dict = ifelse(unique(pathway_counts_run[[1]]$Type) %in% 
-                         c("Unable to produce biomass when KO'd", "Unable to produce biomass in WT"), 3, 1)
+                         c("Unable to produce biomass when KO'd", "Unable to produce biomass in WT", "Insufficient significant metabolites"), 3, 1)
 names(linetype_dict) = unique(pathway_counts_run[[1]]$Type)
 
 g = lapply(seq_along(categories_to_pathways), function(i){
@@ -486,24 +487,24 @@ main_plot =
     ggraph::geom_node_label(aes(label=str_wrap(label,23)),alpha=0.6,lineheight = 0.7, size=3)
 
 TP_FN_legend =
-    layout[[i]] %>% filter(Type %in% c("TP", "FN", "Unable to be run in ORA", "Unable to produce biomass when KO'd", "TP_WT_default", "FN_WT_default")) %>% mutate(Type = fct_relevel(Type, c("TP", "FN", "Unable to be run in ORA", "Unable to produce biomass when KO'd"))) %>% ggraph()+
+    layout[[i]] %>% filter(Type %in% c("TP", "FN", "Insufficient significant metabolites", "Unable to produce biomass when KO'd", "TP_WT_default", "FN_WT_default")) %>% mutate(Type = fct_relevel(Type, c("TP", "FN", "Insufficient significant metabolites", "Unable to produce biomass when KO'd"))) %>% ggraph()+
     geom_node_circle(aes(fill=Type, group=depth, color=Type, linetype=as.factor(Type)))+
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "white", name="Predicted",
                       labels=str_wrap(c("True Positive", "False Negative", 
-                               "Unable to be run in ORA",
+                               "Insufficient significant metabolites",
                                "Infeasible"
                                ), 23))+
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Predicted",
                       labels=str_wrap(c("True Positive", "False Negative",  
-                               "Unable to be run in ORA",
+                               "Insufficient significant metabolites",
                                "Infeasible"), 23))+
   scale_linetype_manual(values=linetype_dict[pathway_counts_run[[i]]$Type], 
                         labels=str_wrap(c("True Positive", "False Negative", 
-                               "Unable to be run in ORA",
+                               "Insufficient significant metabolites",
                                "Infeasible"
                                ), 23), name="Predicted")
 
-cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Unable to be run in ORA", "Unable to produce biomass when KO'd")) %>% ggraph()+
+cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Insufficient significant metabolites", "Unable to produce biomass when KO'd")) %>% ggraph()+
     geom_node_circle(aes(fill=Type, group=depth, color=Type))+
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "lightgrey", name="Pathway category")+
     scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Pathway category")#+
@@ -516,6 +517,9 @@ p1 = plot_grid(
     ,nrow = 1, rel_widths = c(0.6,0.4))
 p1
 ORA_no_leg = main_plot
+```
+```{r}
+ggsave("~/Downloads/ORA_pink.png", width = 8, height = 6, dpi=300, bg="white")
 ```
 
 ## Fig2
@@ -580,7 +584,7 @@ TP_FN_plot =
   summarise(n = n()) %>% 
   mutate(total = sum(n), value = n/total) %>% 
   ungroup() %>% 
-  mutate(Type = fct_relevel(Type, c("Unable to be run in ORA","FN","TP")),
+  mutate(Type = fct_relevel(Type, c("Insufficient significant metabolites","FN","TP")),
          method = fct_relevel(method, paste0(model_name, "_", 
                                              c("ORA_pval_005_metrics_external", 
                                                "GSEA_absolute_metric_external", 
@@ -592,7 +596,7 @@ TP_FN_plot =
   geom_text(aes(label=round(value,2)), position = position_stack(vjust=0.5), col="white", size=4)+
   theme_minimal_hgrid()+
   scale_fill_manual(values = pathway_cat_cols_dict[all_methods_df$Type], 
-                    labels=c("Unable to be\nrun in ORA","FN","TP"))+
+                    labels=c(str_wrap("Insufficient significant metabolites",50),"FN","TP"))+
   scale_x_discrete(labels = c("ORA", "GSEA\nunsigned", "GSEA\nsigned"))+
   xlab("")+
   ylab("Proportion")+
@@ -666,12 +670,17 @@ zscores.plot
 
 ## Fig3
 ```{r}
-plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.5,0.05,0.5), 
+plot_grid(plot_grid(TP_FN_plot, NULL,FPR_TNR_plot, rel_widths = c(0.52,0.05,0.48), 
                     ncol = 3, labels=c("A","B")),
   nrow=2,
   zscores.plot,
   labels = c("", "C"), rel_heights = c(0.33,0.33, 0.33))
 ggsave(paste0("../../plots/",model_name,"/Fig3.png"), dpi=300, bg="white", width=10, height=7)
+```
+
+```{r}
+TP_FN_plot
+ggsave(paste0("../../plots/",model_name,"/Fig3_vposter.png"), dpi=300, bg="white", width=6.5, height=4)
 ```
 
 
@@ -730,7 +739,7 @@ exchangeable_m_filtered$name = factor(exchangeable_m_filtered$name, levels=metho
 
 exchangeable_m_filtered = exchangeable_m_filtered %>% 
   filter(!subsystem %in% infeasible_pathways_ko) %>% 
-  mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Unable to be run in ORA", value)) %>% 
+  mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Insufficient significant metabolites", value)) %>% 
   filter(Total >= 3)
 
 # Exchangeable Ratio bar plot
@@ -777,11 +786,12 @@ ex_TP_FN_plot =
 # TP and FN legend
 ex_TP_FN_plot_legend =
   exchangeable_m_filtered %>% 
-  mutate(value = fct_relevel(value, c("TP", "FN", "Unable to be run in ORA"))) %>%
+  filter(name=="Human1_GSEA_absolute_metric_external_with_WT_default_all") %>% 
+  mutate(value = fct_relevel(value, c("TP", "FN"))) %>%
   ggplot()+
   geom_tile(aes(x=name, y= subsystem, fill = value))+
   scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered_clean$value], name="Predicted", na.value = "lightgrey",
-                    labels=c("True Positive", "False Negative", "Unable to be run in ORA", "Unable to produce biomass when KO'd"))+
+                    labels=c("True Positive", "False Negative"))+
   theme_void()+
   theme(axis.text = element_blank(), axis.title = element_blank(), axis.ticks = element_blank())
 
@@ -945,6 +955,30 @@ all.boxplots = boxplot.df %>%
 all.boxplots
 ```
 
+```{r}
+boxplot.df %>% 
+  filter(Method == "GSEA abs" & name=="ExchangeableRatio") %>% 
+  ggplot(aes(x=Type, y=value))+
+  geom_boxplot(aes(col=Type, fill=Type), outliers = F, alpha=0.4)+
+  # facet_grid(Method~name, scales = "free",switch = "y", labeller = as_labeller(label.clean))+
+  theme_minimal()+
+  theme(#strip.text.y.left = element_text(angle = 0,size = 8),
+        # axis.text.y = element_blank(),
+        panel.spacing.x = unit(1, "lines"),
+        legend.position = "right", legend.title = element_blank())+
+  scale_fill_manual(values = pathway_cat_cols_dict[boxplot.df$Type])+
+  scale_colour_manual(values = pathway_cat_cols_dict[boxplot.df$Type])+
+  xlab("")+
+  ylab("")+
+  stat_pvalue_manual(anno_df.all %>% filter(Method == "GSEA abs" & name=="ExchangeableRatio"), label="p.signif", coord.flip = F,tip.length = 0)+
+  guides(col=guide_legend(reverse=TRUE), fill=guide_legend(reverse=TRUE))+
+  coord_cartesian(clip = "off")
+```
+
+```{r}
+ggsave("~/Downloads/exch_ratio_boxplot_poster.png", width = 2.5, height =3, dpi=300, bg="white")
+```
+
 
 ## PCA
 ```{r}
@@ -1050,7 +1084,7 @@ pca_biplot
 
 ## Fig5 
 ```{r}
-pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"/",model_name,"_pathway_graph_edited.png"))
+pathway_graph = ggdraw() + draw_image(paste0("../../plots/",model_name,"/",model_name,"_pathway_graph_edited2.png"))
 fig5 = plot_grid(all.boxplots,labels = c("A"),
                  plot_grid(pathway_graph, pca_biplot, ncol=2, rel_widths = c(0.45,0.55), labels = c("B","C")), 
                  nrow=2, rel_heights = c(0.35,0.65))

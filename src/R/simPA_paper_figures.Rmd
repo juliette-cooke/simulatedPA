@@ -44,6 +44,7 @@ if (model_name == "Human1"){
 }else if (model_name == "Recon2.2"){
   exch.metab.pattern = "_e"
 }
+
 # Change these to suit your tested methods
 methods.indexes = seq(1:3)
 names(methods.indexes) = c("ORA", "GSEA abs", "GSEA raw")
@@ -89,6 +90,7 @@ GSEA.abs.results = read.table(paste0(input.path,model_name,"_GSEA_absolute_metri
 z.scores = read.table(paste0("../../data/large/",model_name,"_zscores.tsv"), sep="\t", header=T) %>%
   filter(Metab %in% metabolites$ID)
 
+# List of side compounds using IDs from the chosen model
 side_compounds = read.table(paste0(input.path,"side_compounds.txt"), header = T) %>% 
   rename("Identifier"=1) %>% 
   mutate(Identifier = stringr::str_sub(Identifier, end=-str_length(exch.metab.pattern)-1)) %>% unique() %>% 
@@ -293,7 +295,6 @@ pathway_stats_feas_plot =
   scale_y_discrete(labels=label_wrap_gen(25))
 
 pathway_stats_feas_plot
-#ggsave("../../plots/stacked_barplot_r2.png", width = 8, height = 5, dpi = 300, bg = "white")
 ```
 
 ## Fig1
@@ -312,6 +313,7 @@ categories_to_pathways = lapply(all_methods_TP_FN_cat, function(x){
   relocate(from)
 })
 
+# Create graph circles
 g_all = lapply(categories_to_pathways, function(x){
   g = graph_from_data_frame(x)
   g_temp = create_layout(g, 'circlepack')
@@ -338,7 +340,6 @@ pathway_counts = lapply(pathways_to_TP_FN, function(x){
 })
 labelled_categories = lapply(all_methods_TP_FN_cat, function(x){
   x %>% group_by(ManualCategoryLvl1) %>% 
-    # count() %>%
     mutate(n = n()) %>% 
   filter(ManualCategoryLvl1 %in% paste0("Cat_",pathway_cat_cols$ManualCategoryLvl1) & (Type=="FN" |n ==1) ) %>%
   pull(ManualCategoryLvl1)
@@ -358,6 +359,7 @@ names(linetype_dict) = unique(pathway_counts_run[[1]]$Type)
 g = lapply(seq_along(categories_to_pathways), function(i){
   graph_from_data_frame(categories_to_pathways[[i]], vertices=pathway_counts_run[[i]])
 })
+# Create layout object (coords of each circle, size etc.)
 layout = lapply(g, function(x){
   create_layout(x, 'circlepack', weight = n) %>% 
     mutate(r = ifelse(is.na(Name), r-0.2, r))
@@ -367,6 +369,7 @@ layout = lapply(g, function(x){
 ## GSEA raw
 Run GSEA plots first to get the coordinates for all other circle plots
 ```{r}
+# This is necessary to get and keep the same layout for all 3 plots: otherwise it regenerates the coordinates each run
 base_layout = methods.indexes["GSEA raw"]
 if (model_name == "Human1" | model_name == "Recon2.2"){
   layout_coord = read.table(paste0(input.path,"circlepack_layout.tsv"), sep="\t", header=T,quote = "")
@@ -507,8 +510,7 @@ TP_FN_legend =
 cat_legend = layout[[i]] %>% filter(!Type %in% c("TP", "FN", "Insufficient significant metabolites", "Unable to produce biomass when KO'd")) %>% ggraph()+
     geom_node_circle(aes(fill=Type, group=depth, color=Type))+
     scale_fill_manual(values = pathway_cat_cols_dict_light[pathway_counts_run[[i]]$Type],na.value = "lightgrey", name="Pathway category")+
-    scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Pathway category")#+
-    # theme(legend.margin = margin(c(0,0,0,0)))
+    scale_color_manual(values = pathway_cat_cols_line_dict[pathway_counts_run[[i]]$Type], name="Pathway category")
   
 p1 = plot_grid(
     main_plot,
@@ -518,14 +520,13 @@ p1 = plot_grid(
 p1
 ORA_no_leg = main_plot
 ```
-```{r}
-ggsave("~/Downloads/ORA_pink.png", width = 8, height = 6, dpi=300, bg="white")
-```
+
 
 ## Fig2
 ### Legend
-Made manually, can need adjusting visually
 ```{r}
+# Made manually, can need adjusting visually
+# Circle div is the range of the circle legend sizes
 if (model_name == "Recon2.2"){
   circle_div = 18
 }else{
@@ -552,7 +553,6 @@ circle_legend =
     get_legend(cat_legend),
     
     nrow = 1, align = "v")+theme(plot.margin = margin(0,2,0,0, "cm"))
-#cat_legend+theme(plot.margin = margin(0.5,1,0.5,0.5, "cm"))
 ```
 
 ```{r}
@@ -560,12 +560,12 @@ plot_grid(ORA_no_leg, circle_legend, NULL,NULL, GSEA_abs_no_leg, GSEA_raw_no_leg
           hjust=c(-0.5,0,0,0,-0.3,-0.3))
 
 ggsave(paste0("../../plots/",model_name,"/Fig2.png"), bg="white", width=11, height = 10, dpi=300)
-#ggsave("../../plots/Fig2-2-no-bg.png", width=11, height = 10, dpi=300)
 ```
 
 
 # Fig3
 ## Barplot
+Summary of all predictions across the 3 methods.
 ```{r}
 all_methods_TP_FN_long = lapply(c(1:3), function(i){
   all_methods_TP_FN_cat[[i]] %>% mutate(method = method_names[i])
@@ -596,7 +596,7 @@ TP_FN_plot =
   geom_text(aes(label=round(value,2)), position = position_stack(vjust=0.5), col="white", size=4)+
   theme_minimal_hgrid()+
   scale_fill_manual(values = pathway_cat_cols_dict[all_methods_df$Type], 
-                    labels=c(str_wrap("Insufficient significant metabolites",50),"FN","TP"))+
+                    labels=c(str_wrap("Insufficient significant metabolites",20),"FN","TP"))+
   scale_x_discrete(labels = c("ORA", "GSEA\nunsigned", "GSEA\nsigned"))+
   xlab("")+
   ylab("Proportion")+
@@ -636,8 +636,6 @@ zthr=50
 zscores.kod.pathways = pathways_no_comp2 %>% 
   left_join(z.scores.long, by = c("Pathway", "metabolite" = "metabID")) %>% 
   filter(!is.na(value)) %>% 
-  # group_by(Pathway) %>% 
-  # summarise(value = mean(value)) %>%
   left_join(all_methods_TP_FN_long_df %>% 
               mutate(Method = str_replace_all(Method, method_names_clean))%>% 
               filter(Method == "GSEA abs"), 
@@ -647,13 +645,13 @@ zscores.kod.pathways = pathways_no_comp2 %>%
   filter(!is.na(Type)) %>% 
   arrange(sd) %>% 
   mutate(Pathway = fct_inorder(Pathway)) %>% 
-  mutate(value = ifelse(value >= zthr, zthr, 
+  mutate(value = ifelse(value >= zthr, zthr,  # 6 metabolites capped for plotting purposes
                         ifelse(value <= -zthr, -zthr, value)))
 
 
 zscores.kod.pathways %>% 
   filter(value >= zthr | value <= -zthr) 
-# 6 metabolites modified for plotting purposes
+
 
 zscores.plot = zscores.kod.pathways %>%
   ggplot(aes(y=(value), x= Pathway))+
@@ -691,8 +689,7 @@ n. of unique exchangeable metabolites (not counting side compounds)
 /
 n. of total unique metabolites in the pathways (not counting side compounds)
 
-This penalises side compounds as even if they are exchangeable, they do not add information to the metabolic profile. 
-(most of the time)
+This penalises side compounds as even if they are exchangeable, they do not usually add information to the metabolic profile. 
 ```{r}
 length.to.strip = str_length(exch.metab.pattern)+1
 
@@ -702,7 +699,6 @@ exchange_metabolites = pathways %>% filter(endsWith(metabolite, exch.metab.patte
            mutate(Identifier = str_remove(Identifier, pattern="^M_")) %>%
            pull(Identifier)))) %>%
   pull(metabolite) %>% unique()
-  
 
 exchangeable_metabolites_per_pathway = pathways %>% 
   mutate(metabolite = str_sub(metabolite, end = -length.to.strip)) %>% group_by(subsystem) %>% 
@@ -740,7 +736,8 @@ exchangeable_m_filtered$name = factor(exchangeable_m_filtered$name, levels=metho
 exchangeable_m_filtered = exchangeable_m_filtered %>% 
   filter(!subsystem %in% infeasible_pathways_ko) %>% 
   mutate(value = ifelse(startsWith(as.character(name), "ORA") & is.na(value),"Insufficient significant metabolites", value)) %>% 
-  filter(Total >= 3)
+  filter(Total >= 3) %>% 
+  filter(!is.na(value))
 
 # Exchangeable Ratio bar plot
 ex_ratio_plot =
@@ -772,7 +769,6 @@ ex_TP_FN_plot =
   facet_wrap(~name,nrow = 1, scales="free_x", labeller = as_labeller(method_names_clean2))+
       geom_tile(aes(x=name, y= subsystem, fill = value), colour = "white", linewidth = 0.7)+
       scale_fill_manual(values = pathway_cat_cols_dict[exchangeable_m_filtered_clean$value], na.value = "lightgrey")+
-      # scale_x_discrete(position="top", label= c("GSEA unsigned", "GSEA signed","ORA"))+
       theme_minimal()+
       theme(axis.text.y = element_blank(),
             axis.title = element_blank(), 
@@ -780,13 +776,12 @@ ex_TP_FN_plot =
             legend.position = "none", 
             strip.text = element_text(angle=45, hjust = 0.5, vjust = 0.4),
             axis.text.x=element_blank(),
-            # axis.text.x = element_text(angle=45, hjust = 0.1, vjust = 0),
             panel.grid = element_blank())
 
 # TP and FN legend
 ex_TP_FN_plot_legend =
   exchangeable_m_filtered %>% 
-  filter(name=="Human1_GSEA_absolute_metric_external_with_WT_default_all") %>% 
+  filter(name==paste0(model_name,"_GSEA_absolute_metric_external_with_WT_default_all")) %>% 
   mutate(value = fct_relevel(value, c("TP", "FN"))) %>%
   ggplot()+
   geom_tile(aes(x=name, y= subsystem, fill = value))+
@@ -839,9 +834,7 @@ exch_plot
 ```
 ## Fig4
 ```{r}
-plot_grid(exch_plot)#, 
-          # labels = c("","", "C"), 
-          # rel_widths = c(0.2,0.05,0.8))
+plot_grid(exch_plot)
 ggsave(paste0("../../plots/",model_name,"/Fig4.png"), dpi=300, bg="white", width=15, height=12)
 ```
 
@@ -849,19 +842,18 @@ ggsave(paste0("../../plots/",model_name,"/Fig4.png"), dpi=300, bg="white", width
 # Fig5
 
 ## Uniqueness
+Uniqueness is calculated by thresholding the zscores and looking at how unique each profile is between KOs.
 ```{r}
 thr=2
 uniqueness = z.scores %>% pivot_longer(-Metab) %>% 
   left_join(pathway_dict, by = c("name" = "Group")) %>% select(-name) %>% 
   rename("zscores" = value) %>% 
   group_by(Metab) %>% 
-  # reframe(zscores = (value - mean(value)) / sd(value), Pathway) %>% 
   filter(zscores > thr | zscores < -thr) %>% 
   left_join(metabolites %>% select(-metabID), by = c("Metab" = "ID")) %>% 
-  select("Pathway","Name","zscores") %>% #pull(Pathway) %>% table() %>% sort(decreasing = T)
-  # mutate(direction = ifelse(zscores > 0, "pos", "neg")) %>% 
+  select("Pathway","Name","zscores") %>% 
   group_by(Name) %>% 
-  summarise(n=n(), Pathway) %>% #pull(n) %>% table() %>% sort(decreasing = T)
+  summarise(n=n(), Pathway) %>% 
   group_by(Pathway) %>% 
   mutate(score = sum(1/n), n.metab = sum(n()), unique = sum(n==1), unique_score = unique/n.metab) %>% 
   select(-Name, -n) %>% 
@@ -956,15 +948,13 @@ all.boxplots
 ```
 
 ```{r}
+# Get a single boxplot if needed
 boxplot.df %>% 
   filter(Method == "GSEA abs" & name=="ExchangeableRatio") %>% 
   ggplot(aes(x=Type, y=value))+
   geom_boxplot(aes(col=Type, fill=Type), outliers = F, alpha=0.4)+
-  # facet_grid(Method~name, scales = "free",switch = "y", labeller = as_labeller(label.clean))+
   theme_minimal()+
-  theme(#strip.text.y.left = element_text(angle = 0,size = 8),
-        # axis.text.y = element_blank(),
-        panel.spacing.x = unit(1, "lines"),
+  theme(panel.spacing.x = unit(1, "lines"),
         legend.position = "right", legend.title = element_blank())+
   scale_fill_manual(values = pathway_cat_cols_dict[boxplot.df$Type])+
   scale_colour_manual(values = pathway_cat_cols_dict[boxplot.df$Type])+
@@ -976,7 +966,7 @@ boxplot.df %>%
 ```
 
 ```{r}
-ggsave("~/Downloads/exch_ratio_boxplot_poster.png", width = 2.5, height =3, dpi=300, bg="white")
+# ggsave("../../plots/exch_ratio_boxplot.png", width = 2.5, height =3, dpi=300, bg="white")
 ```
 
 
@@ -1003,7 +993,6 @@ non.uniques = data.frame("Pathway" = exchangeable_metabolites_per_pathway$subsys
 
 
 GSEA.NES = GSEA.abs.results %>% 
-  # filter(Term == unique_id & NOM.p.val > 0.05) %>% 
   filter(Term == unique_id) %>% 
   select(Term, NES)
 
@@ -1015,9 +1004,6 @@ pca.data = exchangeable_metabolites_per_pathway %>% filter(!(subsystem %in% misc
   select(subsystem, GSEA.abs, ProfileUniquenessScore, ExchangeableRatio, PathwaySize) %>% 
   left_join(network_stats %>% select(name, AverageShortestPathLength, BetweennessCentrality, ClosenessCentrality, ClusteringCoefficient, Degree, NeighborhoodConnectivity, Stress, TopologicalCoefficient), by = c("subsystem" = "name")) %>% 
   filter(!is.na(GSEA.abs))%>%
-  # filter(!subsystem %in% c("Peptide metabolism", "Vitamin B2 metabolism", "Riboflavin metabolism"))%>%
-  # select(-c(Stress,BetweennessCentrality,AverageShortestPathLength, Degree,NeighborhoodConnectivity, TopologicalCoefficient, score))# %>%
-
   mutate(ProfileUniquenessScore = ifelse(is.na(ProfileUniquenessScore), 0, ProfileUniquenessScore)) %>% 
   left_join(GSEA.NES, by = c("subsystem" = "Term")) %>% 
   mutate(NES = ifelse(GSEA.abs == "FN" & is.na(NES), -1.5, NES))%>% 
@@ -1036,6 +1022,7 @@ groups = pca.data %>% column_to_rownames("subsystem") %>% select(GSEA.abs, NES)
 
 res.PCA = PCA(indiv,scale.unit = T) 
 
+# Manually create the PCA plot for full customisation
 arrow_coord = fviz_pca_biplot(res.PCA)$layers[[6]]$data
 # Radial shift function
 rshift = function(r, theta, a=0.1, b=0.7) {

@@ -32,7 +32,7 @@ SAMBA takes a metabolic network as input. You can also provide a list of reactio
 
 This results in a simulated metabolic profile for each modelled condition.
 
-We have run SAMBA on Human1 and Recon2.2, simulating each individual pathway knockout. As the resulting files can be large, they have been made available at [add link] to avoid overloading this github repository. They can be used to run the rest of this analysis without running SAMBA, if you wish to work on a human network.
+We have run SAMBA on Human1 and Recon2.2, simulating each individual pathway knockout. As the resulting files can be large, they have been made available [here](https://zenodo.org/records/13753914) to avoid overloading this github repository. They can be used to run the rest of this analysis without running SAMBA, if you wish to work on a human network.
 
 ### External input data
 - Metabolic network (SBML)
